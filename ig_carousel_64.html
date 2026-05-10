@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IG 輪播預覽｜@54jingyi｜No.64</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --cream:#EDEAE3;
+      --olive:#3D4F2A;
+      --olive-deep:#2E3D1F;
+      --ink:#1F2418;
+      --gold:#C9A961;
+      --serif:'Noto Serif TC',serif;
+      --sans:'Noto Sans TC',sans-serif;
+    }
+    body{background:#B4B1AA;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:32px 20px 56px;gap:16px;}
+    .pg-label{font-family:var(--sans);font-size:10.5px;letter-spacing:4px;color:#787570;text-transform:uppercase;}
+    .controls{display:flex;align-items:center;gap:16px;}
+    .ctrl-btn{background:transparent;border:1px solid #8A8880;color:#2E2C2A;padding:7px 20px;cursor:pointer;font-family:var(--sans);font-size:11px;letter-spacing:1px;border-radius:2px;transition:all .2s;}
+    .ctrl-btn:hover{background:#2E2C2A;color:var(--cream);}
+    .slide-ctr{font-family:var(--sans);font-size:13px;color:#787570;min-width:46px;text-align:center;}
+
+    /* Frame */
+    .frame{width:400px;background:#fff;border-radius:12px;box-shadow:0 0 0 1px #C0BCB5,0 24px 80px rgba(0,0,0,.28);overflow:hidden;}
+    .viewport{width:400px;height:500px;overflow:hidden;position:relative;}
+    .track{display:flex;height:500px;transition:transform .42s cubic-bezier(.25,.46,.45,.94);will-change:transform;}
+
+    /* Slides */
+    .slide{min-width:400px;width:400px;height:500px;padding:24px 30px 60px;position:relative;flex-shrink:0;display:flex;flex-direction:column;}
+    .bg-cream{background:var(--cream);color:var(--ink);}
+    .bg-olive{background:var(--olive-deep);color:var(--cream);}
+
+    /* Topbar */
+    .topbar{display:flex;align-items:center;gap:8px;}
+    .avatar{width:26px;height:26px;border-radius:50%;overflow:hidden;flex-shrink:0;}
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block;}
+    .handle{font-family:var(--sans);font-size:12.5px;font-weight:500;opacity:.6;}
+
+    /* Pagenum */
+    .pagenum{position:absolute;top:24px;right:30px;font-family:var(--serif);font-size:13px;letter-spacing:1px;opacity:.4;}
+
+    /* Body */
+    .body{flex:1;display:flex;flex-direction:column;margin-top:16px;}
+
+    /* Cover */
+    .cover-eyebrow{font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;opacity:.55;margin-bottom:18px;}
+    .cover-h{font-family:var(--serif);font-size:28px;font-weight:700;line-height:1.45;}
+    .cover-sub{font-family:var(--sans);font-size:12px;line-height:1.65;opacity:.5;margin-top:16px;}
+    .cover-foot{margin-top:auto;font-family:var(--sans);font-size:10.5px;letter-spacing:2.5px;opacity:.38;text-transform:uppercase;}
+
+    /* Body elements */
+    .eyebrow{font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;opacity:.55;margin-bottom:12px;}
+    .h1{font-family:var(--serif);font-size:21px;font-weight:700;line-height:1.5;margin-bottom:14px;}
+    .p{font-family:var(--serif);font-size:14px;line-height:1.85;}
+    .hl{font-family:var(--serif);font-weight:700;}
+
+    /* Quote */
+    .quote{margin-top:auto;margin-bottom:8px;font-family:var(--serif);font-size:15px;font-weight:700;line-height:1.7;}
+    .quote-sm{margin-top:auto;margin-bottom:6px;font-family:var(--serif);font-size:13px;font-weight:700;line-height:1.6;}
+
+    /* Pain list */
+    .pain-list{display:flex;flex-direction:column;gap:8px;margin:12px 0;}
+    .pain-item{display:flex;align-items:flex-start;gap:8px;}
+    .pain-dot{width:4px;height:4px;border-radius:50%;background:currentColor;opacity:.45;flex-shrink:0;margin-top:9px;}
+    .pain-text{font-family:var(--serif);font-size:13.5px;line-height:1.65;}
+
+    /* Compare grid */
+    .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;}
+    .compare-card{border-radius:7px;padding:12px 13px;}
+    .bg-cream .compare-card{background:rgba(0,0,0,.05);}
+    .bg-olive .compare-card{background:rgba(255,255,255,.07);}
+    .card-label{font-family:var(--sans);font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;opacity:.55;margin-bottom:9px;}
+    .card-after .card-label{opacity:1;color:var(--gold);}
+    .bg-cream .card-after .card-label{color:var(--olive);}
+    .card-row{font-family:var(--serif);font-size:12.5px;line-height:1.8;}
+
+    /* CTA */
+    .cta-label{font-family:var(--sans);font-size:11px;letter-spacing:2.5px;text-transform:uppercase;opacity:.55;margin-bottom:16px;}
+    .cta-big{font-family:var(--serif);font-size:24px;font-weight:700;line-height:1.5;margin-bottom:22px;}
+    .cta-keyword{display:inline-block;font-family:var(--serif);font-size:15px;font-weight:700;color:var(--gold);padding:12px 18px;border:1.5px solid rgba(201,169,97,.35);border-radius:7px;margin-bottom:14px;}
+    .cta-note{font-family:var(--sans);font-size:12px;line-height:1.65;opacity:.55;}
+
+    /* Arrow */
+    .arrow{position:absolute;right:14px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;z-index:20;transition:transform .2s;user-select:none;}
+    .bg-olive .arrow{background:rgba(255,255,255,.1);color:var(--cream);}
+    .bg-cream .arrow{background:rgba(0,0,0,.07);color:var(--ink);}
+    .arrow:hover{transform:translateY(-50%) scale(1.1);}
+
+    /* Footer */
+    .footer{position:absolute;bottom:18px;left:30px;right:30px;display:flex;align-items:center;gap:10px;}
+    .footer-label{font-family:var(--sans);font-size:10.5px;letter-spacing:3px;text-transform:uppercase;opacity:.38;flex-shrink:0;}
+    .progress{flex:1;height:2px;border-radius:1px;overflow:hidden;}
+    .bg-cream .progress{background:rgba(0,0,0,.12);}
+    .bg-olive .progress{background:rgba(255,255,255,.15);}
+    .progress-fill{height:100%;width:0;border-radius:1px;opacity:.75;transition:width .42s;}
+    .bg-cream .progress-fill{background:var(--ink);}
+    .bg-olive .progress-fill{background:var(--cream);}
+
+    /* IG bar */
+    .ig-actions{padding:10px 16px 6px;display:flex;justify-content:space-between;align-items:center;background:#fff;}
+    .ig-left{display:flex;gap:14px;align-items:center;}
+    .ig-icon{font-size:22px;cursor:pointer;}
+    .ig-dots{display:flex;gap:3px;align-items:center;}
+    .ig-dot{width:5px;height:5px;border-radius:50%;background:#DBDBDB;transition:all .3s;}
+    .ig-dot.on{background:#0095f6;width:14px;border-radius:3px;}
+    .ig-caption{padding:4px 16px 14px;font-size:11.5px;font-family:var(--sans);color:#262626;line-height:1.5;background:#fff;}
+
+    .hint{font-family:var(--sans);font-size:11px;color:#787570;letter-spacing:1px;text-align:center;}
+  </style>
+</head>
+<body>
+
+<div class="pg-label">IG Carousel Preview — @54jingyi — No.64</div>
+<div class="controls">
+  <button class="ctrl-btn" onclick="prev()">← 上一張</button>
+  <span class="slide-ctr" id="ctr">1 / 7</span>
+  <button class="ctrl-btn" onclick="next()">下一張 →</button>
+</div>
+
+<div class="frame">
+  <div class="viewport">
+    <div class="track" id="track">
+
+      <!-- S1 封面 bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar">
+          <div class="avatar"><img src="./avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">01 / 07</div>
+        <div class="body">
+          <div class="cover-eyebrow">Claude × 帳號分析</div>
+          <h1 class="cover-h">
+            我把帳號丟給 Claude 分析<br>
+            說了 3 件我說不出的事情
+          </h1>
+          <p class="cover-sub">教學型，7 張帶你看懂自己的帳號</p>
+          <div class="cover-foot">底氣實驗室 · JINGYI LAB</div>
+        </div>
+        <div class="arrow" onclick="next()">›</div>
+        <div class="footer">
+          <span class="footer-label">SHARE</span>
+          <div class="progress"><div class="progress-fill"></div></div>
+          <span class="footer-label">SAVE</span>
+        </div>
+      </section>
+
+      <!-- S2 痛點 bg-cream -->
+      <section class="slide bg-cream">
+        <div class="topbar">
+          <div class="avatar"><img src="./avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">02 / 07</div>
+        <div class="body">
+          <div class="eyebrow">你也這樣嗎</div>
+          <h2 class="h1">靠感覺發文，說不清哪裡有效</h2>
+          <p class="p">每次發完貼文，你能說清楚為什麼這篇有人留言、那篇沒有嗎？</p>
+          <div class="pain-list">
+            <div class="pain-item"><div class="pain-dot"></div><div class="pain-text">不知道哪種鉤子對你的讀者有效</div></div>
+            <div class="pain-item"><div class="pain-dot"></div><div class="pain-text">每次都要從零開始想，很耗力</div></div>
+            <div class="pain-item"><div class="pain-dot"></div><div class="pain-text">努力了，但沒有可以複製的公式</div></div>
+          </div>
+          <div class="quote">Claude 的分析，讓我第一次說清楚自己的爆文規律。</div>
+        </div>
+        <div class="arrow" onclick="next()">›</div>
+        <div class="footer">
+          <span class="footer-label">SHARE</span>
+          <div class="progress"><div class="progress-fill"></div></div>
+          <span class="footer-label">SAVE</span>
+        </div>
+      </section>
+
+      <!-- S3 01 最強鉤子 bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar">
+          <div class="avatar"><img src="./avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">03 / 07</div>
+        <div class="body">
+          <div class="eyebrow">01 · Finding</div>
+          <h2 class="h1">最強鉤子：數字加痛點型</h2>
+          <p class="p">你最高互動的貼文，結構幾乎都一樣。<br><br>「30 天 IG 內容，怎麼一次規劃完？」34 則留言，全場最高。<br><br>數字讓讀者立刻知道能得到什麼，不用猜，直接點進去。這個鉤子<span class="hl">是可以刻意複製的</span>。</p>
+          <div class="quote">數字量化加命中卡點，轉換率最強的開場。</div>
+        </div>
+        <div class="arrow" onclick="next()">›</div>
+        <div class="footer">
+          <span class="footer-label">SHARE</span>
+          <div class="progress"><div class="progress-fill"></div></div>
+          <span class="footer-label">SAVE</span>
+        </div>
+      </section>
+
+      <!-- S4 02 核心情緒 bg-cream -->
+      <section class="slide bg-cream">
+        <div class="topbar">
+          <div class="avatar"><img src="./avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">04 / 07</div>
+        <div class="body">
+          <div class="eyebrow">02 · Finding</div>
+          <h2 class="h1">你觸動讀者的核心情緒</h2>
+          <p class="p">「<span class="hl">明明努力了，卻沒有正比的回報。</span>」<br><br>這個情緒跨了你所有的主題。社群、感情、副業，核心都是同一種感受。<br><br>你比誰都懂這種感覺，所以你寫得出來。</p>
+          <div class="quote">情緒共鳴跨主題，才是真正的品牌核心。</div>
+        </div>
+        <div class="arrow" onclick="next()">›</div>
+        <div class="footer">
+          <span class="footer-label">SHARE</span>
+          <div class="progress"><div class="progress-fill"></div></div>
+          <span class="footer-label">SAVE</span>
+        </div>
+      </section>
+
+      <!-- S5 03 盲點 bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar">
+          <div class="avatar"><img src="./avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">05 / 07</div>
+        <div class="body">
+          <div class="eyebrow">03 · Blind Spot</div>
+          <h2 class="h1">兩個武器，從來沒有合用過</h2>
+          <p class="p">武器一：說出別人說不出的感受，最容易被截圖收藏。<br><br>武器二：具體資源加留言 CTA，轉換率最高的收尾。<br><br>你一直分開用。<span class="hl">合在一起的那一篇，才是真正的爆發點。</span></p>
+          <div class="quote">感受語言加具體資源，下一篇的公式。</div>
+        </div>
+        <div class="arrow" onclick="next()">›</div>
+        <div class="footer">
+          <span class="footer-label">SHARE</span>
+          <div class="progress"><div class="progress-fill"></div></div>
+          <span class="footer-label">SAVE</span>
+        </div>
+      </section>
+
+      <!-- S6 分析前後對比 bg-cream -->
+      <section class="slide bg-cream">
+        <div class="topbar">
+          <div class="avatar"><img src="./avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">06 / 07</div>
+        <div class="body">
+          <div class="eyebrow">分析前後對比</div>
+          <h2 class="h1">看清楚自己的武器，就有方向了</h2>
+          <div class="compare-grid">
+            <div class="compare-card card-before">
+              <div class="card-label">分析前</div>
+              <div class="card-row">靠感覺選題</div>
+              <div class="card-row">不知道哪裡有效</div>
+              <div class="card-row">每次從零開始</div>
+              <div class="card-row">努力沒有方向</div>
+            </div>
+            <div class="compare-card card-after">
+              <div class="card-label">分析後</div>
+              <div class="card-row">知道爆文鉤子</div>
+              <div class="card-row">找出未挖礦脈</div>
+              <div class="card-row">公式可以複製</div>
+              <div class="card-row">有系統有方向</div>
+            </div>
+          </div>
+          <div class="quote-sm">分析不是看數字，是讓你看清楚自己真正的武器在哪。</div>
+        </div>
+        <div class="arrow" onclick="next()">›</div>
+        <div class="footer">
+          <span class="footer-label">SHARE</span>
+          <div class="progress"><div class="progress-fill"></div></div>
+          <span class="footer-label">SAVE</span>
+        </div>
+      </section>
+
+      <!-- S7 CTA bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar">
+          <div class="avatar"><img src="./avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">07 / 07</div>
+        <div class="body">
+          <div class="cta-label">你也可以這樣做</div>
+          <div class="cta-big">想知道怎麼把自己的帳號丟給 Claude 分析？</div>
+          <div class="cta-keyword">💬 留言「底氣」直接傳給你</div>
+          <p class="cta-note">我把完整的提示詞清單整理好了。<br>收藏這篇，追蹤 @54jingyi 學更多。</p>
+        </div>
+        <div class="footer">
+          <span class="footer-label">SHARE</span>
+          <div class="progress"><div class="progress-fill"></div></div>
+          <span class="footer-label">SAVE</span>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <div class="ig-actions">
+    <div class="ig-left">
+      <span class="ig-icon">♡</span>
+      <span class="ig-icon" style="font-size:19px;">💬</span>
+      <span class="ig-icon" style="font-size:19px;">✈️</span>
+    </div>
+    <div class="ig-dots" id="igDots"></div>
+    <span class="ig-icon" style="font-size:20px;">🔖</span>
+  </div>
+  <div class="ig-caption">
+    <strong>54jingyi</strong> 我把 24 篇貼文丟給 Claude，它說了這 3 件讓我說不出話的事 ✦ 存起來看！<br>
+    <span style="color:#0095f6;">#Claude #IG經營 #自媒體 #內容創作 #底氣實驗室</span>
+  </div>
+</div>
+
+<div class="hint">鍵盤 ← → 切換 ｜ 點選按鈕切換 ｜ 支援觸控滑動</div>
+
+<script>
+  const TOTAL = 7;
+  let cur = 0;
+  const track = document.getElementById('track');
+  const ctr = document.getElementById('ctr');
+  const igDots = document.getElementById('igDots');
+
+  function render() {
+    track.style.transform = `translateX(-${cur * 400}px)`;
+    ctr.textContent = `${cur + 1} / ${TOTAL}`;
+
+    igDots.innerHTML = '';
+    for (let i = 0; i < TOTAL; i++) {
+      const d = document.createElement('div');
+      d.className = 'ig-dot' + (i === cur ? ' on' : '');
+      igDots.appendChild(d);
+    }
+
+    const pct = ((cur + 1) / TOTAL * 100).toFixed(1) + '%';
+    document.querySelectorAll('.progress-fill').forEach(el => {
+      el.style.width = pct;
+    });
+  }
+
+  function next() { if (cur < TOTAL - 1) { cur++; render(); } }
+  function prev() { if (cur > 0) { cur--; render(); } }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') next();
+    if (e.key === 'ArrowLeft') prev();
+  });
+
+  const vp = document.querySelector('.viewport');
+  let tx = 0;
+  vp.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, { passive: true });
+  vp.addEventListener('touchend', e => {
+    const d = tx - e.changedTouches[0].screenX;
+    if (d > 40) next(); else if (d < -40) prev();
+  }, { passive: true });
+
+  render();
+</script>
+</body>
+</html>

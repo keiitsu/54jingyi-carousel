@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IG 輪播預覽｜@54jingyi｜No.65</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --cream:#EDEAE3;
+      --olive:#3D4F2A;
+      --olive-deep:#2E3D1F;
+      --ink:#1F2418;
+      --gold:#C9A961;
+      --serif:'Noto Serif TC',serif;
+      --sans:'Noto Sans TC',sans-serif;
+    }
+    body{background:#B4B1AA;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:32px 20px 56px;gap:16px;}
+    .pg-label{font-family:var(--sans);font-size:10.5px;letter-spacing:4px;color:#787570;text-transform:uppercase;}
+    .controls{display:flex;align-items:center;gap:16px;}
+    .ctrl-btn{background:transparent;border:1px solid #8A8880;color:#2E2C2A;padding:7px 20px;cursor:pointer;font-family:var(--sans);font-size:11px;letter-spacing:1px;border-radius:2px;transition:all .2s;}
+    .ctrl-btn:hover{background:#2E2C2A;color:var(--cream);}
+    .slide-ctr{font-family:var(--sans);font-size:13px;color:#787570;min-width:46px;text-align:center;}
+
+    /* Frame */
+    .frame{width:400px;background:#fff;border-radius:12px;box-shadow:0 0 0 1px #C0BCB5,0 24px 80px rgba(0,0,0,.28);overflow:hidden;}
+    .viewport{width:400px;height:500px;overflow:hidden;position:relative;}
+    .track{display:flex;height:500px;transition:transform .42s cubic-bezier(.25,.46,.45,.94);will-change:transform;}
+
+    /* Slides */
+    .slide{min-width:400px;width:400px;height:500px;padding:24px 30px 60px;position:relative;flex-shrink:0;display:flex;flex-direction:column;}
+    .bg-cream{background:var(--cream);color:var(--ink);}
+    .bg-olive{background:var(--olive-deep);color:var(--cream);}
+
+    /* Topbar */
+    .topbar{display:flex;align-items:center;gap:8px;}
+    .avatar{width:26px;height:26px;border-radius:50%;overflow:hidden;flex-shrink:0;}
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block;}
+    .handle{font-family:var(--sans);font-size:12.5px;font-weight:500;opacity:.6;}
+
+    /* Pagenum */
+    .pagenum{position:absolute;top:24px;right:30px;font-family:var(--serif);font-size:13px;letter-spacing:1px;opacity:.4;}
+
+    /* Body */
+    .body{flex:1;display:flex;flex-direction:column;margin-top:16px;}
+
+    /* Cover */
+    .cover-eyebrow{font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;opacity:.55;margin-bottom:18px;}
+    .cover-h{font-family:var(--serif);font-size:28px;font-weight:700;line-height:1.45;}
+    .cover-sub{font-family:var(--sans);font-size:12px;line-height:1.65;opacity:.5;margin-top:16px;}
+    .cover-foot{margin-top:auto;font-family:var(--sans);font-size:10.5px;letter-spacing:2.5px;opacity:.38;text-transform:uppercase;}
+
+    /* Body elements */
+    .eyebrow{font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;opacity:.55;margin-bottom:12px;}
+    .h1{font-family:var(--serif);font-size:21px;font-weight:700;line-height:1.5;margin-bottom:14px;}
+    .p{font-family:var(--serif);font-size:14px;line-height:1.85;}
+    .hl{font-family:var(--serif);font-weight:700;}
+
+    /* Quote */
+    .quote{margin-top:auto;margin-bottom:8px;font-family:var(--serif);font-size:15px;font-weight:700;line-height:1.7;}
+    .quote-sm{margin-top:auto;margin-bottom:6px;font-family:var(--serif);font-size:13px;font-weight:700;line-height:1.6;}
+
+    /* Pain list */
+    .pain-list{display:flex;flex-direction:column;gap:8px;margin:12px 0;}
+    .pain-item{display:flex;align-items:flex-start;gap:8px;}
+    .pain-dot{width:4px;height:4px;border-radius:50%;background:currentColor;opacity:.45;flex-shrink:0;margin-top:9px;}
+    .pain-text{font-family:var(--serif);font-size:13.5px;line-height:1.65;}
+
+    /* Scene */
+    .scene-quote{background:rgba(255,255,255,.07);border-left:2px solid rgba(201,169,97,.5);padding:12px 14px;margin-top:14px;font-family:var(--serif);font-size:13px;line-height:1.7;font-style:italic;}
+    .bg-cream .scene-quote{background:rgba(0,0,0,.04);border-left-color:rgba(61,79,42,.3);}
+
+    /* Tool cards */
+    .tool-cards{display:flex;flex-direction:column;gap:9px;margin-top:10px;flex:1;}
+    .tool-card{border-radius:7px;padding:12px 14px;}
+    .bg-olive .tool-card{background:rgba(255,255,255,.07);}
+    .bg-cream .tool-card{background:rgba(0,0,0,.05);}
+    .tc-title{font-family:var(--serif);font-size:13px;font-weight:700;margin-bottom:4px;}
+    .tc-desc{font-family:var(--sans);font-size:11.5px;line-height:1.65;opacity:.7;}
+
+    /* Compare grid */
+    .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;}
+    .compare-card{border-radius:7px;padding:12px 13px;}
+    .bg-cream .compare-card{background:rgba(0,0,0,.05);}
+    .bg-olive .compare-card{background:rgba(255,255,255,.07);}
+    .card-label{font-family:var(--sans);font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;opacity:.55;margin-bottom:9px;}
+    .card-after .card-label{opacity:1;color:var(--gold);}
+    .bg-cream .card-after .card-label{color:var(--olive);}
+    .card-row{font-family:var(--serif);font-size:12.5px;line-height:1.8;}
+
+    /* CTA */
+    .cta-label{font-family:var(--sans);font-size:11px;letter-spacing:2.5px;text-transform:uppercase;opacity:.55;margin-bottom:16px;}
+    .cta-big{font-family:var(--serif);font-size:22px;font-weight:700;line-height:1.55;margin-bottom:22px;}
+    .cta-keyword{display:inline-block;font-family:var(--serif);font-size:15px;font-weight:700;color:var(--gold);padding:12px 18px;border:1.5px solid rgba(201,169,97,.35);border-radius:7px;margin-bottom:14px;}
+    .cta-note{font-family:var(--sans);font-size:12px;line-height:1.65;opacity:.55;}
+
+    /* Arrow */
+    .arrow{position:absolute;right:14px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;z-index:20;transition:transform .2s;user-select:none;}
+    .bg-olive .arrow{background:rgba(255,255,255,.1);color:var(--cream);}
+    .bg-cream .arrow{background:rgba(0,0,0,.07);color:var(--ink);}
+    .arrow:hover{transform:translateY(-50%) scale(1.1);}
+
+    /* Footer */
+    .footer{position:absolute;bottom:18px;left:30px;right:30px;display:flex;align-items:center;gap:10px;}
+    .footer-label{font-family:var(--sans);font-size:10.5px;letter-spacing:3px;text-transform:uppercase;opacity:.38;flex-shrink:0;}
+    .progress{flex:1;height:2px;border-radius:1px;overflow:hidden;}
+    .bg-cream .progress{background:rgba(0,0,0,.12);}
+    .bg-olive .progress{background:rgba(255,255,255,.15);}
+    .progress-fill{height:100%;width:0;border-radius:1px;opacity:.75;transition:width .42s;}
+    .bg-cream .progress-fill{background:var(--ink);}
+    .bg-olive .progress-fill{background:var(--cream);}
+
+    /* IG bar */
+    .ig-actions{padding:10px 16px 6px;display:flex;justify-content:space-between;align-items:center;background:#fff;}
+    .ig-left{display:flex;gap:14px;align-items:center;}
+    .ig-icon{font-size:22px;cursor:pointer;}
+    .ig-dots{display:flex;gap:3px;align-items:center;}
+    .ig-dot{width:5px;height:5px;border-radius:50%;background:#DBDBDB;transition:all .3s;}
+    .ig-dot.on{background:#0095f6;width:14px;border-radius:3px;}
+    .ig-caption{padding:4px 16px 14px;font-size:11.5px;font-family:var(--sans);color:#262626;line-height:1.5;background:#fff;}
+
+    .hint{font-family:var(--sans);font-size:11px;color:#787570;letter-spacing:1px;text-align:center;}
+  </style>
+</head>
+<body>
+
+<div class="pg-label">IG Carousel Preview — @54jingyi — No.65</div>
+<div class="controls">
+  <button class="ctrl-btn" onclick="prev()">← 上一張</button>
+  <span class="slide-ctr" id="ctr">1 / 7</span>
+  <button class="ctrl-btn" onclick="next()">下一張 →</button>
+</div>
+
+<div class="frame">
+  <div class="viewport">
+    <div class="track" id="track">
+
+      <!-- S1 封面 bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar">
+          <div class="avatar"><img src="./avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">01 / 07</div>
+        <div class="body">
+          <div class="cover-eyebrow">創作者的真實故事</div>
+          <h1 class="cover-h">
+            消失了 5 個月<br>
+            不是因為我懶了
+          </h1>
+          <p class="cover-sub">場景型，一個關於停下來才能繼續的故事</p>
+          <div class="cover-foot">底氣實驗室 · JINGYI LAB</div>
+        </div>
+        <div class="arrow" onclick="next()">›</div>
+        <div class="footer">
+          <span class="footer-label">SHARE</span>
+          <div class="progress"><div class="progress-fill"></div></div>
+          <span class="footer-label">SAVE</span>
+        </div>
+      </section>
+
+      <!-- S2 起點 bg-cream -->
+      <section class="slide bg-cream">
+        <div class="topbar">
+          <div class="avatar"><img src="./avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">02 / 07</div>
+        <div class="body">
+          <div class="eyebrow">一切的起點</div>
+          <h2 class="h1">我開始在意流量這件事</h2>
+          <div class="pain-list">
+            <div class="pain-item"><div class="pain-dot"></div><div class="pain-text">數字沒動，就開始懷疑自己是不是不夠好</div></div>
+            <div class="pain-item"><div class="pain-dot"></div><div class="pain-text">花越多時間在 IG，越覺得焦慮</div></div>
+            <div class="pain-item"><div class="pain-dot"></div><div class="pain-text">明明在努力，卻感覺一直在被消耗</div></div>
+            <div class="pain-item"><div class="pain-dot"></div><div class="pain-text">對「被看見」的渴望，慢慢變成了一種傷害</div></div>
+          </div>
+          <div class="quote">我以為是我不夠努力。其實是我已經撐太久了。</div>
+        </div>
+        <div class="arrow" onclick="next()">›</div>
+        <div class="footer">
+          <span class="footer-label">SHARE</span>
+          <div class="progress"><div class="progress-fill"></div></div>
+          <span class="footer-label">SAVE</span>
+        </div>
+      </section>
+
+      <!-- S3 身體出問題 bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar">
+          <div class="avatar"><img src="./avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">03 / 07</div>
+        <div class="body">
+          <div class="eyebrow">身體先說了不</div>
+          <h2 class="h1">睡眠障礙、恐慌症、焦慮症</h2>
+          <p class="p">躺下去，腦子停不了。<br><br>後來開始有恐慌症發作，有時候突然就喘不過氣，心跳加速。焦慮變成了日常的底色。<br><br>我終於去看身心科。</p>
+          <div class="scene-quote">「我只是需要休息。」那時候我還不知道，這遠不只是休息的問題。</div>
+        </div>
+        <div class="arrow" onclick="next()">›</div>
+        <div class="footer">
+          <span class="footer-label">SHARE</span>
+          <div class="progress"><div class="progress-fill"></div></div>
+          <span class="footer-label">SAVE</span>
+        </div>
+      </section>
+
+      <!-- S4 ADHD bg-cream -->
+      <section class="slide bg-cream">
+        <div class="topbar">
+          <div class="avatar"><img src="./avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">04 / 07</div>
+        <div class="body">
+          <div class="eyebrow">意外的轉折</div>
+          <h2 class="h1">我有 ADHD。</h2>
+          <p class="p">身心科治療的過程中做了評估，意外發現了這件事。<br><br>很多說不清楚的事突然有了解釋。為什麼一直分心？為什麼做到一半就停下來？為什麼對「表現」特別焦慮？<br><br><span class="hl">這不是藉口，這是答案。</span></p>
+          <div class="quote">我終於知道自己為什麼一直這樣了。</div>
+        </div>
+        <div class="arrow" onclick="next()">›</div>
+        <div class="footer">
+          <span class="footer-label">SHARE</span>
+          <div class="progress"><div class="progress-fill"></div></div>
+          <span class="footer-label">SAVE</span>
+        </div>
+      </section>
+
+      <!-- S5 半年調整 bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar">
+          <div class="avatar"><img src="./avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">05 / 07</div>
+        <div class="body">
+          <div class="eyebrow">半年的重心調整</div>
+          <div class="tool-cards">
+            <div class="tool-card">
+              <div class="tc-title">不再追流量</div>
+              <div class="tc-desc">先把自己顧好，才有能力繼續說話。暫停不是放棄，是為了走更遠。</div>
+            </div>
+            <div class="tool-card">
+              <div class="tc-title">從紀錄生活開始</div>
+              <div class="tc-desc">不設目標，不管讚數。如實記下每天的樣子，讓自己重新和生活連接。</div>
+            </div>
+            <div class="tool-card">
+              <div class="tc-title">慢慢找回節奏</div>
+              <div class="tc-desc">知道了自己的大腦怎麼運作，才懂得怎麼和它共處，而不是一直跟自己對抗。</div>
+            </div>
+          </div>
+        </div>
+        <div class="arrow" onclick="next()">›</div>
+        <div class="footer">
+          <span class="footer-label">SHARE</span>
+          <div class="progress"><div class="progress-fill"></div></div>
+          <span class="footer-label">SAVE</span>
+        </div>
+      </section>
+
+      <!-- S6 Before/After bg-cream -->
+      <section class="slide bg-cream">
+        <div class="topbar">
+          <div class="avatar"><img src="./avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">06 / 07</div>
+        <div class="body">
+          <div class="eyebrow">停更前後對比</div>
+          <h2 class="h1">找回的不是數字，是感覺</h2>
+          <div class="compare-grid">
+            <div class="compare-card card-before">
+              <div class="card-label">停更前</div>
+              <div class="card-row">拿讚數定義自己</div>
+              <div class="card-row">睡不著</div>
+              <div class="card-row">越努力越焦慮</div>
+              <div class="card-row">硬撐著</div>
+            </div>
+            <div class="compare-card card-after">
+              <div class="card-label">回來後</div>
+              <div class="card-row">知道自己的節奏</div>
+              <div class="card-row">睡得著了</div>
+              <div class="card-row">有 ADHD 也 OK</div>
+              <div class="card-row">找回目標和方向</div>
+            </div>
+          </div>
+          <div class="quote-sm">我找回的不是數字，是想繼續走下去的感覺。</div>
+        </div>
+        <div class="arrow" onclick="next()">›</div>
+        <div class="footer">
+          <span class="footer-label">SHARE</span>
+          <div class="progress"><div class="progress-fill"></div></div>
+          <span class="footer-label">SAVE</span>
+        </div>
+      </section>
+
+      <!-- S7 CTA bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar">
+          <div class="avatar"><img src="./avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">07 / 07</div>
+        <div class="body">
+          <div class="cta-label">我回來了</div>
+          <div class="cta-big" style="font-size:20px;">如果你也曾覺得自己撐不住了<br>這篇是給你的</div>
+          <div class="cta-keyword">💬 留言「底氣」，我想認識你</div>
+          <p class="cta-note">收藏這篇，追蹤 @54jingyi 陪你慢慢來。</p>
+        </div>
+        <div class="footer">
+          <span class="footer-label">SHARE</span>
+          <div class="progress"><div class="progress-fill"></div></div>
+          <span class="footer-label">SAVE</span>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <div class="ig-actions">
+    <div class="ig-left">
+      <span class="ig-icon">♡</span>
+      <span class="ig-icon" style="font-size:19px;">💬</span>
+      <span class="ig-icon" style="font-size:19px;">✈️</span>
+    </div>
+    <div class="ig-dots" id="igDots"></div>
+    <span class="ig-icon" style="font-size:20px;">🔖</span>
+  </div>
+  <div class="ig-caption">
+    <strong>54jingyi</strong> 我消失了 5 個月。不是因為懶，是因為生病了。✦ 存起來看！<br>
+    <span style="color:#0095f6;">#創作者心聲 #ADHD #心理健康 #自媒體 #底氣實驗室</span>
+  </div>
+</div>
+
+<div class="hint">鍵盤 ← → 切換 ｜ 點選按鈕切換 ｜ 支援觸控滑動</div>
+
+<script>
+  const TOTAL = 7;
+  let cur = 0;
+  const track = document.getElementById('track');
+  const ctr = document.getElementById('ctr');
+  const igDots = document.getElementById('igDots');
+
+  function render() {
+    track.style.transform = `translateX(-${cur * 400}px)`;
+    ctr.textContent = `${cur + 1} / ${TOTAL}`;
+
+    igDots.innerHTML = '';
+    for (let i = 0; i < TOTAL; i++) {
+      const d = document.createElement('div');
+      d.className = 'ig-dot' + (i === cur ? ' on' : '');
+      igDots.appendChild(d);
+    }
+
+    const pct = ((cur + 1) / TOTAL * 100).toFixed(1) + '%';
+    document.querySelectorAll('.progress-fill').forEach(el => {
+      el.style.width = pct;
+    });
+  }
+
+  function next() { if (cur < TOTAL - 1) { cur++; render(); } }
+  function prev() { if (cur > 0) { cur--; render(); } }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') next();
+    if (e.key === 'ArrowLeft') prev();
+  });
+
+  const vp = document.querySelector('.viewport');
+  let tx = 0;
+  vp.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, { passive: true });
+  vp.addEventListener('touchend', e => {
+    const d = tx - e.changedTouches[0].screenX;
+    if (d > 40) next(); else if (d < -40) prev();
+  }, { passive: true });
+
+  render();
+</script>
+</body>
+</html>
