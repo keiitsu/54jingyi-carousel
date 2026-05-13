@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IG 輪播預覽｜@54jingyi｜No.69</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --cream:#EDEAE3;--olive:#3D4F2A;--olive-deep:#2E3D1F;--ink:#1F2418;--gold:#C9A961;
+      --serif:'Noto Serif TC',serif;--sans:'Noto Sans TC',sans-serif;
+    }
+    body{background:#B4B1AA;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:32px 20px 56px;gap:16px;}
+    .pg-label{font-family:var(--sans);font-size:10.5px;letter-spacing:4px;color:#787570;text-transform:uppercase;}
+    .controls{display:flex;align-items:center;gap:16px;}
+    .ctrl-btn{background:transparent;border:1px solid #8A8880;color:#2E2C2A;padding:7px 20px;cursor:pointer;font-family:var(--sans);font-size:11px;letter-spacing:1px;border-radius:2px;transition:all .2s;}
+    .ctrl-btn:hover{background:#2E2C2A;color:var(--cream);}
+    .slide-ctr{font-family:var(--sans);font-size:13px;color:#787570;min-width:46px;text-align:center;}
+    .frame{width:400px;background:#fff;border-radius:12px;box-shadow:0 0 0 1px #C0BCB5,0 24px 80px rgba(0,0,0,.28);overflow:hidden;}
+    .viewport{width:400px;height:500px;overflow:hidden;position:relative;}
+    .track{display:flex;height:500px;transition:transform .42s cubic-bezier(.25,.46,.45,.94);will-change:transform;}
+    .slide{min-width:400px;width:400px;height:500px;padding:24px 30px 60px;position:relative;flex-shrink:0;display:flex;flex-direction:column;}
+    .bg-cream{background:var(--cream);color:var(--ink);}
+    .bg-olive{background:var(--olive-deep);color:var(--cream);}
+    .topbar{display:flex;align-items:center;gap:8px;}
+    .avatar{width:26px;height:26px;border-radius:50%;overflow:hidden;flex-shrink:0;}
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block;}
+    .handle{font-family:var(--sans);font-size:12.5px;font-weight:500;opacity:.6;}
+    .pagenum{position:absolute;top:24px;right:30px;font-family:var(--serif);font-size:13px;letter-spacing:1px;opacity:.4;}
+    .body{flex:1;display:flex;flex-direction:column;margin-top:16px;}
+    .cover-eyebrow{font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;opacity:.55;margin-bottom:18px;}
+    .cover-h{font-family:var(--serif);font-size:28px;font-weight:700;line-height:1.45;}
+    .cover-sub{font-family:var(--sans);font-size:12px;line-height:1.65;opacity:.5;margin-top:16px;}
+    .cover-foot{margin-top:auto;font-family:var(--sans);font-size:10.5px;letter-spacing:2.5px;opacity:.38;text-transform:uppercase;}
+    .eyebrow{font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;opacity:.55;margin-bottom:12px;}
+    .h1{font-family:var(--serif);font-size:21px;font-weight:700;line-height:1.5;margin-bottom:14px;}
+    .p{font-family:var(--serif);font-size:14px;line-height:1.85;}
+    .hl{font-family:var(--serif);font-weight:700;}
+    .quote{margin-top:auto;margin-bottom:8px;font-family:var(--serif);font-size:15px;font-weight:700;line-height:1.7;}
+    .quote-sm{margin-top:auto;margin-bottom:6px;font-family:var(--serif);font-size:13px;font-weight:700;line-height:1.6;}
+    .scene-quote{border-radius:7px;padding:12px 14px;margin-top:12px;font-family:var(--serif);font-size:13px;line-height:1.7;font-style:italic;}
+    .bg-olive .scene-quote{background:rgba(255,255,255,.07);border-left:2px solid rgba(201,169,97,.5);}
+    .bg-cream .scene-quote{background:rgba(0,0,0,.04);border-left:2px solid rgba(61,79,42,.3);}
+    .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;}
+    .compare-card{border-radius:7px;padding:12px 13px;}
+    .bg-cream .compare-card{background:rgba(0,0,0,.05);}
+    .bg-olive .compare-card{background:rgba(255,255,255,.07);}
+    .card-label{font-family:var(--sans);font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;opacity:.55;margin-bottom:9px;}
+    .card-after .card-label{opacity:1;color:var(--gold);}
+    .bg-cream .card-after .card-label{color:var(--olive);}
+    .card-row{font-family:var(--serif);font-size:12.5px;line-height:1.8;}
+    .cta-label{font-family:var(--sans);font-size:11px;letter-spacing:2.5px;text-transform:uppercase;opacity:.55;margin-bottom:16px;}
+    .cta-big{font-family:var(--serif);font-size:23px;font-weight:700;line-height:1.5;margin-bottom:22px;}
+    .cta-keyword{display:inline-block;font-family:var(--serif);font-size:15px;font-weight:700;color:var(--gold);padding:12px 18px;border:1.5px solid rgba(201,169,97,.35);border-radius:7px;margin-bottom:14px;}
+    .cta-note{font-family:var(--sans);font-size:12px;line-height:1.65;opacity:.55;}
+    .arrow{position:absolute;right:14px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;z-index:20;transition:transform .2s;user-select:none;}
+    .bg-olive .arrow{background:rgba(255,255,255,.1);color:var(--cream);}
+    .bg-cream .arrow{background:rgba(0,0,0,.07);color:var(--ink);}
+    .arrow:hover{transform:translateY(-50%) scale(1.1);}
+    .footer{position:absolute;bottom:18px;left:30px;right:30px;display:flex;align-items:center;gap:10px;}
+    .footer-label{font-family:var(--sans);font-size:10.5px;letter-spacing:3px;text-transform:uppercase;opacity:.38;flex-shrink:0;}
+    .progress{flex:1;height:2px;border-radius:1px;overflow:hidden;}
+    .bg-cream .progress{background:rgba(0,0,0,.12);}
+    .bg-olive .progress{background:rgba(255,255,255,.15);}
+    .progress-fill{height:100%;width:0;border-radius:1px;opacity:.75;transition:width .42s;}
+    .bg-cream .progress-fill{background:var(--ink);}
+    .bg-olive .progress-fill{background:var(--cream);}
+    .ig-actions{padding:10px 16px 6px;display:flex;justify-content:space-between;align-items:center;background:#fff;}
+    .ig-left{display:flex;gap:14px;align-items:center;}
+    .ig-icon{font-size:22px;cursor:pointer;}
+    .ig-dots{display:flex;gap:3px;align-items:center;}
+    .ig-dot{width:5px;height:5px;border-radius:50%;background:#DBDBDB;transition:all .3s;}
+    .ig-dot.on{background:#0095f6;width:14px;border-radius:3px;}
+    .ig-caption{padding:4px 16px 14px;font-size:11.5px;font-family:var(--sans);color:#262626;line-height:1.5;background:#fff;}
+    .hint{font-family:var(--sans);font-size:11px;color:#787570;letter-spacing:1px;text-align:center;}
+  </style>
+</head>
+<body>
+<div class="pg-label">IG Carousel Preview — @54jingyi — No.69</div>
+<div class="controls">
+  <button class="ctrl-btn" onclick="prev()">← 上一張</button>
+  <span class="slide-ctr" id="ctr">1 / 7</span>
+  <button class="ctrl-btn" onclick="next()">下一張 →</button>
+</div>
+<div class="frame">
+  <div class="viewport">
+    <div class="track" id="track">
+
+      <!-- S1 封面 bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar"><div class="avatar"><img src="./avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">01 / 07</div>
+        <div class="body">
+          <div class="cover-eyebrow">Claude × 創作者日常 No.10</div>
+          <h1 class="cover-h">讓 Claude 幫你省掉<br>這 3 個每天重複的動作</h1>
+          <p class="cover-sub">教學型，從選題到發文，省下 3 小時的完整流程</p>
+          <div class="cover-foot">底氣實驗室 · JINGYI LAB</div>
+        </div>
+        <div class="arrow" onclick="next()">›</div>
+        <div class="footer"><span class="footer-label">SHARE</span><div class="progress"><div class="progress-fill"></div></div><span class="footer-label">SAVE</span></div>
+      </section>
+
+      <!-- S2 為什麼重要 bg-cream -->
+      <section class="slide bg-cream">
+        <div class="topbar"><div class="avatar"><img src="./avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">02 / 07</div>
+        <div class="body">
+          <div class="eyebrow">你每天在做的事</div>
+          <h2 class="h1">70% 的時間在「整理」而不是「創作」</h2>
+          <p class="p">大部分創作者的時間分配是這樣的：想題目、整理筆記、改格式、想 hashtag、改標題、排版…<br><br>真正在「創作」的時間，其實很少。<br><br><span class="hl">這 3 個重複動作，Claude 可以幫你自動處理。</span></p>
+          <div class="quote">讓 AI 做重複的，你做獨特的。</div>
+        </div>
+        <div class="arrow" onclick="next()">›</div>
+        <div class="footer"><span class="footer-label">SHARE</span><div class="progress"><div class="progress-fill"></div></div><span class="footer-label">SAVE</span></div>
+      </section>
+
+      <!-- S3 動作一 bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar"><div class="avatar"><img src="./avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">03 / 07</div>
+        <div class="body">
+          <div class="eyebrow">動作一</div>
+          <h2 class="h1">把主題丟給 Claude，一次生成 30 個題目</h2>
+          <p class="p">給 Claude 你的帳號定位、受眾、最近一篇貼文，它會給你 30 個題目清單，還幫你分類：反問型、場景型、教學型。<br><br>以前想題目要花一個下午，現在 10 分鐘。</p>
+          <div class="scene-quote">提示詞：「我的受眾是台灣媽媽，帳號主題是 AI 副業，幫我生成 30 個 IG 輪播題目，分成反問型、場景型、教學型」</div>
+        </div>
+        <div class="arrow" onclick="next()">›</div>
+        <div class="footer"><span class="footer-label">SHARE</span><div class="progress"><div class="progress-fill"></div></div><span class="footer-label">SAVE</span></div>
+      </section>
+
+      <!-- S4 動作二 bg-cream -->
+      <section class="slide bg-cream">
+        <div class="topbar"><div class="avatar"><img src="./avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">04 / 07</div>
+        <div class="body">
+          <div class="eyebrow">動作二</div>
+          <h2 class="h1">讓 Claude 先搭好 7 張投影片的骨架</h2>
+          <p class="p">給它題目，加上一篇你的舊貼文當語氣參考，讓它產出 7 張的文字稿。<br><br>不是叫它直接用，而是讓它先做骨架，你再填自己的故事和細節。<br><br><span class="hl">骨架讓 Claude 搭，靈魂你自己填。</span></p>
+          <div class="scene-quote">提示詞：「參考以上語氣，用教學型結構幫我寫出這篇輪播的 7 張文字稿，每張 80 字以內」</div>
+        </div>
+        <div class="arrow" onclick="next()">›</div>
+        <div class="footer"><span class="footer-label">SHARE</span><div class="progress"><div class="progress-fill"></div></div><span class="footer-label">SAVE</span></div>
+      </section>
+
+      <!-- S5 動作三 bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar"><div class="avatar"><img src="./avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">05 / 07</div>
+        <div class="body">
+          <div class="eyebrow">動作三</div>
+          <h2 class="h1">5 個 hashtag、3 個標題選項、1 個 CTA，10 秒完成</h2>
+          <p class="p">文案寫完後，最耗時的三件事就是：想 hashtag、改標題、決定 CTA。<br><br>把文案貼給 Claude，叫它同時生成這三樣，你只要從選項裡挑一個就好。</p>
+          <div class="scene-quote">提示詞：「根據以上文案，幫我生成 5 個 hashtag、3 個標題選項、1 個 CTA 句子，CTA 關鍵字是『底氣』」</div>
+        </div>
+        <div class="arrow" onclick="next()">›</div>
+        <div class="footer"><span class="footer-label">SHARE</span><div class="progress"><div class="progress-fill"></div></div><span class="footer-label">SAVE</span></div>
+      </section>
+
+      <!-- S6 成果對比 bg-cream -->
+      <section class="slide bg-cream">
+        <div class="topbar"><div class="avatar"><img src="./avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">06 / 07</div>
+        <div class="body">
+          <div class="eyebrow">一篇輪播的時間對比</div>
+          <h2 class="h1">從每篇花 4 小時，到 1 小時完成</h2>
+          <div class="compare-grid">
+            <div class="compare-card card-before">
+              <div class="card-label">沒用 Claude</div>
+              <div class="card-row">想題目 60 分鐘</div>
+              <div class="card-row">寫文案 2 小時</div>
+              <div class="card-row">想 hashtag 30 分</div>
+              <div class="card-row">總計 4 小時</div>
+            </div>
+            <div class="compare-card card-after">
+              <div class="card-label">用 Claude</div>
+              <div class="card-row">選題 10 分鐘</div>
+              <div class="card-row">調整文案 40 分</div>
+              <div class="card-row">發文準備 5 分</div>
+              <div class="card-row">總計 1 小時</div>
+            </div>
+          </div>
+          <div class="quote-sm">每週省下 9 小時，可以多陪孩子、多休息，或多做一篇。</div>
+        </div>
+        <div class="arrow" onclick="next()">›</div>
+        <div class="footer"><span class="footer-label">SHARE</span><div class="progress"><div class="progress-fill"></div></div><span class="footer-label">SAVE</span></div>
+      </section>
+
+      <!-- S7 CTA bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar"><div class="avatar"><img src="./avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">07 / 07</div>
+        <div class="body">
+          <div class="cta-label">給想省時間的創作者</div>
+          <div class="cta-big">這 3 個提示詞模板的完整版，直接給你</div>
+          <div class="cta-keyword">💬 留言「底氣」馬上送你</div>
+          <p class="cta-note">追蹤 @54jingyi 學更多 AI 創作技巧。</p>
+        </div>
+        <div class="footer"><span class="footer-label">SHARE</span><div class="progress"><div class="progress-fill"></div></div><span class="footer-label">SAVE</span></div>
+      </section>
+
+    </div>
+  </div>
+  <div class="ig-actions">
+    <div class="ig-left"><span class="ig-icon">♡</span><span class="ig-icon" style="font-size:19px;">💬</span><span class="ig-icon" style="font-size:19px;">✈️</span></div>
+    <div class="ig-dots" id="igDots"></div>
+    <span class="ig-icon" style="font-size:20px;">🔖</span>
+  </div>
+  <div class="ig-caption"><strong>54jingyi</strong> 每篇輪播以前要花 4 小時，用了這 3 個 Claude 動作之後剩 1 小時。提示詞清單留言「底氣」直送。✦ 存起來用！<br><span style="color:#0095f6;">#AI工具 #IG經營 #自媒體 #數位副業 #底氣實驗室</span></div>
+</div>
+<div class="hint">鍵盤 ← → 切換 ｜ 點選按鈕切換 ｜ 支援觸控滑動</div>
+<script>
+  const TOTAL=7;let cur=0;
+  const track=document.getElementById('track'),ctr=document.getElementById('ctr'),igDots=document.getElementById('igDots');
+  function render(){
+    track.style.transform=`translateX(-${cur*400}px)`;
+    ctr.textContent=`${cur+1} / ${TOTAL}`;
+    igDots.innerHTML='';
+    for(let i=0;i<TOTAL;i++){const d=document.createElement('div');d.className='ig-dot'+(i===cur?' on':'');igDots.appendChild(d);}
+    const pct=((cur+1)/TOTAL*100).toFixed(1)+'%';
+    document.querySelectorAll('.progress-fill').forEach(el=>{el.style.width=pct;});
+  }
+  function next(){if(cur<TOTAL-1){cur++;render();}}
+  function prev(){if(cur>0){cur--;render();}}
+  document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')next();if(e.key==='ArrowLeft')prev();});
+  const vp=document.querySelector('.viewport');let tx=0;
+  vp.addEventListener('touchstart',e=>{tx=e.changedTouches[0].screenX;},{passive:true});
+  vp.addEventListener('touchend',e=>{const d=tx-e.changedTouches[0].screenX;if(d>40)next();else if(d<-40)prev();},{passive:true});
+  render();
+</script>
+</body>
+</html>
