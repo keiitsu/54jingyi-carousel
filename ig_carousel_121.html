@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>#121 PIF白話文 Vol.01｜你的化妝品少了這份文件</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--cream:#EDEAE3;--olive:#3D4F2A;--olive-deep:#2E3D1F;--ink:#1F2418;--gold:#C9A961;--serif:'Noto Serif TC',serif;--sans:'Noto Sans TC',sans-serif;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{background:#e8e4db;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:40px 20px;font-family:var(--serif);}
+    .ig-frame{width:400px;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 10px 48px rgba(0,0,0,.20);}
+    .carousel{position:relative;overflow:hidden;width:400px;}
+    .track{display:flex;transition:transform .35s cubic-bezier(.4,0,.2,1);}
+    .slide{min-width:400px;width:400px;height:500px;padding:24px 30px 60px;position:relative;overflow:hidden;flex-shrink:0;}
+    .bg-cream{background:var(--cream);color:var(--ink);}
+    .bg-olive{background:var(--olive-deep);color:var(--cream);}
+    .topbar{display:flex;align-items:center;gap:8px;}
+    .avatar{width:26px;height:26px;border-radius:50%;overflow:hidden;flex-shrink:0;}
+    .avatar img{width:100%;height:100%;object-fit:cover;}
+    .handle{font-family:var(--sans);font-size:13px;font-weight:500;opacity:.85;}
+    .pagenum{position:absolute;top:24px;right:30px;font-family:var(--serif);font-size:13px;letter-spacing:1px;opacity:.55;}
+    .body{margin-top:16px;display:flex;flex-direction:column;height:calc(500px - 26px - 16px - 60px - 24px);}
+    .cover-eyebrow{font-family:var(--sans);font-size:11.5px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+    .cover-h{font-family:var(--serif);font-size:28px;font-weight:700;line-height:1.45;margin-bottom:18px;}
+    .cover-sub{font-family:var(--serif);font-size:13.5px;font-weight:400;line-height:1.75;opacity:.75;margin-bottom:auto;}
+    .cover-tag{display:inline-block;font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:rgba(201,169,97,.18);color:var(--gold);padding:4px 10px;border-radius:4px;margin-top:16px;}
+    .eyebrow{font-family:var(--sans);font-size:11.5px;font-weight:500;letter-spacing:2.5px;opacity:.55;text-transform:uppercase;margin-bottom:10px;}
+    .h1{font-family:var(--serif);font-size:21px;font-weight:700;line-height:1.5;margin-bottom:14px;}
+    .p{font-family:var(--serif);font-size:14px;font-weight:400;line-height:1.85;margin-bottom:10px;}
+    .hl{font-family:var(--serif);font-weight:700;}
+    .quote{font-family:var(--serif);font-size:15px;font-weight:700;line-height:1.7;margin-top:auto;margin-bottom:8px;}
+    .quote-sm{font-family:var(--serif);font-size:13px;font-weight:700;line-height:1.6;margin-top:auto;margin-bottom:8px;}
+    .numlist{display:flex;flex-direction:column;gap:10px;margin-bottom:12px;}
+    .numlist .row{display:flex;gap:10px;align-items:flex-start;}
+    .num{font-family:var(--serif);font-size:13px;font-weight:700;color:var(--gold);min-width:18px;line-height:1.75;flex-shrink:0;}
+    .num-text{font-family:var(--serif);font-size:13px;line-height:1.75;}
+    .warn-box{border-radius:7px;padding:13px 14px;margin-bottom:12px;}
+    .bg-cream .warn-box{background:rgba(180,50,30,.07);border-left:3px solid rgba(180,50,30,.35);}
+    .bg-olive .warn-box{background:rgba(255,255,255,.09);border-left:3px solid rgba(201,169,97,.5);}
+    .warn-label{font-family:var(--sans);font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;opacity:.55;margin-bottom:6px;}
+    .warn-text{font-family:var(--serif);font-size:13px;line-height:1.75;}
+    .compare-wrap{display:flex;flex-direction:column;gap:9px;margin-bottom:12px;}
+    .compare-card{border-radius:7px;padding:12px 14px;}
+    .bg-cream .compare-card{background:rgba(46,61,31,.07);}
+    .bg-olive .compare-card{background:rgba(255,255,255,.09);}
+    .card-label{font-family:var(--sans);font-size:10.5px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;opacity:.55;margin-bottom:6px;}
+    .card-text{font-family:var(--serif);font-size:13px;line-height:1.75;}
+    .cta-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;height:100%;text-align:center;}
+    .cta-eyebrow{font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);}
+    .cta-line{font-family:var(--serif);font-size:16px;font-weight:400;opacity:.9;}
+    .cta-keyword{font-family:var(--serif);font-size:28px;font-weight:700;letter-spacing:7px;color:var(--gold);}
+    .cta-desc{font-family:var(--sans);font-size:12px;opacity:.65;line-height:1.7;}
+    .arrow{position:absolute;right:14px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;user-select:none;}
+    .bg-olive .arrow{background:rgba(255,255,255,.15);color:var(--cream);}
+    .bg-cream .arrow{background:rgba(46,61,31,.12);color:var(--ink);}
+    .footer{position:absolute;bottom:18px;left:30px;right:30px;display:flex;align-items:center;justify-content:space-between;}
+    .footer span{font-family:var(--sans);font-size:11px;letter-spacing:3px;opacity:.45;text-transform:uppercase;}
+    .progress{flex:1;height:2px;margin:0 12px;border-radius:1px;position:relative;}
+    .bg-olive .progress{background:rgba(237,234,227,.2);}
+    .bg-cream .progress{background:rgba(31,36,24,.15);}
+    .progress::after{content:'';position:absolute;left:0;top:0;height:100%;width:var(--p,14%);background:currentColor;opacity:.6;border-radius:1px;}
+    .dots{display:flex;gap:6px;justify-content:center;padding:12px 0 8px;background:#fff;}
+    .dot{width:6px;height:6px;border-radius:50%;background:rgba(46,61,31,.2);cursor:pointer;transition:all .25s;}
+    .dot.active{background:var(--olive-deep);width:20px;border-radius:3px;}
+    .nav-bar{display:flex;justify-content:space-between;align-items:center;padding:8px 16px 14px;background:#fff;}
+    .nav-btn{font-family:var(--sans);font-size:12px;font-weight:500;color:var(--olive-deep);background:none;border:1px solid rgba(46,61,31,.25);border-radius:20px;padding:5px 16px;cursor:pointer;}
+    .nav-btn:disabled{opacity:.28;cursor:default;}
+    .slide-counter{font-family:var(--sans);font-size:12px;color:var(--ink);opacity:.45;}
+  </style>
+</head>
+<body>
+<div class="ig-frame">
+  <div class="carousel">
+    <div class="track" id="track">
+
+      <!-- S1 封面 bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">01 / 07</div>
+        <div class="body">
+          <div class="cover-eyebrow">PIF 白話文 Vol.01</div>
+          <div class="cover-h">你的化妝品<br>少了這份文件</div>
+          <div class="cover-sub">2026 年 7 月 1 日起，台灣所有一般化妝品都必須備妥 PIF。沒有？最高罰新台幣 100 萬，還可能下架停售。</div>
+          <div class="cover-tag">TFDA 新制 · 2026/7/1 上路</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:14%;"></div><span>SAVE</span></div>
+      </section>
+
+      <!-- S2 bg-cream -->
+      <section class="slide bg-cream">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">02 / 07</div>
+        <div class="body">
+          <div class="eyebrow">先搞清楚是什麼</div>
+          <h2 class="h1">PIF 是化妝品的「出生證明＋安全履歷」</h2>
+          <p class="p">PIF 全名 Product Information File（產品資訊檔案），是每一款化妝品上市前必須建立的核心合規文件。</p>
+          <p class="p">它不需要送審，但<span class="hl">主管機關隨時可能來查，你必須當場拿出來。</span></p>
+          <p class="p">一份 PIF 包含：產品基本資料、全成分配方、製造流程、安全評估報告、GMP證明、標籤仿單，共 16 項核心內容。</p>
+          <div class="quote">PIF 是你對消費者安全的承諾書，不是填填表格而已。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:28%;"></div><span>SAVE</span></div>
+      </section>
+
+      <!-- S3 bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">03 / 07</div>
+        <div class="body">
+          <div class="eyebrow">誰需要備妥 PIF</div>
+          <h2 class="h1">只要你的品牌有賣化妝品，就需要</h2>
+          <div class="numlist">
+            <div class="row"><span class="num">01</span><span class="num-text">台灣自製品牌：從配方、代工廠到上架，全程都需要備妥 PIF</span></div>
+            <div class="row"><span class="num">02</span><span class="num-text">海外代購、進口品：只要在台灣上市，同樣需要備妥，不因為「在國外做的」而豁免</span></div>
+            <div class="row"><span class="num">03</span><span class="num-text">電商賣家：在蝦皮、Shopee、自架官網銷售，全部適用，沒有「線上通路例外」</span></div>
+            <div class="row"><span class="num">04</span><span class="num-text">微型品牌：就算只有一款產品，PIF 也是必備，規模大小不影響法規要求</span></div>
+          </div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:43%;"></div><span>SAVE</span></div>
+      </section>
+
+      <!-- S4 bg-cream -->
+      <section class="slide bg-cream">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">04 / 07</div>
+        <div class="body">
+          <div class="eyebrow">不備 PIF 的代價</div>
+          <h2 class="h1">後果不只是罰錢，還有這些</h2>
+          <div class="compare-wrap">
+            <div class="compare-card">
+              <div class="card-label">最直接的懲罰</div>
+              <div class="card-text">最高罰新台幣 100 萬元。TFDA 稽查時若無法提供 PIF，視為違規，依法裁罰。</div>
+            </div>
+            <div class="compare-card">
+              <div class="card-label">商業損失</div>
+              <div class="card-text">主管機關可命令停售、下架，已上架的庫存全數無法出售，損失由業者自行承擔。</div>
+            </div>
+            <div class="compare-card">
+              <div class="card-label">品牌信任</div>
+              <div class="card-text">違規紀錄公開，消費者看得到。一次被查到，品牌信譽難以挽回。</div>
+            </div>
+          </div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:57%;"></div><span>SAVE</span></div>
+      </section>
+
+      <!-- S5 bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">05 / 07</div>
+        <div class="body">
+          <div class="eyebrow">2026 / 7 / 1 倒數</div>
+          <h2 class="h1">距離新制上路，你還有多少時間？</h2>
+          <p class="p">今天是 2026 年 5 月 21 日。</p>
+          <p class="p"><span class="hl">距離 7 月 1 日，只剩約 40 天。</span></p>
+          <p class="p">建置一份完整 PIF 平均需要 2–6 週，包含：委外安全評估報告（SA 簽署）通常需要 3–4 週、GMP 證明取得、全文件彙整存檔。</p>
+          <div class="quote-sm">如果你現在還沒開始，時間已經很緊。現在立刻確認你的 PIF 狀態。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:71%;"></div><span>SAVE</span></div>
+      </section>
+
+      <!-- S6 bg-cream -->
+      <section class="slide bg-cream">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">06 / 07</div>
+        <div class="body">
+          <div class="eyebrow">現在馬上做</div>
+          <h2 class="h1">今天可以做的 3 件事</h2>
+          <div class="numlist">
+            <div class="row"><span class="num">01</span><span class="num-text">盤點現有文件：你手上有哪些？全成分配方、GMP 證明、產品標籤，先列清單確認缺口</span></div>
+            <div class="row"><span class="num">02</span><span class="num-text">確認產品已登錄：登入 TFDA 化妝品管理系統，確認每款產品是否有完成登錄並取得証明文件</span></div>
+            <div class="row"><span class="num">03</span><span class="num-text">聯繫 SA 或委外機構：安全評估報告需要有資格的人員簽署，越早約越好，時間不等人</span></div>
+          </div>
+          <div class="quote-sm">不需要一步到位，但必須今天開始。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:85%;"></div><span>SAVE</span></div>
+      </section>
+
+      <!-- S7 CTA bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">07 / 07</div>
+        <div class="body">
+          <div class="cta-wrap">
+            <div class="cta-eyebrow">PIF 白話文系列</div>
+            <div class="cta-line">想拿到 PIF 自我檢查表？留言</div>
+            <div class="cta-keyword">底氣</div>
+            <div class="cta-line">我直接傳給你</div>
+            <div class="cta-desc">16 項必備文件清單＋缺口確認表<br>讓你今天就知道你差在哪裡</div>
+          </div>
+        </div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:100%;"></div><span>SAVE</span></div>
+      </section>
+
+    </div>
+  </div>
+  <div class="dots" id="dots">
+    <div class="dot active" onclick="goTo(0)"></div><div class="dot" onclick="goTo(1)"></div>
+    <div class="dot" onclick="goTo(2)"></div><div class="dot" onclick="goTo(3)"></div>
+    <div class="dot" onclick="goTo(4)"></div><div class="dot" onclick="goTo(5)"></div>
+    <div class="dot" onclick="goTo(6)"></div>
+  </div>
+  <div class="nav-bar">
+    <button class="nav-btn" id="prev" onclick="prev()" disabled>上一張</button>
+    <span class="slide-counter" id="counter">1 / 7</span>
+    <button class="nav-btn" id="next" onclick="next()">下一張</button>
+  </div>
+</div>
+<script>
+  const track=document.getElementById('track'),slides=track.querySelectorAll('.slide'),total=slides.length;let current=0;
+  function goTo(n){current=Math.max(0,Math.min(n,total-1));track.style.transform=`translateX(-${current*400}px)`;document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===current));document.getElementById('counter').textContent=`${current+1} / ${total}`;document.getElementById('prev').disabled=current===0;document.getElementById('next').disabled=current===total-1;slides.forEach((s,i)=>{const a=s.querySelector('.arrow');if(a)a.style.display=i===total-1?'none':'flex';});}
+  function next(){goTo(current+1);}function prev(){goTo(current-1);}
+  slides.forEach((s,i)=>{const a=s.querySelector('.arrow');if(a){a.addEventListener('click',next);if(i===total-1)a.style.display='none';}});
+  document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')next();if(e.key==='ArrowLeft')prev();});
+  let startX=0;track.addEventListener('touchstart',e=>{startX=e.touches[0].clientX;});track.addEventListener('touchend',e=>{const diff=startX-e.changedTouches[0].clientX;if(Math.abs(diff)>40)diff>0?next():prev();});
+  goTo(0);
+</script>
+</body>
+</html>
