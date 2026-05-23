@@ -1,85 +1,265 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>54jingyi Carousel Pages</title>
+  <title>@54jingyi 已完成貼文分享連結</title>
   <style>
     :root {
-      color-scheme: light;
-      font-family: Arial, "Microsoft JhengHei", sans-serif;
-      color: #25211c;
-      background: #f4efe7;
+      --cream: #edeae3;
+      --olive: #2e3d1f;
+      --olive-soft: #4f6335;
+      --gold: #c9a961;
+      --paper: #fbfaf6;
+      --ink: #18200f;
+      --line: rgba(46, 61, 31, .16);
     }
-
+    * { box-sizing: border-box; }
     body {
       margin: 0;
-      padding: 32px;
+      font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--cream);
     }
-
-    main {
-      max-width: 720px;
+    header {
+      background: var(--olive);
+      color: var(--cream);
+      padding: 32px clamp(18px, 4vw, 48px);
+    }
+    .header-inner {
+      max-width: 1120px;
       margin: 0 auto;
-    }
-
-    h1 {
-      margin: 0 0 20px;
-      font-size: clamp(28px, 5vw, 42px);
-      line-height: 1.15;
-    }
-
-    .links {
       display: grid;
-      gap: 14px;
+      grid-template-columns: auto 1fr;
+      gap: 16px;
+      align-items: center;
     }
-
-    a {
-      display: block;
-      padding: 18px 20px;
-      border: 1px solid #d5c8b8;
-      border-radius: 8px;
-      background: #fffaf4;
-      color: #7b3f20;
-      font-size: 18px;
+    .avatar {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--gold);
+      background: var(--paper);
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-family: "Noto Serif TC", "Microsoft JhengHei", serif;
+      font-size: clamp(24px, 4vw, 40px);
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+    .summary {
+      margin: 0;
+      color: rgba(237, 234, 227, .86);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 26px clamp(18px, 4vw, 48px) 44px;
+    }
+    .tools {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+    .home-link {
+      color: var(--olive);
       font-weight: 700;
       text-decoration: none;
-      box-shadow: 0 12px 28px rgba(37, 33, 28, 0.08);
+      border-bottom: 2px solid var(--gold);
     }
-
-    a:hover {
-      text-decoration: underline;
+    .copy-all {
+      border: 0;
+      background: var(--olive);
+      color: var(--cream);
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-weight: 700;
+      cursor: pointer;
     }
-
-    .group {
-      margin-top: 28px;
+    .link-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 10px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
     }
-
-    h2 {
-      margin: 0 0 12px;
-      font-size: 20px;
-      color: #5f4a37;
+    .link-row {
+      min-height: 52px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      border-radius: 8px;
+      padding: 8px 8px 8px 14px;
+    }
+    .link-row a {
+      color: var(--olive);
+      text-decoration: none;
+      font-weight: 800;
+      line-height: 1.3;
+    }
+    .link-row span {
+      margin-left: 8px;
+      color: var(--olive-soft);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .link-row button {
+      min-width: 62px;
+      border: 1px solid rgba(46, 61, 31, .24);
+      background: #fff;
+      color: var(--olive);
+      border-radius: 6px;
+      padding: 8px 10px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .link-row button.done,
+    .copy-all.done {
+      background: var(--gold);
+      color: var(--ink);
+      border-color: var(--gold);
+    }
+    @media (max-width: 560px) {
+      .header-inner { grid-template-columns: 1fr; }
+      .avatar { width: 48px; height: 48px; }
+      .tools { align-items: stretch; }
+      .copy-all { width: 100%; }
     }
   </style>
 </head>
 <body>
-  <main>
-    <h1>54jingyi Carousel Pages</h1>
-    <section class="group">
-      <h2>PIF Whitepaper Series</h2>
-      <div class="links">
-        <a href="ig_carousel_121.html">#121 PIF 白話文 Vol.01 | 7/1新制警示</a>
-        <a href="ig_carousel_122.html">#122 PIF 白話文 Vol.02 | 16項清單拆解</a>
-        <a href="ig_carousel_123.html">#123 PIF 白話文 Vol.03 | 5步驟建置流程</a>
-        <a href="ig_carousel_124.html">#124 PIF 白話文 Vol.04 | 費用全解析</a>
+  <header>
+    <div class="header-inner">
+      <img class="avatar" src="avatar_jy.jpg" alt="@54jingyi">
+      <div>
+        <h1>@54jingyi 已完成貼文分享連結</h1>
+        <p class="summary">已完成貼文區 HTML 共 86 個，更新日期：2026-05-23。點選編號可開啟預覽，Copy 可複製公開連結。</p>
       </div>
-    </section>
-    <section class="group">
-      <h2>Other Pages</h2>
-    <div class="links">
-      <a href="ig_carousel_64.html">Open ig_carousel_64</a>
-      <a href="ig_carousel_65.html">Open ig_carousel_65</a>
     </div>
-    </section>
+  </header>
+  <main>
+    <div class="tools">
+      <a class="home-link" href="https://keiitsu.github.io/54jingyi-carousel/">https://keiitsu.github.io/54jingyi-carousel/</a>
+      <button class="copy-all" type="button">Copy All Links</button>
+    </div>
+    <ol class="link-list">
+        <li class="link-row"><a href="ig_carousel_61.html">#61 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_61.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_61_standalone.html">#61 <span>Standalone</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_61_standalone.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_62.html">#62 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_62.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_62_standalone.html">#62 <span>Standalone</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_62_standalone.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_63.html">#63 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_63.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_63_standalone.html">#63 <span>Standalone</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_63_standalone.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_64.html">#64 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_64.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_64_standalone.html">#64 <span>Standalone</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_64_standalone.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_65.html">#65 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_65.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_65_standalone.html">#65 <span>Standalone</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_65_standalone.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_66.html">#66 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_66.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_66_standalone.html">#66 <span>Standalone</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_66_standalone.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_67.html">#67 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_67.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_67_standalone.html">#67 <span>Standalone</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_67_standalone.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_68.html">#68 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_68.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_68_standalone.html">#68 <span>Standalone</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_68_standalone.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_70.html">#70 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_70.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_71.html">#71 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_71.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_72.html">#72 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_72.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_73.html">#73 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_73.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_74.html">#74 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_74.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_75.html">#75 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_75.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_76.html">#76 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_76.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_77.html">#77 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_77.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_78.html">#78 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_78.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_79.html">#79 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_79.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_80.html">#80 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_80.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_81.html">#81 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_81.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_82.html">#82 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_82.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_83.html">#83 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_83.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_84.html">#84 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_84.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_85.html">#85 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_85.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_86.html">#86 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_86.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_87.html">#87 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_87.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_88.html">#88 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_88.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_89.html">#89 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_89.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_90.html">#90 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_90.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_91.html">#91 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_91.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_92.html">#92 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_92.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_93.html">#93 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_93.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_94.html">#94 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_94.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_95.html">#95 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_95.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_96.html">#96 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_96.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_97.html">#97 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_97.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_98.html">#98 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_98.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_99.html">#99 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_99.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_100.html">#100 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_100.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_101.html">#101 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_101.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_102.html">#102 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_102.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_103.html">#103 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_103.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_104.html">#104 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_104.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_105.html">#105 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_105.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_106.html">#106 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_106.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_107.html">#107 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_107.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_108.html">#108 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_108.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_109.html">#109 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_109.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_110.html">#110 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_110.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_111.html">#111 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_111.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_112.html">#112 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_112.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_113.html">#113 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_113.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_114.html">#114 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_114.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_115.html">#115 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_115.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_116.html">#116 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_116.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_117.html">#117 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_117.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_118.html">#118 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_118.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_119.html">#119 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_119.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_120.html">#120 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_120.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_121.html">#121 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_121.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_122.html">#122 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_122.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_123.html">#123 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_123.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_124.html">#124 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_124.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_125.html">#125 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_125.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_126.html">#126 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_126.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_127.html">#127 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_127.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_128.html">#128 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_128.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_129.html">#129 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_129.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_130.html">#130 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_130.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_131.html">#131 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_131.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_132.html">#132 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_132.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_133.html">#133 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_133.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_134.html">#134 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_134.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_135.html">#135 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_135.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_136.html">#136 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_136.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_137.html">#137 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_137.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_138.html">#138 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_138.html">Copy</button></li>
+        <li class="link-row"><a href="ig_carousel_139.html">#139 <span>HTML</span></a><button type="button" data-url="https://keiitsu.github.io/54jingyi-carousel/ig_carousel_139.html">Copy</button></li>
+    </ol>
   </main>
+  <script>
+    const buttons = document.querySelectorAll('[data-url]');
+    async function copyText(text, button) {
+      await navigator.clipboard.writeText(text);
+      const original = button.textContent;
+      button.textContent = 'Copied';
+      button.classList.add('done');
+      setTimeout(() => {
+        button.textContent = original;
+        button.classList.remove('done');
+      }, 1400);
+    }
+    buttons.forEach((button) => button.addEventListener('click', () => copyText(button.dataset.url, button)));
+    document.querySelector('.copy-all').addEventListener('click', (event) => {
+      const links = Array.from(buttons).map((button) => button.dataset.url).join('\n');
+      copyText(links, event.currentTarget);
+    });
+  </script>
 </body>
 </html>
