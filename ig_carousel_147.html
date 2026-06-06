@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>#147 底氣變現術 Vol.05 你的內容已經夠好了，只差這一件事</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #1a1a1a; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: 'Noto Sans TC', sans-serif; }
+
+    :root {
+      --cream: #EDEAE3;
+      --olive: #3D4F2A;
+      --olive-deep: #2E3D1F;
+      --ink: #1F2418;
+      --gold: #C9A961;
+      --serif: 'Noto Serif TC', serif;
+      --sans: 'Noto Sans TC', sans-serif;
+    }
+
+    .ig-frame { width: 400px; height: 500px; overflow: hidden; position: relative; }
+    .carousel { width: 400px; height: 500px; overflow: hidden; }
+    .track {
+      display: flex;
+      width: calc(400px * 7);
+      height: 500px;
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .slide {
+      width: 400px; height: 500px;
+      position: relative;
+      padding: 24px 30px 60px;
+      flex-shrink: 0; overflow: hidden;
+    }
+
+    .bg-olive { background-color: var(--olive); color: var(--cream); }
+    .bg-cream { background-color: var(--cream); color: var(--ink); }
+
+    .topbar { display: flex; align-items: center; gap: 7px; position: absolute; top: 18px; left: 20px; }
+    .avatar { width: 26px; height: 26px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .handle { font-family: var(--sans); font-size: 13px; font-weight: 400; }
+    .bg-olive .handle { color: rgba(237,234,227,0.85); }
+    .bg-cream .handle { color: rgba(31,36,24,0.7); }
+
+    .pagenum { position: absolute; top: 20px; right: 20px; font-family: var(--serif); font-size: 13px; }
+    .bg-olive .pagenum { color: rgba(237,234,227,0.7); }
+    .bg-cream .pagenum { color: rgba(31,36,24,0.55); }
+
+    .body {
+      position: absolute;
+      top: 58px; left: 30px; right: 30px; bottom: 60px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+
+    .eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 10px; }
+    .bg-olive .eyebrow { color: var(--gold); }
+    .bg-cream .eyebrow { color: var(--olive); }
+
+    .h1 { font-family: var(--serif); font-size: 19px; font-weight: 700; line-height: 1.5; margin-bottom: 12px; }
+    .p { font-family: var(--sans); font-size: 14px; font-weight: 300; line-height: 1.9; }
+    .hl { font-weight: 700; }
+
+    .quote-sm {
+      font-family: var(--serif); font-size: 14px; font-weight: 500; line-height: 1.75;
+      margin-top: 14px; padding-left: 14px;
+    }
+    .bg-olive .quote-sm { border-left: 2px solid var(--gold); color: rgba(237,234,227,0.9); }
+    .bg-cream .quote-sm { border-left: 2px solid var(--olive); }
+
+    /* Cover */
+    .cover-eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+    .cover-h { font-family: var(--serif); font-size: 27px; font-weight: 700; line-height: 1.45; color: var(--cream); margin-bottom: 16px; }
+    .cover-sub { font-family: var(--sans); font-size: 14px; font-weight: 300; line-height: 1.85; color: rgba(237,234,227,0.8); margin-bottom: 18px; }
+    .cover-foot { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: rgba(237,234,227,0.45); }
+
+    /* Myth list (S2) */
+    .myth-list { display: flex; flex-direction: column; gap: 9px; margin-top: 12px; }
+    .myth-row {
+      display: flex; align-items: flex-start; gap: 10px;
+      background: rgba(61,79,42,0.07); border-radius: 6px; padding: 10px 12px;
+    }
+    .myth-x { font-family: var(--serif); font-size: 15px; font-weight: 900; color: rgba(31,36,24,0.3); flex-shrink: 0; line-height: 1.4; }
+    .myth-text { font-family: var(--sans); font-size: 13px; font-weight: 300; line-height: 1.65; color: var(--ink); }
+
+    /* Tip list */
+    .tip-list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+    .tip-row { display: flex; gap: 10px; align-items: flex-start; }
+    .tip-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); margin-top: 7px; flex-shrink: 0; }
+    .bg-cream .tip-dot { background: var(--olive); }
+    .tip-text { font-family: var(--sans); font-size: 13px; font-weight: 300; line-height: 1.7; }
+
+    /* Fact card */
+    .fact-card { border-radius: 8px; padding: 14px; margin-top: 10px; }
+    .bg-olive .fact-card { background: rgba(201,169,97,0.12); }
+    .bg-cream .fact-card { background: rgba(61,79,42,0.07); }
+    .fact-title { font-family: var(--serif); font-size: 14px; font-weight: 700; margin-bottom: 10px; padding-bottom: 8px; }
+    .bg-olive .fact-title { border-bottom: 1px solid rgba(201,169,97,0.35); color: var(--cream); }
+    .bg-cream .fact-title { border-bottom: 1px solid rgba(61,79,42,0.2); }
+
+    /* Compare flow (S5) */
+    .flow-wrap { display: flex; gap: 10px; margin-top: 12px; }
+    .flow-col { flex: 1; border-radius: 8px; padding: 13px 11px; }
+    .flow-col.bad { background: rgba(0,0,0,0.15); border: 1px solid rgba(237,234,227,0.12); }
+    .flow-col.good { background: rgba(201,169,97,0.15); border: 1px solid rgba(201,169,97,0.3); }
+    .flow-head { font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+    .flow-col.bad .flow-head { color: rgba(237,234,227,0.45); }
+    .flow-col.good .flow-head { color: var(--gold); }
+    .flow-step { font-family: var(--sans); font-size: 12px; font-weight: 300; line-height: 1.6; color: var(--cream); margin-bottom: 5px; display: flex; align-items: flex-start; gap: 6px; }
+    .flow-arrow { font-size: 10px; opacity: 0.5; flex-shrink: 0; margin-top: 2px; }
+
+    /* BA wrap */
+    .ba-wrap { display: flex; gap: 10px; margin-top: 10px; }
+    .ba-col { flex: 1; border-radius: 8px; padding: 13px 12px; }
+    .ba-col.before { background: rgba(0,0,0,0.12); border: 1px solid rgba(237,234,227,0.15); }
+    .bg-cream .ba-col.before { background: rgba(61,79,42,0.06); border: 1px solid rgba(61,79,42,0.15); }
+    .ba-col.after { background: rgba(201,169,97,0.18); border: 1px solid rgba(201,169,97,0.35); }
+    .bg-cream .ba-col.after { background: rgba(61,79,42,0.12); border: 1px solid rgba(61,79,42,0.3); }
+    .ba-head { font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 9px; }
+    .ba-item { font-family: var(--sans); font-size: 12.5px; font-weight: 300; line-height: 1.75; margin-bottom: 4px; }
+
+    /* CTA */
+    .cta-wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; gap: 11px; }
+    .cta-eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
+    .cta-line { font-family: var(--serif); font-size: 17px; font-weight: 600; color: var(--cream); line-height: 1.6; }
+    .cta-keyword { font-family: var(--serif); font-size: 32px; font-weight: 900; color: var(--cream); background: rgba(201,169,97,0.2); border: 1.5px solid var(--gold); border-radius: 6px; padding: 6px 28px; letter-spacing: 0.2em; }
+    .cta-desc { font-family: var(--sans); font-size: 13px; font-weight: 300; line-height: 1.9; color: rgba(237,234,227,0.8); }
+
+    .arrow { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 22px; opacity: 0.45; transition: opacity 0.2s; user-select: none; }
+    .arrow:hover { opacity: 1; }
+    .bg-olive .arrow { color: var(--cream); }
+    .bg-cream .arrow { color: var(--ink); }
+
+    .footer { position: absolute; bottom: 18px; left: 30px; right: 30px; display: flex; align-items: center; gap: 10px; }
+    .footer span { font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; flex-shrink: 0; }
+    .bg-olive .footer span { color: rgba(237,234,227,0.4); }
+    .bg-cream .footer span { color: rgba(31,36,24,0.38); }
+    .progress { flex: 1; height: 2px; background: rgba(128,128,128,0.22); border-radius: 2px; position: relative; }
+    .progress::after { content: ''; position: absolute; left: 0; top: 0; width: var(--p); height: 100%; background: var(--gold); border-radius: 2px; }
+  </style>
+</head>
+<body>
+<div class="ig-frame">
+  <div class="carousel">
+    <div class="track" id="track">
+
+      <!-- S1 封面 bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar">
+          <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">01 / 07</div>
+        <div class="body">
+          <div class="cover-eyebrow">底氣變現術 Vol.05</div>
+          <div class="cover-h">你的內容已經夠好了，只差這一件事</div>
+          <div class="cover-sub">一直覺得「再等我準備好」，其實你缺的不是內容，是讓粉絲行動的系統。</div>
+          <div class="cover-foot">內容變現 · CTA · 轉換路徑 · 信任感</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:14%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- S2 迷思 bg-cream -->
+      <section class="slide bg-cream">
+        <div class="topbar">
+          <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">02 / 07</div>
+        <div class="body">
+          <div class="eyebrow">你是不是也說過</div>
+          <h2 class="h1">這三句話，我在自己身上說了整整一年</h2>
+          <div class="myth-list">
+            <div class="myth-row">
+              <div class="myth-x">✕</div>
+              <div class="myth-text">我的內容還不夠好，等我再準備一下再說</div>
+            </div>
+            <div class="myth-row">
+              <div class="myth-x">✕</div>
+              <div class="myth-text">粉絲還不夠多，沒資格賣東西</div>
+            </div>
+            <div class="myth-row">
+              <div class="myth-x">✕</div>
+              <div class="myth-text">萬一沒人買，很丟臉，還是再等等</div>
+            </div>
+          </div>
+          <div class="quote-sm">問題從來不是內容，是你沒有讓粉絲知道下一步要做什麼。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:28%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- S3 事實① bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar">
+          <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">03 / 07</div>
+        <div class="body">
+          <div class="eyebrow">事實 01</div>
+          <h2 class="h1" style="color:var(--cream);">買家買的是信任感，不是完美內容</h2>
+          <div class="fact-card">
+            <div class="fact-title">你的受眾在乎的是</div>
+            <div class="tip-list">
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">你能不能幫他解決一個具體的問題</div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">你是否真的懂他的處境，說出他說不出來的話</div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">你是不是一個他願意繼續跟著走的人</div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text"><span style="font-weight:700;">80分的內容持續出現，比100分偶爾出現更有力</span></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:43%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- S4 事實② bg-cream -->
+      <section class="slide bg-cream">
+        <div class="topbar">
+          <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">04 / 07</div>
+        <div class="body">
+          <div class="eyebrow">事實 02</div>
+          <h2 class="h1">你真正缺的，是這三樣東西</h2>
+          <div class="fact-card">
+            <div class="fact-title">讓變現發生的必要條件</div>
+            <div class="tip-list">
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text"><span style="font-weight:700;">明確的 CTA：</span>每篇貼文都要有一個清楚的下一步，不能只說「希望對你有幫助」</div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text"><span style="font-weight:700;">清楚的產品路徑：</span>粉絲要知道「你賣什麼、怎麼買、為什麼值得」</div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text"><span style="font-weight:700;">轉換的機制：</span>把粉絲從「喜歡你」引導到「想跟你買」的橋梁</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:57%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- S5 有系統 vs 沒系統 bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar">
+          <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">05 / 07</div>
+        <div class="body">
+          <div class="eyebrow">有系統 vs 沒系統</div>
+          <h2 class="h1" style="color:var(--cream);">同樣的內容，結果完全不同</h2>
+          <div class="flow-wrap">
+            <div class="flow-col bad">
+              <div class="flow-head">沒有系統</div>
+              <div class="flow-step"><span class="flow-arrow">›</span>內容很好</div>
+              <div class="flow-step"><span class="flow-arrow">›</span>粉絲喜歡</div>
+              <div class="flow-step"><span class="flow-arrow">›</span>不知道怎麼買</div>
+              <div class="flow-step" style="font-weight:700; color:rgba(237,234,227,0.5);"><span class="flow-arrow">›</span>什麼都沒發生</div>
+            </div>
+            <div class="flow-col good">
+              <div class="flow-head">有系統</div>
+              <div class="flow-step"><span class="flow-arrow">›</span>內容夠好</div>
+              <div class="flow-step"><span class="flow-arrow">›</span>CTA 明確</div>
+              <div class="flow-step"><span class="flow-arrow">›</span>粉絲採取行動</div>
+              <div class="flow-step" style="font-weight:700; color:var(--gold);"><span class="flow-arrow">›</span>變現發生</div>
+            </div>
+          </div>
+          <div class="quote-sm" style="margin-top:14px;">系統不複雜。一個清楚的 CTA，就是開始。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:71%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- S6 Before / After bg-cream -->
+      <section class="slide bg-cream">
+        <div class="topbar">
+          <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">06 / 07</div>
+        <div class="body">
+          <div class="eyebrow">我自己的轉變</div>
+          <h2 class="h1">加了 CTA 之後，同樣的內容結果不同了</h2>
+          <div class="ba-wrap">
+            <div class="ba-col before">
+              <div class="ba-head" style="color:rgba(31,36,24,0.5);">以前</div>
+              <div class="ba-item">每篇結尾：「希望對你有幫助」</div>
+              <div class="ba-item">粉絲按讚，然後離開</div>
+              <div class="ba-item">沒有人問怎麼買</div>
+              <div class="ba-item">以為是內容不夠好</div>
+            </div>
+            <div class="ba-col after">
+              <div class="ba-head" style="color:var(--olive);">現在</div>
+              <div class="ba-item">每篇結尾：明確的下一步</div>
+              <div class="ba-item">粉絲按讚後留言行動</div>
+              <div class="ba-item">私訊開始進來</div>
+              <div class="ba-item">內容一樣，只是加了引導</div>
+            </div>
+          </div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:85%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- S7 CTA bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar">
+          <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">07 / 07</div>
+        <div class="body">
+          <div class="cta-wrap">
+            <div class="cta-eyebrow">想了解更多</div>
+            <div class="cta-line">想要一份讓粉絲開始行動的</div>
+            <div class="cta-line">CTA 模板與變現路徑範本</div>
+            <div class="cta-keyword">底 氣</div>
+            <div class="cta-desc">私訊你一份可直接套用的<br>社群 CTA 公式，完全免費</div>
+          </div>
+        </div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:100%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+<script>
+  let cur = 0;
+  const total = 7;
+  const track = document.getElementById('track');
+  function goTo(n) {
+    cur = Math.max(0, Math.min(total - 1, n));
+    track.style.transform = `translateX(-${cur * 400}px)`;
+  }
+  document.querySelectorAll('.arrow').forEach(a => a.addEventListener('click', () => goTo(cur + 1)));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') goTo(cur + 1);
+    if (e.key === 'ArrowLeft') goTo(cur - 1);
+  });
+  let tx = 0;
+  track.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 40) goTo(dx < 0 ? cur + 1 : cur - 1);
+  }, { passive: true });
+</script>
+</body>
+</html>

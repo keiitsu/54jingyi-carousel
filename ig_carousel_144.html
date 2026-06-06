@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>#144 益生菌飯前吃還是飯後吃？時間點真的有差</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #1a1a1a; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: 'Noto Sans TC', sans-serif; }
+
+    :root {
+      --cream: #EDEAE3;
+      --olive: #3D4F2A;
+      --olive-deep: #2E3D1F;
+      --ink: #1F2418;
+      --gold: #C9A961;
+      --serif: 'Noto Serif TC', serif;
+      --sans: 'Noto Sans TC', sans-serif;
+    }
+
+    .ig-frame { width: 400px; height: 500px; overflow: hidden; position: relative; }
+    .carousel { width: 400px; height: 500px; overflow: hidden; }
+    .track {
+      display: flex;
+      width: calc(400px * 7);
+      height: 500px;
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .slide {
+      width: 400px; height: 500px;
+      position: relative;
+      padding: 24px 30px 60px;
+      flex-shrink: 0; overflow: hidden;
+    }
+
+    .bg-olive { background-color: var(--olive); color: var(--cream); }
+    .bg-cream { background-color: var(--cream); color: var(--ink); }
+
+    .topbar { display: flex; align-items: center; gap: 7px; position: absolute; top: 18px; left: 20px; }
+    .avatar { width: 26px; height: 26px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .handle { font-family: var(--sans); font-size: 13px; font-weight: 400; }
+    .bg-olive .handle { color: rgba(237,234,227,0.85); }
+    .bg-cream .handle { color: rgba(31,36,24,0.7); }
+
+    .pagenum { position: absolute; top: 20px; right: 20px; font-family: var(--serif); font-size: 13px; }
+    .bg-olive .pagenum { color: rgba(237,234,227,0.7); }
+    .bg-cream .pagenum { color: rgba(31,36,24,0.55); }
+
+    .body {
+      position: absolute;
+      top: 58px; left: 30px; right: 30px; bottom: 60px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+
+    .eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 10px; }
+    .bg-olive .eyebrow { color: var(--gold); }
+    .bg-cream .eyebrow { color: var(--olive); }
+
+    .h1 { font-family: var(--serif); font-size: 19px; font-weight: 700; line-height: 1.5; margin-bottom: 12px; }
+    .p { font-family: var(--sans); font-size: 14px; font-weight: 300; line-height: 1.9; }
+    .hl { font-weight: 700; }
+
+    .quote-sm {
+      font-family: var(--serif); font-size: 14px; font-weight: 500; line-height: 1.75;
+      margin-top: 14px; padding-left: 14px;
+    }
+    .bg-olive .quote-sm { border-left: 2px solid var(--gold); color: rgba(237,234,227,0.9); }
+    .bg-cream .quote-sm { border-left: 2px solid var(--olive); }
+
+    /* Cover */
+    .cover-eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .cover-h { font-family: var(--serif); font-size: 28px; font-weight: 700; line-height: 1.45; color: var(--cream); margin-bottom: 16px; }
+    .cover-sub { font-family: var(--sans); font-size: 14px; font-weight: 300; line-height: 1.85; color: rgba(237,234,227,0.8); margin-bottom: 18px; }
+    .cover-foot { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: rgba(237,234,227,0.45); }
+
+    /* Step card */
+    .step-card { border-radius: 8px; padding: 14px; margin-top: 10px; }
+    .bg-olive .step-card { background: rgba(201,169,97,0.12); }
+    .bg-cream .step-card { background: rgba(61,79,42,0.07); }
+    .step-num { font-family: var(--sans); font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 5px; }
+    .bg-olive .step-num { color: var(--gold); }
+    .bg-cream .step-num { color: var(--olive); }
+    .step-product { font-family: var(--serif); font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+    .bg-olive .step-product { color: var(--cream); }
+    .step-timing { font-family: var(--sans); font-size: 12px; font-weight: 300; margin-bottom: 10px; padding-bottom: 10px; }
+    .bg-olive .step-timing { color: rgba(237,234,227,0.65); border-bottom: 1px solid rgba(201,169,97,0.3); }
+    .bg-cream .step-timing { color: rgba(31,36,24,0.55); border-bottom: 1px solid rgba(61,79,42,0.2); }
+
+    /* Tip list */
+    .tip-list { display: flex; flex-direction: column; gap: 7px; }
+    .tip-row { display: flex; gap: 10px; align-items: flex-start; }
+    .tip-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); margin-top: 7px; flex-shrink: 0; }
+    .bg-cream .tip-dot { background: var(--olive); }
+    .tip-text { font-family: var(--sans); font-size: 12.5px; font-weight: 300; line-height: 1.7; }
+
+    /* Do/Don't list (S6) */
+    .dd-wrap { display: flex; gap: 12px; margin-top: 12px; }
+    .dd-col { flex: 1; border-radius: 8px; padding: 13px 12px; }
+    .dd-col.do { background: rgba(201,169,97,0.12); }
+    .dd-col.dont { background: rgba(0,0,0,0.12); border: 1px solid rgba(237,234,227,0.12); }
+    .dd-head { font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 9px; }
+    .dd-col.do .dd-head { color: var(--gold); }
+    .dd-col.dont .dd-head { color: rgba(237,234,227,0.45); }
+    .dd-item { font-family: var(--sans); font-size: 12.5px; font-weight: 300; line-height: 1.75; margin-bottom: 4px; color: var(--cream); }
+
+    /* CTA */
+    .cta-wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; gap: 11px; }
+    .cta-eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
+    .cta-line { font-family: var(--serif); font-size: 17px; font-weight: 600; color: var(--cream); line-height: 1.6; }
+    .cta-keyword { font-family: var(--serif); font-size: 32px; font-weight: 900; color: var(--cream); background: rgba(201,169,97,0.2); border: 1.5px solid var(--gold); border-radius: 6px; padding: 6px 28px; letter-spacing: 0.2em; }
+    .cta-desc { font-family: var(--sans); font-size: 13px; font-weight: 300; line-height: 1.9; color: rgba(237,234,227,0.8); }
+
+    .arrow { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 22px; opacity: 0.45; transition: opacity 0.2s; user-select: none; }
+    .arrow:hover { opacity: 1; }
+    .bg-olive .arrow { color: var(--cream); }
+    .bg-cream .arrow { color: var(--ink); }
+
+    .footer { position: absolute; bottom: 18px; left: 30px; right: 30px; display: flex; align-items: center; gap: 10px; }
+    .footer span { font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; flex-shrink: 0; }
+    .bg-olive .footer span { color: rgba(237,234,227,0.4); }
+    .bg-cream .footer span { color: rgba(31,36,24,0.38); }
+    .progress { flex: 1; height: 2px; background: rgba(128,128,128,0.22); border-radius: 2px; position: relative; }
+    .progress::after { content: ''; position: absolute; left: 0; top: 0; width: var(--p); height: 100%; background: var(--gold); border-radius: 2px; }
+  </style>
+</head>
+<body>
+<div class="ig-frame">
+  <div class="carousel">
+    <div class="track" id="track">
+
+      <!-- S1 封面 bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar">
+          <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">01 / 07</div>
+        <div class="body">
+          <div class="cover-eyebrow">選品保養</div>
+          <div class="cover-h">益生菌飯前吃<br>還是飯後吃？</div>
+          <div class="cover-sub">同一瓶益生菌，選對時間吃，活菌存活率差距可以超過一倍。</div>
+          <div class="cover-foot">飯前 · 飯後 · 睡前 · 服用注意事項</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:14%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- S2 為什麼時間點重要 bg-cream -->
+      <section class="slide bg-cream">
+        <div class="topbar">
+          <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">02 / 07</div>
+        <div class="body">
+          <div class="eyebrow">為什麼時間點有差</div>
+          <h2 class="h1">益生菌最大的敵人，是你的胃酸</h2>
+          <p class="p">益生菌是<span class="hl">活的細菌</span>，必須通過胃酸才能抵達腸道發揮作用。空腹時胃酸濃度最高，活菌大量陣亡。飽腹後食物稀釋了胃酸，活菌存活率大幅提升。</p>
+          <div class="quote-sm">選對時間，讓你花的每一分錢都發揮應有的效果。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:28%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- S3 飯前空腹 bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar">
+          <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">03 / 07</div>
+        <div class="body">
+          <div class="eyebrow">時間點 01</div>
+          <div class="step-card">
+            <div class="step-num">Option 01</div>
+            <div class="step-product">飯前 / 空腹</div>
+            <div class="step-timing">胃酸濃度最高，一般不推薦</div>
+            <div class="tip-list">
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">空腹胃酸 pH 值約 1.5–2，對活菌殺傷力最強</div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">一般益生菌空腹吃，大部分活菌在胃裡就陣亡</div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text"><span style="font-weight:700;">例外：</span>有腸溶膠囊或耐胃酸設計的產品才適合空腹</div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">看產品標示，有「耐酸」字樣才可空腹服用</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:43%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- S4 飯後 30 分鐘 bg-cream -->
+      <section class="slide bg-cream">
+        <div class="topbar">
+          <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">04 / 07</div>
+        <div class="body">
+          <div class="eyebrow">時間點 02</div>
+          <div class="step-card">
+            <div class="step-num">Option 02 — 最推薦</div>
+            <div class="step-product">飯後 30 分鐘</div>
+            <div class="step-timing">活菌存活率最高的黃金窗口</div>
+            <div class="tip-list">
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">食物進入胃後，胃酸被稀釋，pH 值上升至 3–5</div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">活菌通過胃的存活率顯著提高</div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">適合所有類型的益生菌產品，包含無包埋設計的</div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">最容易養成習慣，早餐或晚餐後服用都好</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:57%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- S5 睡前 bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar">
+          <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">05 / 07</div>
+        <div class="body">
+          <div class="eyebrow">時間點 03</div>
+          <div class="step-card">
+            <div class="step-num">Option 03</div>
+            <div class="step-product">睡前</div>
+            <div class="step-timing">適合有腸溶設計的益生菌</div>
+            <div class="tip-list">
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">睡眠中腸道蠕動慢，益生菌有更長時間<span style="font-weight:700;">在腸道定殖</span></div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">距上次進食 2 小時以上最佳，胃酸已趨於穩定</div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">適合目標是<span style="font-weight:700;">改善腸道菌相、調整體質</span>的人</div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">搭配包埋技術效果更好，一般益生菌建議飯後吃</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:71%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- S6 服用注意事項 bg-cream -->
+      <section class="slide bg-cream">
+        <div class="topbar">
+          <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">06 / 07</div>
+        <div class="body">
+          <div class="eyebrow">吃對時間還不夠</div>
+          <h2 class="h1">這四件事也會影響效果</h2>
+          <div class="tip-list" style="margin-top:4px; gap:10px;">
+            <div class="tip-row">
+              <div class="tip-dot"></div>
+              <div class="tip-text">用<span style="font-weight:700;">溫開水</span>送服，水溫不超過 37°C，熱水會直接殺死活菌</div>
+            </div>
+            <div class="tip-row">
+              <div class="tip-dot"></div>
+              <div class="tip-text">避免用<span style="font-weight:700;">咖啡、熱茶、牛奶</span>送服，影響活菌存活</div>
+            </div>
+            <div class="tip-row">
+              <div class="tip-dot"></div>
+              <div class="tip-text">服用抗生素期間，間隔<span style="font-weight:700;">至少 2 小時</span>再吃益生菌</div>
+            </div>
+            <div class="tip-row">
+              <div class="tip-dot"></div>
+              <div class="tip-text">搭配<span style="font-weight:700;">香蕉、燕麥、洋蔥</span>等益生元食物，幫助益生菌在腸道定殖更久</div>
+            </div>
+          </div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:85%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- S7 CTA bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar">
+          <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">07 / 07</div>
+        <div class="body">
+          <div class="cta-wrap">
+            <div class="cta-eyebrow">想了解更多</div>
+            <div class="cta-line">想要一份益生菌完整選購</div>
+            <div class="cta-line">與服用指南</div>
+            <div class="cta-keyword">底 氣</div>
+            <div class="cta-desc">私訊你菌株推薦、時間點整理<br>一份完整的益生菌入門清單</div>
+          </div>
+        </div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:100%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+<script>
+  let cur = 0;
+  const total = 7;
+  const track = document.getElementById('track');
+  function goTo(n) {
+    cur = Math.max(0, Math.min(total - 1, n));
+    track.style.transform = `translateX(-${cur * 400}px)`;
+  }
+  document.querySelectorAll('.arrow').forEach(a => a.addEventListener('click', () => goTo(cur + 1)));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') goTo(cur + 1);
+    if (e.key === 'ArrowLeft') goTo(cur - 1);
+  });
+  let tx = 0;
+  track.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 40) goTo(dx < 0 ? cur + 1 : cur - 1);
+  }, { passive: true });
+</script>
+</body>
+</html>

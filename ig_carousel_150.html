@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>#150 底氣變現術 Vol.08 貼文有人看，卻沒有人買，問題出在這裡</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #1a1a1a; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: 'Noto Sans TC', sans-serif; }
+
+    :root {
+      --cream: #EDEAE3;
+      --olive: #3D4F2A;
+      --olive-deep: #2E3D1F;
+      --ink: #1F2418;
+      --gold: #C9A961;
+      --serif: 'Noto Serif TC', serif;
+      --sans: 'Noto Sans TC', sans-serif;
+    }
+
+    .ig-frame { width: 400px; height: 500px; overflow: hidden; position: relative; }
+    .carousel { width: 400px; height: 500px; overflow: hidden; }
+    .track {
+      display: flex;
+      width: calc(400px * 7);
+      height: 500px;
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .slide {
+      width: 400px; height: 500px;
+      position: relative;
+      padding: 24px 30px 60px;
+      flex-shrink: 0; overflow: hidden;
+    }
+
+    .bg-olive { background-color: var(--olive); color: var(--cream); }
+    .bg-cream { background-color: var(--cream); color: var(--ink); }
+
+    .topbar { display: flex; align-items: center; gap: 7px; position: absolute; top: 18px; left: 20px; }
+    .avatar { width: 26px; height: 26px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .handle { font-family: var(--sans); font-size: 13px; font-weight: 400; }
+    .bg-olive .handle { color: rgba(237,234,227,0.85); }
+    .bg-cream .handle { color: rgba(31,36,24,0.7); }
+
+    .pagenum { position: absolute; top: 20px; right: 20px; font-family: var(--serif); font-size: 13px; }
+    .bg-olive .pagenum { color: rgba(237,234,227,0.7); }
+    .bg-cream .pagenum { color: rgba(31,36,24,0.55); }
+
+    .body {
+      position: absolute;
+      top: 58px; left: 30px; right: 30px; bottom: 60px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+
+    .eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 10px; }
+    .bg-olive .eyebrow { color: var(--gold); }
+    .bg-cream .eyebrow { color: var(--olive); }
+
+    .h1 { font-family: var(--serif); font-size: 19px; font-weight: 700; line-height: 1.5; margin-bottom: 12px; }
+    .p { font-family: var(--sans); font-size: 14px; font-weight: 300; line-height: 1.9; }
+    .hl { font-weight: 700; }
+
+    .quote-sm {
+      font-family: var(--serif); font-size: 14px; font-weight: 500; line-height: 1.75;
+      margin-top: 14px; padding-left: 14px;
+    }
+    .bg-olive .quote-sm { border-left: 2px solid var(--gold); color: rgba(237,234,227,0.9); }
+    .bg-cream .quote-sm { border-left: 2px solid var(--olive); }
+
+    /* Cover */
+    .cover-eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+    .cover-h { font-family: var(--serif); font-size: 26px; font-weight: 700; line-height: 1.45; color: var(--cream); margin-bottom: 16px; }
+    .cover-sub { font-family: var(--sans); font-size: 14px; font-weight: 300; line-height: 1.85; color: rgba(237,234,227,0.8); margin-bottom: 18px; }
+    .cover-foot { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: rgba(237,234,227,0.45); }
+
+    /* Myth list */
+    .myth-list { display: flex; flex-direction: column; gap: 9px; margin-top: 12px; }
+    .myth-row { display: flex; align-items: flex-start; gap: 10px; background: rgba(61,79,42,0.07); border-radius: 6px; padding: 10px 12px; }
+    .myth-x { font-family: var(--serif); font-size: 15px; font-weight: 900; color: rgba(31,36,24,0.3); flex-shrink: 0; line-height: 1.4; }
+    .myth-text { font-family: var(--sans); font-size: 13px; font-weight: 300; line-height: 1.65; color: var(--ink); }
+
+    /* Tip list */
+    .tip-list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+    .tip-row { display: flex; gap: 10px; align-items: flex-start; }
+    .tip-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); margin-top: 7px; flex-shrink: 0; }
+    .bg-cream .tip-dot { background: var(--olive); }
+    .tip-text { font-family: var(--sans); font-size: 13px; font-weight: 300; line-height: 1.7; }
+
+    /* Two-column comparison (S4) */
+    .two-col { display: flex; gap: 12px; margin-top: 12px; }
+    .col-box { flex: 1; border-radius: 8px; padding: 13px 11px; }
+    .bg-olive .col-box { background: rgba(201,169,97,0.1); }
+    .bg-cream .col-box { background: rgba(61,79,42,0.07); }
+    .col-head { font-family: var(--serif); font-size: 13px; font-weight: 700; margin-bottom: 8px; padding-bottom: 7px; }
+    .bg-olive .col-head { border-bottom: 1px solid rgba(201,169,97,0.3); color: var(--cream); }
+    .bg-cream .col-head { border-bottom: 1px solid rgba(61,79,42,0.2); }
+    .col-body { font-family: var(--sans); font-size: 12px; font-weight: 300; line-height: 1.7; }
+    .col-tag { font-family: var(--sans); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 8px; }
+    .bg-olive .col-tag { color: var(--gold); }
+    .bg-cream .col-tag { color: var(--olive); }
+
+    /* Ratio visual (S5) */
+    .ratio-wrap { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+    .ratio-card { border-radius: 8px; padding: 12px 14px; }
+    .ratio-card.wrong { background: rgba(0,0,0,0.15); border: 1px solid rgba(237,234,227,0.12); }
+    .ratio-card.right { background: rgba(201,169,97,0.15); border: 1px solid rgba(201,169,97,0.3); }
+    .ratio-tag { font-family: var(--sans); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+    .ratio-card.wrong .ratio-tag { color: rgba(237,234,227,0.4); }
+    .ratio-card.right .ratio-tag { color: var(--gold); }
+    .ratio-bar { display: flex; gap: 3px; margin-bottom: 7px; }
+    .bar-seg { height: 8px; border-radius: 2px; }
+    .bar-content { background: var(--gold); }
+    .bar-sell { background: rgba(237,234,227,0.85); }
+    .bar-none { background: rgba(237,234,227,0.15); }
+    .ratio-desc { font-family: var(--sans); font-size: 12.5px; font-weight: 300; line-height: 1.6; color: var(--cream); }
+    .ratio-desc strong { font-weight: 700; }
+
+    /* BA wrap */
+    .ba-wrap { display: flex; gap: 10px; margin-top: 10px; }
+    .ba-col { flex: 1; border-radius: 8px; padding: 13px 12px; }
+    .ba-col.before { background: rgba(0,0,0,0.12); border: 1px solid rgba(237,234,227,0.15); }
+    .bg-cream .ba-col.before { background: rgba(61,79,42,0.06); border: 1px solid rgba(61,79,42,0.15); }
+    .ba-col.after { background: rgba(201,169,97,0.18); border: 1px solid rgba(201,169,97,0.35); }
+    .bg-cream .ba-col.after { background: rgba(61,79,42,0.12); border: 1px solid rgba(61,79,42,0.3); }
+    .ba-head { font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 9px; }
+    .ba-item { font-family: var(--sans); font-size: 12.5px; font-weight: 300; line-height: 1.75; margin-bottom: 4px; }
+
+    /* CTA */
+    .cta-wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; gap: 11px; }
+    .cta-eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
+    .cta-line { font-family: var(--serif); font-size: 17px; font-weight: 600; color: var(--cream); line-height: 1.6; }
+    .cta-keyword { font-family: var(--serif); font-size: 32px; font-weight: 900; color: var(--cream); background: rgba(201,169,97,0.2); border: 1.5px solid var(--gold); border-radius: 6px; padding: 6px 28px; letter-spacing: 0.2em; }
+    .cta-desc { font-family: var(--sans); font-size: 13px; font-weight: 300; line-height: 1.9; color: rgba(237,234,227,0.8); }
+
+    .arrow { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 22px; opacity: 0.45; transition: opacity 0.2s; user-select: none; }
+    .arrow:hover { opacity: 1; }
+    .bg-olive .arrow { color: var(--cream); }
+    .bg-cream .arrow { color: var(--ink); }
+
+    .footer { position: absolute; bottom: 18px; left: 30px; right: 30px; display: flex; align-items: center; gap: 10px; }
+    .footer span { font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; flex-shrink: 0; }
+    .bg-olive .footer span { color: rgba(237,234,227,0.4); }
+    .bg-cream .footer span { color: rgba(31,36,24,0.38); }
+    .progress { flex: 1; height: 2px; background: rgba(128,128,128,0.22); border-radius: 2px; position: relative; }
+    .progress::after { content: ''; position: absolute; left: 0; top: 0; width: var(--p); height: 100%; background: var(--gold); border-radius: 2px; }
+  </style>
+</head>
+<body>
+<div class="ig-frame">
+  <div class="carousel">
+    <div class="track" id="track">
+
+      <!-- S1 封面 bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar">
+          <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">01 / 07</div>
+        <div class="body">
+          <div class="cover-eyebrow">底氣變現術 Vol.08</div>
+          <div class="cover-h">貼文有人看，卻沒有人買，問題出在這裡</div>
+          <div class="cover-sub">內容做好了，不等於銷售做好了。這是兩件事，你只做了一半。</div>
+          <div class="cover-foot">內容策略 · 銷售邏輯 · 轉換率 · 變現斷層</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:14%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- S2 迷思 bg-cream -->
+      <section class="slide bg-cream">
+        <div class="topbar">
+          <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">02 / 07</div>
+        <div class="body">
+          <div class="eyebrow">你是不是也這樣以為</div>
+          <h2 class="h1">這三個想法，讓你的努力都停在「被看到」</h2>
+          <div class="myth-list">
+            <div class="myth-row">
+              <div class="myth-x">✕</div>
+              <div class="myth-text">貼文有人看，遲早會有人主動來買</div>
+            </div>
+            <div class="myth-row">
+              <div class="myth-x">✕</div>
+              <div class="myth-text">做好內容，銷售就會自然發生</div>
+            </div>
+            <div class="myth-row">
+              <div class="myth-x">✕</div>
+              <div class="myth-text">我不想太推銷，看起來太商業化</div>
+            </div>
+          </div>
+          <div class="quote-sm">觸及率和轉換率，是兩件完全不同的事。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:28%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- S3 事實① bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar">
+          <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">03 / 07</div>
+        <div class="body">
+          <div class="eyebrow">事實 01</div>
+          <h2 class="h1" style="color:var(--cream);">內容和銷售，是兩套完全不同的語言</h2>
+          <div class="tip-list" style="margin-top:4px; gap:10px;">
+            <div class="tip-row">
+              <div class="tip-dot"></div>
+              <div class="tip-text"><span style="font-weight:700;">內容的目的：</span>建立信任、增加知名度、讓對方覺得你懂她</div>
+            </div>
+            <div class="tip-row">
+              <div class="tip-dot"></div>
+              <div class="tip-text"><span style="font-weight:700;">銷售的目的：</span>讓對方清楚知道她能得到什麼、為什麼現在要採取行動</div>
+            </div>
+            <div class="tip-row">
+              <div class="tip-dot"></div>
+              <div class="tip-text">你需要同時掌握兩種語言，缺一就會斷層</div>
+            </div>
+            <div class="tip-row">
+              <div class="tip-dot"></div>
+              <div class="tip-text">不要讓買家自己去猜「要怎麼找你、怎麼買」</div>
+            </div>
+          </div>
+          <div class="quote-sm">好的內容讓人願意追蹤你。好的銷售讓人願意掏錢給你。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:43%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- S4 內容型 vs 銷售型 bg-cream -->
+      <section class="slide bg-cream">
+        <div class="topbar">
+          <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">04 / 07</div>
+        <div class="body">
+          <div class="eyebrow">事實 02</div>
+          <h2 class="h1">兩種貼文，你需要都有</h2>
+          <div class="two-col">
+            <div class="col-box">
+              <div class="col-head">內容型貼文</div>
+              <div class="col-body">分享知識、啟發思考、引發共鳴</div>
+              <div class="col-tag">增加信任</div>
+            </div>
+            <div class="col-box">
+              <div class="col-head">銷售型貼文</div>
+              <div class="col-body">說明產品、結果、價格、購買步驟</div>
+              <div class="col-tag">引發行動</div>
+            </div>
+          </div>
+          <div class="quote-sm" style="margin-top:16px;">很多人只做前者。粉絲喜歡你，但不知道怎麼給你錢。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:57%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- S5 內容比例 bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar">
+          <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">05 / 07</div>
+        <div class="body">
+          <div class="eyebrow">貼文比例</div>
+          <h2 class="h1" style="color:var(--cream);">不用每篇都在賣，但不能從不賣</h2>
+          <div class="ratio-wrap">
+            <div class="ratio-card wrong">
+              <div class="ratio-tag">只有內容，沒有銷售</div>
+              <div class="ratio-bar">
+                <div class="bar-seg bar-content" style="width:140px;"></div>
+                <div class="bar-seg bar-none" style="width:140px;"></div>
+              </div>
+              <div class="ratio-desc">10 篇全是教學 → 粉絲覺得<strong style="color:rgba(237,234,227,0.5);">「她不賣東西」</strong></div>
+            </div>
+            <div class="ratio-card right">
+              <div class="ratio-tag">內容 + 銷售平衡</div>
+              <div class="ratio-bar">
+                <div class="bar-seg bar-content" style="width:112px;"></div>
+                <div class="bar-seg bar-sell" style="width:56px;"></div>
+                <div class="bar-seg bar-content" style="width:56px;"></div>
+              </div>
+              <div class="ratio-desc">8 篇教學 + 2 篇銷售 → 清楚、<strong style="color:var(--gold);">不過度推銷</strong>、持續轉換</div>
+            </div>
+          </div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:71%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- S6 Before / After bg-cream -->
+      <section class="slide bg-cream">
+        <div class="topbar">
+          <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">06 / 07</div>
+        <div class="body">
+          <div class="eyebrow">我自己的轉變</div>
+          <h2 class="h1">加了銷售型貼文後，私訊開始進來</h2>
+          <div class="ba-wrap">
+            <div class="ba-col before">
+              <div class="ba-head" style="color:rgba(31,36,24,0.5);">只做內容時</div>
+              <div class="ba-item">10 篇全是教學分享</div>
+              <div class="ba-item">粉絲按讚、收藏</div>
+              <div class="ba-item">沒有人問怎麼跟我買</div>
+              <div class="ba-item">以為是粉絲還不夠多</div>
+            </div>
+            <div class="ba-col after">
+              <div class="ba-head" style="color:var(--olive);">加入銷售貼文後</div>
+              <div class="ba-item">8 教學 + 2 銷售</div>
+              <div class="ba-item">粉絲知道我有在賣什麼</div>
+              <div class="ba-item">私訊開始主動進來</div>
+              <div class="ba-item">內容沒變，多的是引導</div>
+            </div>
+          </div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:85%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- S7 CTA bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar">
+          <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">07 / 07</div>
+        <div class="body">
+          <div class="cta-wrap">
+            <div class="cta-eyebrow">想了解更多</div>
+            <div class="cta-line">想要一份內容與銷售貼文</div>
+            <div class="cta-line">的比例規劃範本</div>
+            <div class="cta-keyword">底 氣</div>
+            <div class="cta-desc">私訊你一份可直接套用的<br>內容行事曆框架，完全免費</div>
+          </div>
+        </div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:100%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+<script>
+  let cur = 0;
+  const total = 7;
+  const track = document.getElementById('track');
+  function goTo(n) {
+    cur = Math.max(0, Math.min(total - 1, n));
+    track.style.transform = `translateX(-${cur * 400}px)`;
+  }
+  document.querySelectorAll('.arrow').forEach(a => a.addEventListener('click', () => goTo(cur + 1)));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') goTo(cur + 1);
+    if (e.key === 'ArrowLeft') goTo(cur - 1);
+  });
+  let tx = 0;
+  track.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 40) goTo(dx < 0 ? cur + 1 : cur - 1);
+  }, { passive: true });
+</script>
+</body>
+</html>

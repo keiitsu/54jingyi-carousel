@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>#142 防曬沒卸乾淨，才是你一直長痘的原因</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #1a1a1a; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: 'Noto Sans TC', sans-serif; }
+
+    :root {
+      --cream: #EDEAE3;
+      --olive: #3D4F2A;
+      --olive-deep: #2E3D1F;
+      --ink: #1F2418;
+      --gold: #C9A961;
+      --serif: 'Noto Serif TC', serif;
+      --sans: 'Noto Sans TC', sans-serif;
+    }
+
+    .ig-frame { width: 400px; height: 500px; overflow: hidden; position: relative; }
+    .carousel { width: 400px; height: 500px; overflow: hidden; }
+    .track {
+      display: flex;
+      width: calc(400px * 7);
+      height: 500px;
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .slide {
+      width: 400px;
+      height: 500px;
+      position: relative;
+      padding: 24px 30px 60px;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .bg-olive { background-color: var(--olive); color: var(--cream); }
+    .bg-cream { background-color: var(--cream); color: var(--ink); }
+
+    /* Topbar */
+    .topbar { display: flex; align-items: center; gap: 7px; position: absolute; top: 18px; left: 20px; }
+    .avatar { width: 26px; height: 26px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .handle { font-family: var(--sans); font-size: 13px; font-weight: 400; }
+    .bg-olive .handle { color: rgba(237,234,227,0.85); }
+    .bg-cream .handle { color: rgba(31,36,24,0.7); }
+
+    .pagenum { position: absolute; top: 20px; right: 20px; font-family: var(--serif); font-size: 13px; font-weight: 400; }
+    .bg-olive .pagenum { color: rgba(237,234,227,0.7); }
+    .bg-cream .pagenum { color: rgba(31,36,24,0.55); }
+
+    /* Body */
+    .body {
+      position: absolute;
+      top: 58px; left: 30px; right: 30px; bottom: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 10px; }
+    .bg-olive .eyebrow { color: var(--gold); }
+    .bg-cream .eyebrow { color: var(--olive); }
+
+    .h1 { font-family: var(--serif); font-size: 19px; font-weight: 700; line-height: 1.5; margin-bottom: 12px; }
+    .p { font-family: var(--sans); font-size: 14px; font-weight: 300; line-height: 1.9; }
+    .hl { font-weight: 700; }
+
+    .quote-sm {
+      font-family: var(--serif);
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.75;
+      margin-top: 14px;
+      padding-left: 14px;
+    }
+    .bg-olive .quote-sm { border-left: 2px solid var(--gold); color: rgba(237,234,227,0.9); }
+    .bg-cream .quote-sm { border-left: 2px solid var(--olive); }
+
+    /* Cover */
+    .cover-eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .cover-h { font-family: var(--serif); font-size: 27px; font-weight: 700; line-height: 1.45; color: var(--cream); margin-bottom: 16px; }
+    .cover-sub { font-family: var(--sans); font-size: 14px; font-weight: 300; line-height: 1.85; color: rgba(237,234,227,0.8); margin-bottom: 18px; }
+    .cover-foot { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: rgba(237,234,227,0.45); }
+
+    /* Myth list (S2) */
+    .myth-list { display: flex; flex-direction: column; gap: 9px; margin-top: 12px; }
+    .myth-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: rgba(61,79,42,0.07);
+      border-radius: 6px;
+      padding: 10px 12px;
+    }
+    .myth-x {
+      font-family: var(--serif);
+      font-size: 15px;
+      font-weight: 900;
+      color: rgba(31,36,24,0.35);
+      flex-shrink: 0;
+      line-height: 1.4;
+    }
+    .myth-text {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--ink);
+    }
+
+    /* Fact card (S3, S4) */
+    .fact-card {
+      background: rgba(201,169,97,0.12);
+      border-radius: 8px;
+      padding: 14px;
+      margin-top: 10px;
+    }
+    .bg-cream .fact-card { background: rgba(61,79,42,0.07); }
+    .fact-title { font-family: var(--serif); font-size: 14px; font-weight: 700; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(201,169,97,0.35); }
+    .bg-cream .fact-title { border-bottom-color: rgba(61,79,42,0.2); }
+
+    /* Tip list */
+    .tip-list { display: flex; flex-direction: column; gap: 8px; }
+    .tip-row { display: flex; gap: 10px; align-items: flex-start; }
+    .tip-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); margin-top: 7px; flex-shrink: 0; }
+    .bg-cream .tip-dot { background: var(--olive); }
+    .tip-text { font-family: var(--sans); font-size: 13px; font-weight: 300; line-height: 1.7; }
+
+    /* Step list (S5) */
+    .step-list { display: flex; flex-direction: column; gap: 9px; margin-top: 10px; }
+    .step-row { display: flex; align-items: flex-start; gap: 12px; }
+    .step-badge {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--olive);
+      background: var(--gold);
+      border-radius: 4px;
+      padding: 3px 7px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .step-content { font-family: var(--sans); font-size: 13px; font-weight: 300; line-height: 1.7; }
+    .step-content strong { font-weight: 700; }
+
+    /* BA wrap */
+    .ba-wrap { display: flex; gap: 10px; margin-top: 10px; }
+    .ba-col { flex: 1; border-radius: 8px; padding: 13px 12px; }
+    .ba-col.before { background: rgba(0,0,0,0.12); border: 1px solid rgba(237,234,227,0.15); }
+    .bg-cream .ba-col.before { background: rgba(61,79,42,0.06); border: 1px solid rgba(61,79,42,0.15); }
+    .ba-col.after { background: rgba(201,169,97,0.18); border: 1px solid rgba(201,169,97,0.35); }
+    .bg-cream .ba-col.after { background: rgba(61,79,42,0.12); border: 1px solid rgba(61,79,42,0.3); }
+    .ba-head { font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 9px; }
+    .ba-item { font-family: var(--sans); font-size: 12.5px; font-weight: 300; line-height: 1.75; margin-bottom: 4px; }
+
+    /* CTA */
+    .cta-wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; gap: 11px; }
+    .cta-eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
+    .cta-line { font-family: var(--serif); font-size: 17px; font-weight: 600; color: var(--cream); line-height: 1.6; }
+    .cta-keyword { font-family: var(--serif); font-size: 32px; font-weight: 900; color: var(--cream); background: rgba(201,169,97,0.2); border: 1.5px solid var(--gold); border-radius: 6px; padding: 6px 28px; letter-spacing: 0.2em; }
+    .cta-desc { font-family: var(--sans); font-size: 13px; font-weight: 300; line-height: 1.9; color: rgba(237,234,227,0.8); }
+
+    /* Arrow */
+    .arrow { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 22px; opacity: 0.45; transition: opacity 0.2s; user-select: none; }
+    .arrow:hover { opacity: 1; }
+    .bg-olive .arrow { color: var(--cream); }
+    .bg-cream .arrow { color: var(--ink); }
+
+    /* Footer */
+    .footer { position: absolute; bottom: 18px; left: 30px; right: 30px; display: flex; align-items: center; gap: 10px; }
+    .footer span { font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; flex-shrink: 0; }
+    .bg-olive .footer span { color: rgba(237,234,227,0.4); }
+    .bg-cream .footer span { color: rgba(31,36,24,0.38); }
+    .progress { flex: 1; height: 2px; background: rgba(128,128,128,0.22); border-radius: 2px; position: relative; }
+    .progress::after { content: ''; position: absolute; left: 0; top: 0; width: var(--p); height: 100%; background: var(--gold); border-radius: 2px; }
+  </style>
+</head>
+<body>
+<div class="ig-frame">
+  <div class="carousel">
+    <div class="track" id="track">
+
+      <!-- S1 封面 bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar">
+          <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">01 / 07</div>
+        <div class="body">
+          <div class="cover-eyebrow">選品保養</div>
+          <div class="cover-h">防曬沒卸乾淨，<br>才是你一直長痘的原因</div>
+          <div class="cover-sub">用洗面乳洗就夠了？這個習慣，很多人做了十年都是錯的。</div>
+          <div class="cover-foot">防曬卸妝 · 二次清潔 · 毛孔清潔</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:14%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- S2 大家都說的迷思 bg-cream -->
+      <section class="slide bg-cream">
+        <div class="topbar">
+          <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">02 / 07</div>
+        <div class="body">
+          <div class="eyebrow">大家都這樣說</div>
+          <h2 class="h1">這三句話，我曾經全都信過</h2>
+          <div class="myth-list">
+            <div class="myth-row">
+              <div class="myth-x">✕</div>
+              <div class="myth-text">防曬不像彩妝，用洗面乳洗掉就好</div>
+            </div>
+            <div class="myth-row">
+              <div class="myth-x">✕</div>
+              <div class="myth-text">我用泡沫很多的洗面乳，應該洗得掉</div>
+            </div>
+            <div class="myth-row">
+              <div class="myth-x">✕</div>
+              <div class="myth-text">沒上妝，不需要特別卸妝</div>
+            </div>
+          </div>
+          <div class="quote-sm">防曬成分的親油性，洗面乳的泡沫根本帶不走。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:28%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- S3 事實① 防曬殘留的危害 bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar">
+          <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">03 / 07</div>
+        <div class="body">
+          <div class="eyebrow">事實 01</div>
+          <h2 class="h1" style="color:var(--cream);">防曬殘留，是毛孔堵塞的源頭</h2>
+          <div class="fact-card">
+            <div class="fact-title" style="color:var(--cream);">為什麼洗面乳不夠？</div>
+            <div class="tip-list">
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">化學防曬含<span style="font-weight:700;">有機UV過濾成分</span>，親油性強，水洗帶不走</div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">物理防曬的氧化鋅、二氧化鈦<span style="font-weight:700;">微粒容易卡在毛孔</span>深處</div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">殘留防曬 + 油脂 + 污垢 = 閉口、粉刺、痘痘的溫床</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:43%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- S4 事實② 不同防曬的卸妝需求 bg-cream -->
+      <section class="slide bg-cream">
+        <div class="topbar">
+          <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">04 / 07</div>
+        <div class="body">
+          <div class="eyebrow">事實 02</div>
+          <h2 class="h1">哪種防曬更難卸？</h2>
+          <div class="fact-card">
+            <div class="fact-title">三種防曬，卸妝難度不同</div>
+            <div class="tip-list">
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text"><span style="font-weight:700;">化學防曬：</span>需要卸妝，卸妝水、卸妝油、卸妝乳皆可</div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text"><span style="font-weight:700;">物理防曬：</span>顆粒更難水洗帶走，反而更需要卸妝品</div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text"><span style="font-weight:700;">混合型：</span>按最高需求處理，一律使用卸妝品</div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">沒上妝但有擦防曬，同樣需要卸妝這個步驟</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:57%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- S5 正確卸妝步驟 bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar">
+          <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">05 / 07</div>
+        <div class="body">
+          <div class="eyebrow">正確做法</div>
+          <h2 class="h1" style="color:var(--cream);">三步驟卸乾淨，不傷皮膚屏障</h2>
+          <div class="step-list">
+            <div class="step-row">
+              <div class="step-badge">01</div>
+              <div class="step-content" style="color:var(--cream);">取適量卸妝品，<strong>輕柔按摩 30 秒</strong>讓成分乳化，不要搓揉</div>
+            </div>
+            <div class="step-row">
+              <div class="step-badge">02</div>
+              <div class="step-content" style="color:var(--cream);">溫水沖洗乾淨，確認臉上<strong>不殘留油膜感</strong>才算完成</div>
+            </div>
+            <div class="step-row">
+              <div class="step-badge">03</div>
+              <div class="step-content" style="color:var(--cream);">再用洗面乳做<strong>第二次清潔</strong>，洗去卸妝品殘留</div>
+            </div>
+          </div>
+          <div class="quote-sm" style="margin-top:14px;">乳化才是卸妝的關鍵，不是泡沫多少。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:71%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- S6 Before / After bg-cream -->
+      <section class="slide bg-cream">
+        <div class="topbar">
+          <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">06 / 07</div>
+        <div class="body">
+          <div class="eyebrow">改變前 vs 改變後</div>
+          <h2 class="h1">加了卸妝這步，皮膚狀態完全不同</h2>
+          <div class="ba-wrap">
+            <div class="ba-col before">
+              <div class="ba-head" style="color:rgba(31,36,24,0.5);">只用洗面乳時</div>
+              <div class="ba-item">早上起來臉感覺油膩</div>
+              <div class="ba-item">一直長閉口粉刺</div>
+              <div class="ba-item">保養品吸收變差</div>
+              <div class="ba-item">以為是保養品的問題</div>
+            </div>
+            <div class="ba-col after">
+              <div class="ba-head" style="color:var(--olive);">加了卸妝之後</div>
+              <div class="ba-item">早上臉清爽有光澤</div>
+              <div class="ba-item">閉口明顯減少</div>
+              <div class="ba-item">後續保養品吸收更好</div>
+              <div class="ba-item">毛孔感覺更乾淨細緻</div>
+            </div>
+          </div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:85%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- S7 CTA bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar">
+          <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">07 / 07</div>
+        <div class="body">
+          <div class="cta-wrap">
+            <div class="cta-eyebrow">想了解更多</div>
+            <div class="cta-line">想要一份適合你膚質的</div>
+            <div class="cta-line">卸妝品選購推薦</div>
+            <div class="cta-keyword">底 氣</div>
+            <div class="cta-desc">私訊你卸妝水、卸妝油、卸妝乳<br>各膚質推薦清單，完全免費</div>
+          </div>
+        </div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:100%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+<script>
+  let cur = 0;
+  const total = 7;
+  const track = document.getElementById('track');
+  function goTo(n) {
+    cur = Math.max(0, Math.min(total - 1, n));
+    track.style.transform = `translateX(-${cur * 400}px)`;
+  }
+  document.querySelectorAll('.arrow').forEach(a => a.addEventListener('click', () => goTo(cur + 1)));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') goTo(cur + 1);
+    if (e.key === 'ArrowLeft') goTo(cur - 1);
+  });
+  let tx = 0;
+  track.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 40) goTo(dx < 0 ? cur + 1 : cur - 1);
+  }, { passive: true });
+</script>
+</body>
+</html>

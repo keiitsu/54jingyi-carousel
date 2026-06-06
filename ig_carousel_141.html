@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>#141 帶妝之後，防曬還能補嗎？</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #1a1a1a; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: 'Noto Sans TC', sans-serif; }
+
+    :root {
+      --cream: #EDEAE3;
+      --olive: #3D4F2A;
+      --olive-deep: #2E3D1F;
+      --ink: #1F2418;
+      --gold: #C9A961;
+      --serif: 'Noto Serif TC', serif;
+      --sans: 'Noto Sans TC', sans-serif;
+    }
+
+    .ig-frame { width: 400px; height: 500px; overflow: hidden; position: relative; }
+    .carousel { width: 400px; height: 500px; overflow: hidden; }
+    .track {
+      display: flex;
+      width: calc(400px * 7);
+      height: 500px;
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .slide {
+      width: 400px;
+      height: 500px;
+      position: relative;
+      padding: 24px 30px 60px;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .bg-olive { background-color: var(--olive); color: var(--cream); }
+    .bg-cream { background-color: var(--cream); color: var(--ink); }
+
+    /* Topbar */
+    .topbar { display: flex; align-items: center; gap: 7px; position: absolute; top: 18px; left: 20px; }
+    .avatar { width: 26px; height: 26px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .handle { font-family: var(--sans); font-size: 13px; font-weight: 400; }
+    .bg-olive .handle { color: rgba(237,234,227,0.85); }
+    .bg-cream .handle { color: rgba(31,36,24,0.7); }
+
+    .pagenum { position: absolute; top: 20px; right: 20px; font-family: var(--serif); font-size: 13px; font-weight: 400; }
+    .bg-olive .pagenum { color: rgba(237,234,227,0.7); }
+    .bg-cream .pagenum { color: rgba(31,36,24,0.55); }
+
+    /* Body */
+    .body {
+      position: absolute;
+      top: 58px; left: 30px; right: 30px; bottom: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 10px; }
+    .bg-olive .eyebrow { color: var(--gold); }
+    .bg-cream .eyebrow { color: var(--olive); }
+
+    .h1 { font-family: var(--serif); font-size: 19px; font-weight: 700; line-height: 1.5; margin-bottom: 12px; }
+    .p { font-family: var(--sans); font-size: 14px; font-weight: 300; line-height: 1.9; }
+    .hl { font-weight: 700; }
+
+    .quote-sm {
+      font-family: var(--serif);
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.75;
+      margin-top: 14px;
+      padding-left: 14px;
+    }
+    .bg-olive .quote-sm { border-left: 2px solid var(--gold); color: rgba(237,234,227,0.9); }
+    .bg-cream .quote-sm { border-left: 2px solid var(--olive); }
+
+    /* Cover */
+    .cover-eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .cover-h { font-family: var(--serif); font-size: 30px; font-weight: 700; line-height: 1.4; color: var(--cream); margin-bottom: 16px; }
+    .cover-sub { font-family: var(--sans); font-size: 14px; font-weight: 300; line-height: 1.85; color: rgba(237,234,227,0.8); margin-bottom: 18px; }
+    .cover-foot { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: rgba(237,234,227,0.45); }
+
+    /* Step card */
+    .step-card {
+      background: rgba(201,169,97,0.12);
+      border-radius: 8px;
+      padding: 14px;
+      margin-top: 10px;
+    }
+    .bg-cream .step-card { background: rgba(61,79,42,0.07); }
+
+    .step-num {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+    .bg-olive .step-num { color: var(--gold); }
+    .bg-cream .step-num { color: var(--olive); }
+
+    .step-product {
+      font-family: var(--serif);
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .bg-olive .step-product { color: var(--cream); }
+
+    .step-timing {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 300;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(201,169,97,0.3);
+    }
+    .bg-olive .step-timing { color: rgba(237,234,227,0.65); }
+    .bg-cream .step-timing { color: rgba(31,36,24,0.55); border-bottom-color: rgba(61,79,42,0.2); }
+
+    .tip-list { display: flex; flex-direction: column; gap: 7px; }
+    .tip-row { display: flex; gap: 10px; align-items: flex-start; }
+    .tip-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); margin-top: 7px; flex-shrink: 0; }
+    .bg-cream .tip-dot { background: var(--olive); }
+    .tip-text { font-family: var(--sans); font-size: 12.5px; font-weight: 300; line-height: 1.7; }
+
+    /* Timeline (S6) */
+    .timeline { display: flex; flex-direction: column; gap: 9px; margin-top: 10px; }
+    .tl-row { display: flex; align-items: flex-start; gap: 12px; }
+    .tl-dot-wrap { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+    .tl-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); margin-top: 5px; flex-shrink: 0; }
+    .bg-cream .tl-dot { background: var(--olive); }
+    .tl-line { width: 1px; flex: 1; background: rgba(201,169,97,0.3); min-height: 14px; }
+    .bg-cream .tl-line { background: rgba(61,79,42,0.2); }
+    .tl-time { font-family: var(--sans); font-size: 11px; font-weight: 700; width: 56px; flex-shrink: 0; line-height: 1.4; padding-top: 3px; }
+    .bg-olive .tl-time { color: var(--gold); }
+    .bg-cream .tl-time { color: var(--olive); }
+    .tl-text { font-family: var(--sans); font-size: 13px; font-weight: 300; line-height: 1.65; padding-top: 3px; }
+
+    /* CTA */
+    .cta-wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; gap: 11px; }
+    .cta-eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
+    .cta-line { font-family: var(--serif); font-size: 17px; font-weight: 600; color: var(--cream); line-height: 1.6; }
+    .cta-keyword { font-family: var(--serif); font-size: 32px; font-weight: 900; color: var(--cream); background: rgba(201,169,97,0.2); border: 1.5px solid var(--gold); border-radius: 6px; padding: 6px 28px; letter-spacing: 0.2em; }
+    .cta-desc { font-family: var(--sans); font-size: 13px; font-weight: 300; line-height: 1.9; color: rgba(237,234,227,0.8); }
+
+    /* Arrow */
+    .arrow { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 22px; opacity: 0.45; transition: opacity 0.2s; user-select: none; }
+    .arrow:hover { opacity: 1; }
+    .bg-olive .arrow { color: var(--cream); }
+    .bg-cream .arrow { color: var(--ink); }
+
+    /* Footer */
+    .footer { position: absolute; bottom: 18px; left: 30px; right: 30px; display: flex; align-items: center; gap: 10px; }
+    .footer span { font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; flex-shrink: 0; }
+    .bg-olive .footer span { color: rgba(237,234,227,0.4); }
+    .bg-cream .footer span { color: rgba(31,36,24,0.38); }
+    .progress { flex: 1; height: 2px; background: rgba(128,128,128,0.22); border-radius: 2px; position: relative; }
+    .progress::after { content: ''; position: absolute; left: 0; top: 0; width: var(--p); height: 100%; background: var(--gold); border-radius: 2px; }
+  </style>
+</head>
+<body>
+<div class="ig-frame">
+  <div class="carousel">
+    <div class="track" id="track">
+
+      <!-- S1 封面 bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar">
+          <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">01 / 07</div>
+        <div class="body">
+          <div class="cover-eyebrow">選品保養</div>
+          <div class="cover-h">帶妝之後，<br>防曬還能補嗎？</div>
+          <div class="cover-sub">補塗不等於重新上妝。三種方法讓防曬力全天在線，帶妝也能用。</div>
+          <div class="cover-foot">防曬粉餅 · 防曬噴霧 · 防曬棒</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:14%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- S2 為什麼補塗這麼關鍵 bg-cream -->
+      <section class="slide bg-cream">
+        <div class="topbar">
+          <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">02 / 07</div>
+        <div class="body">
+          <div class="eyebrow">為什麼一定要補塗</div>
+          <h2 class="h1">早上塗一次，撐不過一整天</h2>
+          <p class="p">防曬有效期大約只有 <span class="hl">2 小時</span>。出油、流汗、觸摸臉都會讓防曬層失效。很多人早上認真塗，下午卻等於裸曬。</p>
+          <div class="quote-sm">防曬不補塗，就像早上喝了水，卻以為撐過整天都不渴。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:28%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- S3 方法一：防曬粉餅 bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar">
+          <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">03 / 07</div>
+        <div class="body">
+          <div class="eyebrow">補塗方法 01</div>
+          <div class="step-card">
+            <div class="step-num">Method 01</div>
+            <div class="step-product">防曬粉餅</div>
+            <div class="step-timing">適合：公司補妝、日常通勤</div>
+            <div class="tip-list">
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">從臉部中央往外輕壓，不要橫向擦拭</div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">選 PA+++ 以上，才有效阻擋 UVA</div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">補妝同時補防曬，一步完成</div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">出油嚴重者先吸油再壓粉</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:43%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- S4 方法二：防曬噴霧 bg-cream -->
+      <section class="slide bg-cream">
+        <div class="topbar">
+          <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">04 / 07</div>
+        <div class="body">
+          <div class="eyebrow">補塗方法 02</div>
+          <div class="step-card">
+            <div class="step-num">Method 02</div>
+            <div class="step-product">防曬噴霧</div>
+            <div class="step-timing">適合：戶外活動、不方便補妝的場景</div>
+            <div class="tip-list">
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">距臉 15–20cm，閉眼均勻噴霧</div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">噴完輕按讓霧氣服貼，不要抹開</div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">不破壞底妝，補完仍自然</div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">風大的戶外效果會打折，改用粉餅或棒</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:57%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- S5 方法三：防曬棒 bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar">
+          <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">05 / 07</div>
+        <div class="body">
+          <div class="eyebrow">補塗方法 03</div>
+          <div class="step-card">
+            <div class="step-num">Method 03</div>
+            <div class="step-product">防曬棒</div>
+            <div class="step-timing">適合：運動中、帶小孩外出快速補塗</div>
+            <div class="tip-list">
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">固體棒狀，不沾手、攜帶方便</div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">可局部補：鼻頭、耳根、眼周等常漏塗部位</div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">也能補嘴唇防曬（選含防曬的護唇棒）</div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">幫小孩補防曬不狼狽，媽媽必備</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:71%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- S6 補塗時機提醒 bg-cream -->
+      <section class="slide bg-cream">
+        <div class="topbar">
+          <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">06 / 07</div>
+        <div class="body">
+          <div class="eyebrow">補塗時機</div>
+          <h2 class="h1">這四個時間點，不能錯過</h2>
+          <div class="timeline">
+            <div class="tl-row">
+              <div class="tl-dot-wrap"><div class="tl-dot"></div><div class="tl-line"></div></div>
+              <div class="tl-time">出門前</div>
+              <div class="tl-text">化學防曬需等 15–20 分鐘再出門</div>
+            </div>
+            <div class="tl-row">
+              <div class="tl-dot-wrap"><div class="tl-dot"></div><div class="tl-line"></div></div>
+              <div class="tl-time">外出 2 小時後</div>
+              <div class="tl-text">任一方法補一次，維持防曬效力</div>
+            </div>
+            <div class="tl-row">
+              <div class="tl-dot-wrap"><div class="tl-dot"></div><div class="tl-line"></div></div>
+              <div class="tl-time">流汗游泳後</div>
+              <div class="tl-text">立刻補，不等 2 小時，防曬已被帶走</div>
+            </div>
+            <div class="tl-row">
+              <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
+              <div class="tl-time">回室內後</div>
+              <div class="tl-text">不需補，但記得做好卸妝清潔</div>
+            </div>
+          </div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:85%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- S7 CTA bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar">
+          <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">07 / 07</div>
+        <div class="body">
+          <div class="cta-wrap">
+            <div class="cta-eyebrow">想了解更多</div>
+            <div class="cta-line">想要一份好用的防曬補塗工具推薦</div>
+            <div class="cta-line">留言輸入關鍵字</div>
+            <div class="cta-keyword">底 氣</div>
+            <div class="cta-desc">私訊你防曬粉餅、噴霧、棒三類<br>實測推薦清單，完全免費</div>
+          </div>
+        </div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:100%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+<script>
+  let cur = 0;
+  const total = 7;
+  const track = document.getElementById('track');
+  function goTo(n) {
+    cur = Math.max(0, Math.min(total - 1, n));
+    track.style.transform = `translateX(-${cur * 400}px)`;
+  }
+  document.querySelectorAll('.arrow').forEach(a => a.addEventListener('click', () => goTo(cur + 1)));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') goTo(cur + 1);
+    if (e.key === 'ArrowLeft') goTo(cur - 1);
+  });
+  let tx = 0;
+  track.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 40) goTo(dx < 0 ? cur + 1 : cur - 1);
+  }, { passive: true });
+</script>
+</body>
+</html>
