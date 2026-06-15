@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>#154 30天變現D11 沒有設計底子也能做出質感貼文</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #1a1a1a; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: 'Noto Sans TC', sans-serif; }
+    :root { --cream: #EDEAE3; --olive: #3D4F2A; --olive-deep: #2E3D1F; --ink: #1F2418; --gold: #C9A961; --serif: 'Noto Serif TC', serif; --sans: 'Noto Sans TC', sans-serif; }
+    .ig-frame { width: 400px; height: 500px; overflow: hidden; position: relative; }
+    .carousel { width: 400px; height: 500px; overflow: hidden; }
+    .track { display: flex; width: calc(400px * 7); height: 500px; transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); }
+    .slide { width: 400px; height: 500px; position: relative; padding: 24px 30px 60px; flex-shrink: 0; overflow: hidden; }
+    .bg-olive { background-color: var(--olive); color: var(--cream); }
+    .bg-cream { background-color: var(--cream); color: var(--ink); }
+    .topbar { display: flex; align-items: center; gap: 7px; position: absolute; top: 18px; left: 20px; }
+    .avatar { width: 26px; height: 26px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .handle { font-family: var(--sans); font-size: 13px; font-weight: 400; }
+    .bg-olive .handle { color: rgba(237,234,227,0.85); }
+    .bg-cream .handle { color: rgba(31,36,24,0.7); }
+    .pagenum { position: absolute; top: 20px; right: 20px; font-family: var(--serif); font-size: 13px; }
+    .bg-olive .pagenum { color: rgba(237,234,227,0.7); }
+    .bg-cream .pagenum { color: rgba(31,36,24,0.55); }
+    .body { position: absolute; top: 58px; left: 30px; right: 30px; bottom: 60px; display: flex; flex-direction: column; justify-content: center; }
+    .eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 10px; }
+    .bg-olive .eyebrow { color: var(--gold); }
+    .bg-cream .eyebrow { color: var(--olive); }
+    .h1 { font-family: var(--serif); font-size: 19px; font-weight: 700; line-height: 1.5; margin-bottom: 12px; }
+    .p { font-family: var(--sans); font-size: 14px; font-weight: 300; line-height: 1.9; }
+    .hl { font-weight: 700; }
+    .quote-sm { font-family: var(--serif); font-size: 14px; font-weight: 500; line-height: 1.75; margin-top: 14px; padding-left: 14px; }
+    .bg-olive .quote-sm { border-left: 2px solid var(--gold); color: rgba(237,234,227,0.9); }
+    .bg-cream .quote-sm { border-left: 2px solid var(--olive); }
+    .cover-eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+    .cover-h { font-family: var(--serif); font-size: 26px; font-weight: 700; line-height: 1.45; color: var(--cream); margin-bottom: 16px; }
+    .cover-sub { font-family: var(--sans); font-size: 14px; font-weight: 300; line-height: 1.85; color: rgba(237,234,227,0.8); margin-bottom: 18px; }
+    .cover-foot { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: rgba(237,234,227,0.45); }
+    .tip-list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+    .tip-row { display: flex; gap: 10px; align-items: flex-start; }
+    .tip-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); margin-top: 7px; flex-shrink: 0; }
+    .bg-cream .tip-dot { background: var(--olive); }
+    .tip-text { font-family: var(--sans); font-size: 13px; font-weight: 300; line-height: 1.7; }
+    .color-swatch { display: flex; gap: 10px; margin-top: 12px; align-items: center; }
+    .swatch { width: 40px; height: 40px; border-radius: 6px; border: 2px solid rgba(237,234,227,0.3); }
+    .swatch-label { font-family: var(--sans); font-size: 11px; font-weight: 400; color: rgba(237,234,227,0.7); }
+    .ba-wrap { display: flex; gap: 10px; margin-top: 10px; }
+    .ba-col { flex: 1; border-radius: 8px; padding: 13px 12px; }
+    .ba-col.before { background: rgba(61,79,42,0.06); border: 1px solid rgba(61,79,42,0.15); }
+    .ba-col.after { background: rgba(61,79,42,0.12); border: 1px solid rgba(61,79,42,0.3); }
+    .ba-head { font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 9px; }
+    .ba-item { font-family: var(--sans); font-size: 12.5px; font-weight: 300; line-height: 1.75; margin-bottom: 4px; }
+    .cta-wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; gap: 11px; }
+    .cta-eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
+    .cta-line { font-family: var(--serif); font-size: 17px; font-weight: 600; color: var(--cream); line-height: 1.6; }
+    .cta-keyword { font-family: var(--serif); font-size: 32px; font-weight: 900; color: var(--cream); background: rgba(201,169,97,0.2); border: 1.5px solid var(--gold); border-radius: 6px; padding: 6px 28px; letter-spacing: 0.2em; }
+    .cta-desc { font-family: var(--sans); font-size: 13px; font-weight: 300; line-height: 1.9; color: rgba(237,234,227,0.8); }
+    .arrow { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 22px; opacity: 0.45; transition: opacity 0.2s; user-select: none; }
+    .arrow:hover { opacity: 1; } .bg-olive .arrow { color: var(--cream); } .bg-cream .arrow { color: var(--ink); }
+    .footer { position: absolute; bottom: 18px; left: 30px; right: 30px; display: flex; align-items: center; gap: 10px; }
+    .footer span { font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; flex-shrink: 0; }
+    .bg-olive .footer span { color: rgba(237,234,227,0.4); } .bg-cream .footer span { color: rgba(31,36,24,0.38); }
+    .progress { flex: 1; height: 2px; background: rgba(128,128,128,0.22); border-radius: 2px; position: relative; }
+    .progress::after { content: ''; position: absolute; left: 0; top: 0; width: var(--p); height: 100%; background: var(--gold); border-radius: 2px; }
+  </style>
+</head>
+<body>
+<div class="ig-frame">
+  <div class="carousel">
+    <div class="track" id="track">
+
+      <section class="slide bg-olive">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">01 / 07</div>
+        <div class="body">
+          <div class="cover-eyebrow">30 天變現引流 D11</div>
+          <div class="cover-h">不會設計，也能做出<br>質感貼文？</div>
+          <div class="cover-sub">3 個方法，手機就能完成。<br>零基礎也適用。</div>
+          <div class="cover-foot">設計技巧 · Canva · 配色 · 模板</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:14%;"></div><span>SAVE</span></div>
+      </section>
+
+      <section class="slide bg-cream">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">02 / 07</div>
+        <div class="body">
+          <div class="eyebrow">你的困擾</div>
+          <h2 class="h1">看到別人的 IG 都好漂亮，自己做的怎麼看都不對勁</h2>
+          <div class="p">配色亂、字體醜、排版擠——</div>
+          <div class="p" style="margin-top:8px;">你不是不努力，<br>是<span class="hl">沒人教你方法</span>。</div>
+          <div class="quote-sm">好消息：你根本不需要「會設計」。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:28%;"></div><span>SAVE</span></div>
+      </section>
+
+      <section class="slide bg-olive">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">03 / 07</div>
+        <div class="body">
+          <div class="eyebrow">方法 01</div>
+          <h2 class="h1" style="color:var(--cream);">只用 2-3 個顏色</h2>
+          <div class="p" style="color:rgba(237,234,227,0.85);">選一個「主色」+ 一個「底色」，<br>全部貼文統一，看起來就有質感。</div>
+          <div class="color-swatch">
+            <div class="swatch" style="background:#2E3D1F;"></div>
+            <div class="swatch-label">深綠 #2E3D1F</div>
+            <div style="width:10px;"></div>
+            <div class="swatch" style="background:#EDEAE3;"></div>
+            <div class="swatch-label">米白 #EDEAE3</div>
+          </div>
+          <div class="quote-sm">只用這兩色，視覺就很舒服。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:43%;"></div><span>SAVE</span></div>
+      </section>
+
+      <section class="slide bg-cream">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">04 / 07</div>
+        <div class="body">
+          <div class="eyebrow">方法 02</div>
+          <h2 class="h1">套用現成模板</h2>
+          <div class="p">Canva 上有上千個免費模板。<br>挑一個喜歡的，換文字就好。</div>
+          <div class="tip-list" style="margin-top:14px;">
+            <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">搜尋「carousel」或「輪播」</div></div>
+            <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">找到風格接近的，一鍵套用</div></div>
+            <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">只改文字和顏色，其他不動</div></div>
+          </div>
+          <div class="quote-sm">模板就是你的設計師。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:57%;"></div><span>SAVE</span></div>
+      </section>
+
+      <section class="slide bg-olive">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">05 / 07</div>
+        <div class="body">
+          <div class="eyebrow">方法 03</div>
+          <h2 class="h1" style="color:var(--cream);">用 AI 生成圖片素材</h2>
+          <div class="p" style="color:rgba(237,234,227,0.85);">用 Canva AI 或其他工具，<br>輸入關鍵字就能生成質感圖片。</div>
+          <div class="tip-list" style="margin-top:14px;">
+            <div class="tip-row"><div class="tip-dot"></div><div class="tip-text" style="color:var(--cream);">不需要買圖庫</div></div>
+            <div class="tip-row"><div class="tip-dot"></div><div class="tip-text" style="color:var(--cream);">不需要自己拍攝</div></div>
+            <div class="tip-row"><div class="tip-dot"></div><div class="tip-text" style="color:var(--cream);">手機上就能完成</div></div>
+          </div>
+          <div class="quote-sm">AI 是你的免費美術助理。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:71%;"></div><span>SAVE</span></div>
+      </section>
+
+      <section class="slide bg-cream">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">06 / 07</div>
+        <div class="body">
+          <div class="eyebrow">改之前 vs 改之後</div>
+          <h2 class="h1">重點不是「漂亮」，是「一致」</h2>
+          <div class="ba-wrap">
+            <div class="ba-col before">
+              <div class="ba-head" style="color:rgba(31,36,24,0.5);">改之前</div>
+              <div class="ba-item">每篇配色都不同</div>
+              <div class="ba-item">沒有統一風格</div>
+              <div class="ba-item">看不出是同一人做的</div>
+            </div>
+            <div class="ba-col after">
+              <div class="ba-head" style="color:var(--olive);">改之後</div>
+              <div class="ba-item">統一色調 + 模板</div>
+              <div class="ba-item">辨識度超高</div>
+              <div class="ba-item">看起來很專業</div>
+            </div>
+          </div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:85%;"></div><span>SAVE</span></div>
+      </section>
+
+      <section class="slide bg-olive">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">07 / 07</div>
+        <div class="body">
+          <div class="cta-wrap">
+            <div class="cta-eyebrow">留言關鍵字</div>
+            <div class="cta-line">想要我常用的</div>
+            <div class="cta-line">Canva 模板連結？</div>
+            <div class="cta-keyword">設 計</div>
+            <div class="cta-desc">留言「設計」，我私訊給你<br>記得收藏，做貼文卡關的時候回來看</div>
+          </div>
+        </div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:100%;"></div><span>SAVE</span></div>
+      </section>
+
+    </div>
+  </div>
+</div>
+<script>
+  let cur=0;const total=7;const track=document.getElementById('track');
+  function goTo(n){cur=Math.max(0,Math.min(total-1,n));track.style.transform=`translateX(-${cur*400}px)`;}
+  document.querySelectorAll('.arrow').forEach(a=>a.addEventListener('click',()=>goTo(cur+1)));
+  document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')goTo(cur+1);if(e.key==='ArrowLeft')goTo(cur-1);});
+  let tx=0;track.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
+  track.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>40)goTo(dx<0?cur+1:cur-1);},{passive:true});
+</script>
+</body>
+</html>

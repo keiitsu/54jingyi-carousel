@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>#152 30天變現D3 月收35K想增加收入，先搞懂這3件事</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #1a1a1a; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: 'Noto Sans TC', sans-serif; }
+    :root { --cream: #EDEAE3; --olive: #3D4F2A; --olive-deep: #2E3D1F; --ink: #1F2418; --gold: #C9A961; --serif: 'Noto Serif TC', serif; --sans: 'Noto Sans TC', sans-serif; }
+    .ig-frame { width: 400px; height: 500px; overflow: hidden; position: relative; }
+    .carousel { width: 400px; height: 500px; overflow: hidden; }
+    .track { display: flex; width: calc(400px * 7); height: 500px; transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); }
+    .slide { width: 400px; height: 500px; position: relative; padding: 24px 30px 60px; flex-shrink: 0; overflow: hidden; }
+    .bg-olive { background-color: var(--olive); color: var(--cream); }
+    .bg-cream { background-color: var(--cream); color: var(--ink); }
+    .topbar { display: flex; align-items: center; gap: 7px; position: absolute; top: 18px; left: 20px; }
+    .avatar { width: 26px; height: 26px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .handle { font-family: var(--sans); font-size: 13px; font-weight: 400; }
+    .bg-olive .handle { color: rgba(237,234,227,0.85); }
+    .bg-cream .handle { color: rgba(31,36,24,0.7); }
+    .pagenum { position: absolute; top: 20px; right: 20px; font-family: var(--serif); font-size: 13px; }
+    .bg-olive .pagenum { color: rgba(237,234,227,0.7); }
+    .bg-cream .pagenum { color: rgba(31,36,24,0.55); }
+    .body { position: absolute; top: 58px; left: 30px; right: 30px; bottom: 60px; display: flex; flex-direction: column; justify-content: center; }
+    .eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 10px; }
+    .bg-olive .eyebrow { color: var(--gold); }
+    .bg-cream .eyebrow { color: var(--olive); }
+    .h1 { font-family: var(--serif); font-size: 19px; font-weight: 700; line-height: 1.5; margin-bottom: 12px; }
+    .p { font-family: var(--sans); font-size: 14px; font-weight: 300; line-height: 1.9; }
+    .hl { font-weight: 700; }
+    .quote-sm { font-family: var(--serif); font-size: 14px; font-weight: 500; line-height: 1.75; margin-top: 14px; padding-left: 14px; }
+    .bg-olive .quote-sm { border-left: 2px solid var(--gold); color: rgba(237,234,227,0.9); }
+    .bg-cream .quote-sm { border-left: 2px solid var(--olive); }
+    .cover-eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+    .cover-h { font-family: var(--serif); font-size: 26px; font-weight: 700; line-height: 1.45; color: var(--cream); margin-bottom: 16px; }
+    .cover-sub { font-family: var(--sans); font-size: 14px; font-weight: 300; line-height: 1.85; color: rgba(237,234,227,0.8); margin-bottom: 18px; }
+    .cover-foot { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: rgba(237,234,227,0.45); }
+    .num-block { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 8px; }
+    .num-circle { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 14px; font-weight: 700; flex-shrink: 0; }
+    .bg-olive .num-circle { background: rgba(201,169,97,0.2); border: 1px solid var(--gold); color: var(--gold); }
+    .bg-cream .num-circle { background: rgba(61,79,42,0.1); border: 1px solid var(--olive); color: var(--olive); }
+    .num-text { font-family: var(--sans); font-size: 13px; font-weight: 300; line-height: 1.7; flex: 1; }
+    .num-text strong { font-weight: 700; }
+    .tip-list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+    .tip-row { display: flex; gap: 10px; align-items: flex-start; }
+    .tip-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); margin-top: 7px; flex-shrink: 0; }
+    .bg-cream .tip-dot { background: var(--olive); }
+    .tip-text { font-family: var(--sans); font-size: 13px; font-weight: 300; line-height: 1.7; }
+    .cta-wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; gap: 11px; }
+    .cta-eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
+    .cta-line { font-family: var(--serif); font-size: 17px; font-weight: 600; color: var(--cream); line-height: 1.6; }
+    .cta-keyword { font-family: var(--serif); font-size: 32px; font-weight: 900; color: var(--cream); background: rgba(201,169,97,0.2); border: 1.5px solid var(--gold); border-radius: 6px; padding: 6px 28px; letter-spacing: 0.2em; }
+    .cta-desc { font-family: var(--sans); font-size: 13px; font-weight: 300; line-height: 1.9; color: rgba(237,234,227,0.8); }
+    .arrow { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 22px; opacity: 0.45; transition: opacity 0.2s; user-select: none; }
+    .arrow:hover { opacity: 1; }
+    .bg-olive .arrow { color: var(--cream); }
+    .bg-cream .arrow { color: var(--ink); }
+    .footer { position: absolute; bottom: 18px; left: 30px; right: 30px; display: flex; align-items: center; gap: 10px; }
+    .footer span { font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; flex-shrink: 0; }
+    .bg-olive .footer span { color: rgba(237,234,227,0.4); }
+    .bg-cream .footer span { color: rgba(31,36,24,0.38); }
+    .progress { flex: 1; height: 2px; background: rgba(128,128,128,0.22); border-radius: 2px; position: relative; }
+    .progress::after { content: ''; position: absolute; left: 0; top: 0; width: var(--p); height: 100%; background: var(--gold); border-radius: 2px; }
+  </style>
+</head>
+<body>
+<div class="ig-frame">
+  <div class="carousel">
+    <div class="track" id="track">
+
+      <!-- S1 封面 bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">01 / 07</div>
+        <div class="body">
+          <div class="cover-eyebrow">30 天變現引流 D3</div>
+          <div class="cover-h">月收 35K，想增加收入？<br>先搞懂這 3 件事</div>
+          <div class="cover-sub">在你投入任何時間和金錢之前，這些是我最希望有人早點告訴我的事。</div>
+          <div class="cover-foot">副業入門 · 方向選擇 · 少走彎路</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:14%;"></div><span>SAVE</span></div>
+      </section>
+
+      <!-- S2 痛點 bg-cream -->
+      <section class="slide bg-cream">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">02 / 07</div>
+        <div class="body">
+          <div class="eyebrow">先等一下</div>
+          <h2 class="h1">想做副業的人，最常犯的錯</h2>
+          <div class="p">不是「不夠努力」，<br>而是<span class="hl">「還沒想清楚就衝了」</span>。</div>
+          <div class="p" style="margin-top:12px;">買課？開蝦皮？做代購？<br>看到別人做什麼就跟著做什麼——<br>結果錢花了、時間花了、什麼都沒做成。</div>
+          <div class="quote-sm">先停下來 3 分鐘，看完這 3 件事再決定。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:28%;"></div><span>SAVE</span></div>
+      </section>
+
+      <!-- S3 第一件事 bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">03 / 07</div>
+        <div class="body">
+          <div class="eyebrow">第一件事</div>
+          <h2 class="h1" style="color:var(--cream);">選一個你能「持續做」的事</h2>
+          <div class="p" style="color:rgba(237,234,227,0.85);">副業最怕的不是賺不到錢，<br>是做了 2 個月就放棄。</div>
+          <div class="p" style="margin-top:12px;color:rgba(237,234,227,0.85);">問自己：</div>
+          <div class="p" style="margin-top:6px;color:var(--cream);font-weight:700;font-size:15px;">「這件事，就算暫時沒收入，<br>我也願意做嗎？」</div>
+          <div class="quote-sm">如果答案是 Yes，那就對了。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:43%;"></div><span>SAVE</span></div>
+      </section>
+
+      <!-- S4 第二件事 bg-cream -->
+      <section class="slide bg-cream">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">04 / 07</div>
+        <div class="body">
+          <div class="eyebrow">第二件事</div>
+          <h2 class="h1">算清楚你的「可用時間」</h2>
+          <div class="p">每天能投入 1 小時？還是 3 小時？<br>這決定了你適合哪種副業模式。</div>
+          <div class="tip-list" style="margin-top:14px;">
+            <div class="tip-row"><div class="tip-dot"></div><div class="tip-text"><strong>每天 1 小時</strong> → 內容創作、數位產品</div></div>
+            <div class="tip-row"><div class="tip-dot"></div><div class="tip-text"><strong>每天 3 小時</strong> → 電商選品、接案服務</div></div>
+          </div>
+          <div class="quote-sm">別高估自己的時間，才能選到做得動的事。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:57%;"></div><span>SAVE</span></div>
+      </section>
+
+      <!-- S5 第三件事 bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">05 / 07</div>
+        <div class="body">
+          <div class="eyebrow">第三件事</div>
+          <h2 class="h1" style="color:var(--cream);">先解決「一個人」的問題</h2>
+          <div class="p" style="color:rgba(237,234,227,0.85);">不是所有問題都要自己想——<br>找到一個走在前面的人，<br>看他怎麼做、學他的系統。</div>
+          <div class="p" style="margin-top:12px;color:rgba(237,234,227,0.85);">這不是偷懶，<br>是<span style="font-weight:700;color:var(--cream);">「聰明學習」</span>。</div>
+          <div class="quote-sm">自己摸索 6 個月的事，有人帶 1 個月就能搞定。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:71%;"></div><span>SAVE</span></div>
+      </section>
+
+      <!-- S6 重點整理 bg-cream -->
+      <section class="slide bg-cream">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">06 / 07</div>
+        <div class="body">
+          <div class="eyebrow">重點整理</div>
+          <h2 class="h1">想清楚這 3 件事，你就贏了 80% 的人</h2>
+          <div class="tip-list" style="gap:12px;">
+            <div class="num-block"><div class="num-circle">1</div><div class="num-text"><strong>選能持續做的事</strong><br>不追最賺的，追做得動的</div></div>
+            <div class="num-block"><div class="num-circle">2</div><div class="num-text"><strong>算清楚可用時間</strong><br>先從每天 1 小時開始</div></div>
+            <div class="num-block"><div class="num-circle">3</div><div class="num-text"><strong>找一個前輩帶路</strong><br>省時間、少踩坑、走得穩</div></div>
+          </div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:85%;"></div><span>SAVE</span></div>
+      </section>
+
+      <!-- S7 CTA bg-olive -->
+      <section class="slide bg-olive">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">07 / 07</div>
+        <div class="body">
+          <div class="cta-wrap">
+            <div class="cta-eyebrow">收藏這篇</div>
+            <div class="cta-line">覺得有用就收藏起來</div>
+            <div class="cta-line">之後一定用得到</div>
+            <div class="cta-keyword">底 氣</div>
+            <div class="cta-desc">有問題歡迎留言問我<br>想做副業的路上，你不孤單</div>
+          </div>
+        </div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:100%;"></div><span>SAVE</span></div>
+      </section>
+
+    </div>
+  </div>
+</div>
+<script>
+  let cur=0;const total=7;const track=document.getElementById('track');
+  function goTo(n){cur=Math.max(0,Math.min(total-1,n));track.style.transform=`translateX(-${cur*400}px)`;}
+  document.querySelectorAll('.arrow').forEach(a=>a.addEventListener('click',()=>goTo(cur+1)));
+  document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')goTo(cur+1);if(e.key==='ArrowLeft')goTo(cur-1);});
+  let tx=0;track.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
+  track.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>40)goTo(dx<0?cur+1:cur-1);},{passive:true});
+</script>
+</body>
+</html>

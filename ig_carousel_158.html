@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>#158 30天變現D24 正式公開AI內容變現1對1顧問</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #1a1a1a; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: 'Noto Sans TC', sans-serif; }
+    :root { --cream: #EDEAE3; --olive: #3D4F2A; --olive-deep: #2E3D1F; --ink: #1F2418; --gold: #C9A961; --serif: 'Noto Serif TC', serif; --sans: 'Noto Sans TC', sans-serif; }
+    .ig-frame { width: 400px; height: 500px; overflow: hidden; position: relative; } .carousel { width: 400px; height: 500px; overflow: hidden; }
+    .track { display: flex; width: calc(400px * 7); height: 500px; transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); }
+    .slide { width: 400px; height: 500px; position: relative; padding: 24px 30px 60px; flex-shrink: 0; overflow: hidden; }
+    .bg-olive { background-color: var(--olive); color: var(--cream); } .bg-cream { background-color: var(--cream); color: var(--ink); }
+    .topbar { display: flex; align-items: center; gap: 7px; position: absolute; top: 18px; left: 20px; }
+    .avatar { width: 26px; height: 26px; border-radius: 50%; overflow: hidden; flex-shrink: 0; } .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .handle { font-family: var(--sans); font-size: 13px; font-weight: 400; }
+    .bg-olive .handle { color: rgba(237,234,227,0.85); } .bg-cream .handle { color: rgba(31,36,24,0.7); }
+    .pagenum { position: absolute; top: 20px; right: 20px; font-family: var(--serif); font-size: 13px; }
+    .bg-olive .pagenum { color: rgba(237,234,227,0.7); } .bg-cream .pagenum { color: rgba(31,36,24,0.55); }
+    .body { position: absolute; top: 58px; left: 30px; right: 30px; bottom: 60px; display: flex; flex-direction: column; justify-content: center; }
+    .eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 10px; }
+    .bg-olive .eyebrow { color: var(--gold); } .bg-cream .eyebrow { color: var(--olive); }
+    .h1 { font-family: var(--serif); font-size: 19px; font-weight: 700; line-height: 1.5; margin-bottom: 12px; }
+    .p { font-family: var(--sans); font-size: 14px; font-weight: 300; line-height: 1.9; } .hl { font-weight: 700; }
+    .quote-sm { font-family: var(--serif); font-size: 14px; font-weight: 500; line-height: 1.75; margin-top: 14px; padding-left: 14px; }
+    .bg-olive .quote-sm { border-left: 2px solid var(--gold); color: rgba(237,234,227,0.9); }
+    .bg-cream .quote-sm { border-left: 2px solid var(--olive); }
+    .cover-eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+    .cover-h { font-family: var(--serif); font-size: 26px; font-weight: 700; line-height: 1.45; color: var(--cream); margin-bottom: 16px; }
+    .cover-sub { font-family: var(--sans); font-size: 14px; font-weight: 300; line-height: 1.85; color: rgba(237,234,227,0.8); margin-bottom: 18px; }
+    .cover-foot { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: rgba(237,234,227,0.45); }
+    .tip-list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+    .tip-row { display: flex; gap: 10px; align-items: flex-start; }
+    .tip-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); margin-top: 7px; flex-shrink: 0; }
+    .bg-cream .tip-dot { background: var(--olive); }
+    .tip-text { font-family: var(--sans); font-size: 13px; font-weight: 300; line-height: 1.7; }
+    .week-row { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 6px; }
+    .week-label { font-family: var(--serif); font-size: 12px; font-weight: 700; color: var(--gold); flex-shrink: 0; width: 70px; }
+    .bg-cream .week-label { color: var(--olive); }
+    .week-text { font-family: var(--sans); font-size: 13px; font-weight: 300; line-height: 1.6; }
+    .limit-badge { display: inline-block; background: rgba(201,169,97,0.2); border: 1px solid var(--gold); border-radius: 20px; padding: 6px 18px; font-family: var(--serif); font-size: 14px; font-weight: 700; color: var(--gold); margin-top: 12px; }
+    .cta-wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; gap: 11px; }
+    .cta-eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
+    .cta-line { font-family: var(--serif); font-size: 17px; font-weight: 600; color: var(--cream); line-height: 1.6; }
+    .cta-keyword { font-family: var(--serif); font-size: 32px; font-weight: 900; color: var(--cream); background: rgba(201,169,97,0.2); border: 1.5px solid var(--gold); border-radius: 6px; padding: 6px 28px; letter-spacing: 0.2em; }
+    .cta-desc { font-family: var(--sans); font-size: 13px; font-weight: 300; line-height: 1.9; color: rgba(237,234,227,0.8); }
+    .arrow { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 22px; opacity: 0.45; transition: opacity 0.2s; user-select: none; }
+    .arrow:hover { opacity: 1; } .bg-olive .arrow { color: var(--cream); } .bg-cream .arrow { color: var(--ink); }
+    .footer { position: absolute; bottom: 18px; left: 30px; right: 30px; display: flex; align-items: center; gap: 10px; }
+    .footer span { font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; flex-shrink: 0; }
+    .bg-olive .footer span { color: rgba(237,234,227,0.4); } .bg-cream .footer span { color: rgba(31,36,24,0.38); }
+    .progress { flex: 1; height: 2px; background: rgba(128,128,128,0.22); border-radius: 2px; position: relative; }
+    .progress::after { content: ''; position: absolute; left: 0; top: 0; width: var(--p); height: 100%; background: var(--gold); border-radius: 2px; }
+  </style>
+</head>
+<body>
+<div class="ig-frame">
+  <div class="carousel">
+    <div class="track" id="track">
+
+      <section class="slide bg-olive">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">01 / 07</div>
+        <div class="body">
+          <div class="cover-eyebrow">30 天變現引流 D24</div>
+          <div class="cover-h">正式公開<br>AI 內容變現<br>1 對 1 顧問</div>
+          <div class="cover-sub">不是賣課，是陪你一起建。<br>首批只收 3 位。</div>
+          <div class="cover-foot">正式公開 · 1對1 · 首批限額</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:14%;"></div><span>SAVE</span></div>
+      </section>
+
+      <section class="slide bg-cream">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">02 / 07</div>
+        <div class="body">
+          <div class="eyebrow">為什麼做這個</div>
+          <h2 class="h1">很多人問我能不能教，我決定認真做</h2>
+          <div class="p">這不是一時衝動——<br>是我花了一年多驗證過的方法，<br>整理成一套能<span class="hl">手把手帶你</span>的系統。</div>
+          <div class="p" style="margin-top:10px;">不是賣完就走，<br>是真的陪你一起建。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:28%;"></div><span>SAVE</span></div>
+      </section>
+
+      <section class="slide bg-olive">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">03 / 07</div>
+        <div class="body">
+          <div class="eyebrow">這是給誰的</div>
+          <h2 class="h1" style="color:var(--cream);">如果你符合這些，這個方案適合你</h2>
+          <div class="tip-list" style="gap:10px;">
+            <div class="tip-row"><div class="tip-dot"></div><div class="tip-text" style="color:var(--cream);">想做副業但不知從何開始</div></div>
+            <div class="tip-row"><div class="tip-dot"></div><div class="tip-text" style="color:var(--cream);">時間有限的媽媽或上班族</div></div>
+            <div class="tip-row"><div class="tip-dot"></div><div class="tip-text" style="color:var(--cream);">想用 AI 提升效率</div></div>
+            <div class="tip-row"><div class="tip-dot"></div><div class="tip-text" style="color:var(--cream);">願意學習、願意行動</div></div>
+          </div>
+          <div class="quote-sm">不適合想「躺著賺」或不願花時間的人。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:43%;"></div><span>SAVE</span></div>
+      </section>
+
+      <section class="slide bg-cream">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">04 / 07</div>
+        <div class="body">
+          <div class="eyebrow">6 週你會得到</div>
+          <h2 class="h1">從定位到變現，全部幫你建好</h2>
+          <div class="week-row"><div class="week-label">Week 1-2</div><div class="week-text">清晰的個人定位</div></div>
+          <div class="week-row"><div class="week-label">Week 3-4</div><div class="week-text">AI 內容生產系統</div></div>
+          <div class="week-row"><div class="week-label">Week 5</div><div class="week-text">自動化的經營流程</div></div>
+          <div class="week-row"><div class="week-label">Week 6</div><div class="week-text">第一筆副業收入路徑</div></div>
+          <div class="p" style="margin-top:12px;font-size:13px;">每週 1 次 1 對 1 視訊 + 隨時文字支援</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:57%;"></div><span>SAVE</span></div>
+      </section>
+
+      <section class="slide bg-olive">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">05 / 07</div>
+        <div class="body">
+          <div class="eyebrow">為什麼是我</div>
+          <h2 class="h1" style="color:var(--cream);">我不是天生厲害，我是走過來的</h2>
+          <div class="p" style="color:rgba(237,234,227,0.85);">我曾經停更、曾經懷疑自己，<br>但靠著系統重新站起來。</div>
+          <div class="p" style="margin-top:12px;color:rgba(237,234,227,0.85);">我懂你的處境，<br>因為<span style="font-weight:700;color:var(--cream);">我走過</span>。</div>
+          <div class="p" style="margin-top:12px;color:rgba(237,234,227,0.85);">我能教你的，<br>不是理論，是<span style="font-weight:700;color:var(--cream);">實戰</span>。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:71%;"></div><span>SAVE</span></div>
+      </section>
+
+      <section class="slide bg-cream">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">06 / 07</div>
+        <div class="body">
+          <div class="eyebrow">名額限制</div>
+          <h2 class="h1">首批只收 3 位，我想真正陪你走</h2>
+          <div class="p">為了確保品質，<br>我不會一次收很多人。</div>
+          <div class="p" style="margin-top:10px;">我想真正陪你走，<br>不是賣完就走。</div>
+          <div style="text-align:center;"><div class="limit-badge" style="color:var(--olive);border-color:var(--olive);background:rgba(61,79,42,0.1);">首批限額 3 位</div></div>
+          <div class="p" style="margin-top:10px;font-size:13px;">早鳥方案只到本週日截止。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:85%;"></div><span>SAVE</span></div>
+      </section>
+
+      <section class="slide bg-olive">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">07 / 07</div>
+        <div class="body">
+          <div class="cta-wrap">
+            <div class="cta-eyebrow">私訊關鍵字</div>
+            <div class="cta-line">如果你準備好了</div>
+            <div class="cta-line">我們先聊 30 分鐘</div>
+            <div class="cta-keyword">顧 問</div>
+            <div class="cta-desc">私訊「顧問」<br>沒有壓力，只是認識彼此</div>
+          </div>
+        </div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:100%;"></div><span>SAVE</span></div>
+      </section>
+
+    </div>
+  </div>
+</div>
+<script>
+  let cur=0;const total=7;const track=document.getElementById('track');
+  function goTo(n){cur=Math.max(0,Math.min(total-1,n));track.style.transform=`translateX(-${cur*400}px)`;}
+  document.querySelectorAll('.arrow').forEach(a=>a.addEventListener('click',()=>goTo(cur+1)));
+  document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')goTo(cur+1);if(e.key==='ArrowLeft')goTo(cur-1);});
+  let tx=0;track.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
+  track.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>40)goTo(dx<0?cur+1:cur-1);},{passive:true});
+</script>
+</body>
+</html>

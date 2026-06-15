@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>#157 30天變現D22 我把這幾年的方法整理成一套系統</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #1a1a1a; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: 'Noto Sans TC', sans-serif; }
+    :root { --cream: #EDEAE3; --olive: #3D4F2A; --olive-deep: #2E3D1F; --ink: #1F2418; --gold: #C9A961; --serif: 'Noto Serif TC', serif; --sans: 'Noto Sans TC', sans-serif; }
+    .ig-frame { width: 400px; height: 500px; overflow: hidden; position: relative; } .carousel { width: 400px; height: 500px; overflow: hidden; }
+    .track { display: flex; width: calc(400px * 7); height: 500px; transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); }
+    .slide { width: 400px; height: 500px; position: relative; padding: 24px 30px 60px; flex-shrink: 0; overflow: hidden; }
+    .bg-olive { background-color: var(--olive); color: var(--cream); } .bg-cream { background-color: var(--cream); color: var(--ink); }
+    .topbar { display: flex; align-items: center; gap: 7px; position: absolute; top: 18px; left: 20px; }
+    .avatar { width: 26px; height: 26px; border-radius: 50%; overflow: hidden; flex-shrink: 0; } .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .handle { font-family: var(--sans); font-size: 13px; font-weight: 400; }
+    .bg-olive .handle { color: rgba(237,234,227,0.85); } .bg-cream .handle { color: rgba(31,36,24,0.7); }
+    .pagenum { position: absolute; top: 20px; right: 20px; font-family: var(--serif); font-size: 13px; }
+    .bg-olive .pagenum { color: rgba(237,234,227,0.7); } .bg-cream .pagenum { color: rgba(31,36,24,0.55); }
+    .body { position: absolute; top: 58px; left: 30px; right: 30px; bottom: 60px; display: flex; flex-direction: column; justify-content: center; }
+    .eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 10px; }
+    .bg-olive .eyebrow { color: var(--gold); } .bg-cream .eyebrow { color: var(--olive); }
+    .h1 { font-family: var(--serif); font-size: 19px; font-weight: 700; line-height: 1.5; margin-bottom: 12px; }
+    .p { font-family: var(--sans); font-size: 14px; font-weight: 300; line-height: 1.9; } .hl { font-weight: 700; }
+    .quote-sm { font-family: var(--serif); font-size: 14px; font-weight: 500; line-height: 1.75; margin-top: 14px; padding-left: 14px; }
+    .bg-olive .quote-sm { border-left: 2px solid var(--gold); color: rgba(237,234,227,0.9); }
+    .bg-cream .quote-sm { border-left: 2px solid var(--olive); }
+    .cover-eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+    .cover-h { font-family: var(--serif); font-size: 26px; font-weight: 700; line-height: 1.45; color: var(--cream); margin-bottom: 16px; }
+    .cover-sub { font-family: var(--sans); font-size: 14px; font-weight: 300; line-height: 1.85; color: rgba(237,234,227,0.8); margin-bottom: 18px; }
+    .cover-foot { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: rgba(237,234,227,0.45); }
+    .tip-list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+    .tip-row { display: flex; gap: 10px; align-items: flex-start; }
+    .tip-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); margin-top: 7px; flex-shrink: 0; }
+    .bg-cream .tip-dot { background: var(--olive); }
+    .tip-text { font-family: var(--sans); font-size: 13px; font-weight: 300; line-height: 1.7; }
+    .step-card { background: rgba(201,169,97,0.12); border: 1px solid rgba(201,169,97,0.25); border-radius: 8px; padding: 12px 14px; margin-bottom: 8px; display: flex; gap: 12px; align-items: flex-start; }
+    .bg-cream .step-card { background: rgba(61,79,42,0.07); border: 1px solid rgba(61,79,42,0.18); }
+    .step-num { font-family: var(--serif); font-size: 18px; font-weight: 900; color: var(--gold); flex-shrink: 0; line-height: 1.3; }
+    .bg-cream .step-num { color: var(--olive); }
+    .step-text { font-family: var(--sans); font-size: 13px; font-weight: 300; line-height: 1.65; }
+    .two-col { display: flex; gap: 12px; margin-top: 12px; }
+    .col-box { flex: 1; border-radius: 8px; padding: 13px 11px; }
+    .bg-olive .col-box { background: rgba(201,169,97,0.1); }
+    .bg-cream .col-box { background: rgba(61,79,42,0.07); }
+    .col-head { font-family: var(--serif); font-size: 13px; font-weight: 700; margin-bottom: 8px; padding-bottom: 7px; }
+    .bg-olive .col-head { border-bottom: 1px solid rgba(201,169,97,0.3); color: var(--cream); }
+    .bg-cream .col-head { border-bottom: 1px solid rgba(61,79,42,0.2); }
+    .col-body { font-family: var(--sans); font-size: 12px; font-weight: 300; line-height: 1.7; }
+    .cta-wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; gap: 11px; }
+    .cta-eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
+    .cta-line { font-family: var(--serif); font-size: 17px; font-weight: 600; color: var(--cream); line-height: 1.6; }
+    .cta-keyword { font-family: var(--serif); font-size: 32px; font-weight: 900; color: var(--cream); background: rgba(201,169,97,0.2); border: 1.5px solid var(--gold); border-radius: 6px; padding: 6px 28px; letter-spacing: 0.2em; }
+    .cta-desc { font-family: var(--sans); font-size: 13px; font-weight: 300; line-height: 1.9; color: rgba(237,234,227,0.8); }
+    .arrow { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 22px; opacity: 0.45; transition: opacity 0.2s; user-select: none; }
+    .arrow:hover { opacity: 1; } .bg-olive .arrow { color: var(--cream); } .bg-cream .arrow { color: var(--ink); }
+    .footer { position: absolute; bottom: 18px; left: 30px; right: 30px; display: flex; align-items: center; gap: 10px; }
+    .footer span { font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; flex-shrink: 0; }
+    .bg-olive .footer span { color: rgba(237,234,227,0.4); } .bg-cream .footer span { color: rgba(31,36,24,0.38); }
+    .progress { flex: 1; height: 2px; background: rgba(128,128,128,0.22); border-radius: 2px; position: relative; }
+    .progress::after { content: ''; position: absolute; left: 0; top: 0; width: var(--p); height: 100%; background: var(--gold); border-radius: 2px; }
+  </style>
+</head>
+<body>
+<div class="ig-frame">
+  <div class="carousel">
+    <div class="track" id="track">
+
+      <section class="slide bg-olive">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">01 / 07</div>
+        <div class="body">
+          <div class="cover-eyebrow">30 天變現引流 D22</div>
+          <div class="cover-h">我把這幾年的方法<br>整理成一套系統</div>
+          <div class="cover-sub">不是賣課，是陪你一起建。<br>即將公開。</div>
+          <div class="cover-foot">系統預告 · AI副業 · 內容變現</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:14%;"></div><span>SAVE</span></div>
+      </section>
+
+      <section class="slide bg-cream">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">02 / 07</div>
+        <div class="body">
+          <div class="eyebrow">收到最多的私訊</div>
+          <h2 class="h1">「你怎麼用 AI 做副業的？能教我嗎？」</h2>
+          <div class="p">過去這一年，<br>這是我收到最多的訊息。</div>
+          <div class="p" style="margin-top:10px;">我想了很久——<br>我的方法不難，<br>但如果沒有人帶，你可能要花<br><span class="hl">6 個月去踩我已經踩過的坑</span>。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:28%;"></div><span>SAVE</span></div>
+      </section>
+
+      <section class="slide bg-olive">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">03 / 07</div>
+        <div class="body">
+          <div class="eyebrow">這套系統包含</div>
+          <h2 class="h1" style="color:var(--cream);">不是課程，是一套「建好就能跑」的方法</h2>
+          <div class="step-card">
+            <div class="step-num">01</div>
+            <div class="step-text" style="color:var(--cream);">找到你的個人定位</div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">02</div>
+            <div class="step-text" style="color:var(--cream);">用 AI 建立內容產出流程</div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">03</div>
+            <div class="step-text" style="color:var(--cream);">打造自動化經營系統</div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">04</div>
+            <div class="step-text" style="color:var(--cream);">走出第一筆副業收入的路徑</div>
+          </div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:43%;"></div><span>SAVE</span></div>
+      </section>
+
+      <section class="slide bg-cream">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">04 / 07</div>
+        <div class="body">
+          <div class="eyebrow">課程 vs 系統</div>
+          <h2 class="h1">知識聽完會忘，系統建好會自己跑</h2>
+          <div class="two-col">
+            <div class="col-box">
+              <div class="col-head">市面上的課程</div>
+              <div class="col-body">教你「知識」<br>看完影片自己摸索<br>卡關沒人問</div>
+            </div>
+            <div class="col-box">
+              <div class="col-head">我的系統</div>
+              <div class="col-body">教你「流程」<br>手把手陪你建<br>卡關隨時拉你一把</div>
+            </div>
+          </div>
+          <div class="quote-sm">你缺的不是知識，是一套能跑起來的系統。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:57%;"></div><span>SAVE</span></div>
+      </section>
+
+      <section class="slide bg-olive">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">05 / 07</div>
+        <div class="body">
+          <div class="eyebrow">適合誰</div>
+          <h2 class="h1" style="color:var(--cream);">如果你符合這些，這套系統就是為你設計的</h2>
+          <div class="tip-list" style="gap:10px;">
+            <div class="tip-row"><div class="tip-dot"></div><div class="tip-text" style="color:var(--cream);">想做副業但卡在第一步</div></div>
+            <div class="tip-row"><div class="tip-dot"></div><div class="tip-text" style="color:var(--cream);">時間有限的媽媽或上班族</div></div>
+            <div class="tip-row"><div class="tip-dot"></div><div class="tip-text" style="color:var(--cream);">對 AI 工具有興趣但不知怎麼用</div></div>
+            <div class="tip-row"><div class="tip-dot"></div><div class="tip-text" style="color:var(--cream);">願意學習、願意行動的你</div></div>
+          </div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:71%;"></div><span>SAVE</span></div>
+      </section>
+
+      <section class="slide bg-cream">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">06 / 07</div>
+        <div class="body">
+          <div class="eyebrow">預告</div>
+          <h2 class="h1">下一篇，我會正式公開這套系統的細節</h2>
+          <div class="p">包含：<br>方案內容、時間安排、<br>你會得到什麼、適合誰。</div>
+          <div class="p" style="margin-top:10px;">我想幫你省掉那些彎路，<br>用最短的時間，<br>建出<span class="hl">屬於你的副業系統</span>。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:85%;"></div><span>SAVE</span></div>
+      </section>
+
+      <section class="slide bg-olive">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">07 / 07</div>
+        <div class="body">
+          <div class="cta-wrap">
+            <div class="cta-eyebrow">留言關鍵字</div>
+            <div class="cta-line">想第一時間知道？</div>
+            <div class="cta-line">留言讓我私訊通知你</div>
+            <div class="cta-keyword">系 統</div>
+            <div class="cta-desc">留言「系統」<br>我會在公開的第一時間通知你</div>
+          </div>
+        </div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:100%;"></div><span>SAVE</span></div>
+      </section>
+
+    </div>
+  </div>
+</div>
+<script>
+  let cur=0;const total=7;const track=document.getElementById('track');
+  function goTo(n){cur=Math.max(0,Math.min(total-1,n));track.style.transform=`translateX(-${cur*400}px)`;}
+  document.querySelectorAll('.arrow').forEach(a=>a.addEventListener('click',()=>goTo(cur+1)));
+  document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')goTo(cur+1);if(e.key==='ArrowLeft')goTo(cur-1);});
+  let tx=0;track.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
+  track.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>40)goTo(dx<0?cur+1:cur-1);},{passive:true});
+</script>
+</body>
+</html>

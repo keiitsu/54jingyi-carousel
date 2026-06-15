@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>#155 30天變現D15 我曾經一邊崩潰一邊餵奶，後來我這樣調整</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #1a1a1a; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: 'Noto Sans TC', sans-serif; }
+    :root { --cream: #EDEAE3; --olive: #3D4F2A; --olive-deep: #2E3D1F; --ink: #1F2418; --gold: #C9A961; --serif: 'Noto Serif TC', serif; --sans: 'Noto Sans TC', sans-serif; }
+    .ig-frame { width: 400px; height: 500px; overflow: hidden; position: relative; } .carousel { width: 400px; height: 500px; overflow: hidden; }
+    .track { display: flex; width: calc(400px * 7); height: 500px; transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); }
+    .slide { width: 400px; height: 500px; position: relative; padding: 24px 30px 60px; flex-shrink: 0; overflow: hidden; }
+    .bg-olive { background-color: var(--olive); color: var(--cream); } .bg-cream { background-color: var(--cream); color: var(--ink); }
+    .topbar { display: flex; align-items: center; gap: 7px; position: absolute; top: 18px; left: 20px; }
+    .avatar { width: 26px; height: 26px; border-radius: 50%; overflow: hidden; flex-shrink: 0; } .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .handle { font-family: var(--sans); font-size: 13px; font-weight: 400; }
+    .bg-olive .handle { color: rgba(237,234,227,0.85); } .bg-cream .handle { color: rgba(31,36,24,0.7); }
+    .pagenum { position: absolute; top: 20px; right: 20px; font-family: var(--serif); font-size: 13px; }
+    .bg-olive .pagenum { color: rgba(237,234,227,0.7); } .bg-cream .pagenum { color: rgba(31,36,24,0.55); }
+    .body { position: absolute; top: 58px; left: 30px; right: 30px; bottom: 60px; display: flex; flex-direction: column; justify-content: center; }
+    .eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 10px; }
+    .bg-olive .eyebrow { color: var(--gold); } .bg-cream .eyebrow { color: var(--olive); }
+    .h1 { font-family: var(--serif); font-size: 19px; font-weight: 700; line-height: 1.5; margin-bottom: 12px; }
+    .p { font-family: var(--sans); font-size: 14px; font-weight: 300; line-height: 1.9; } .hl { font-weight: 700; }
+    .quote-sm { font-family: var(--serif); font-size: 14px; font-weight: 500; line-height: 1.75; margin-top: 14px; padding-left: 14px; }
+    .bg-olive .quote-sm { border-left: 2px solid var(--gold); color: rgba(237,234,227,0.9); }
+    .bg-cream .quote-sm { border-left: 2px solid var(--olive); }
+    .cover-eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+    .cover-h { font-family: var(--serif); font-size: 26px; font-weight: 700; line-height: 1.45; color: var(--cream); margin-bottom: 16px; }
+    .cover-sub { font-family: var(--sans); font-size: 14px; font-weight: 300; line-height: 1.85; color: rgba(237,234,227,0.8); margin-bottom: 18px; }
+    .cover-foot { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: rgba(237,234,227,0.45); }
+    .cta-wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; gap: 11px; }
+    .cta-eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
+    .cta-line { font-family: var(--serif); font-size: 17px; font-weight: 600; color: var(--cream); line-height: 1.6; }
+    .cta-keyword { font-family: var(--serif); font-size: 32px; font-weight: 900; color: var(--cream); background: rgba(201,169,97,0.2); border: 1.5px solid var(--gold); border-radius: 6px; padding: 6px 28px; letter-spacing: 0.2em; }
+    .cta-desc { font-family: var(--sans); font-size: 13px; font-weight: 300; line-height: 1.9; color: rgba(237,234,227,0.8); }
+    .arrow { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 22px; opacity: 0.45; transition: opacity 0.2s; user-select: none; }
+    .arrow:hover { opacity: 1; } .bg-olive .arrow { color: var(--cream); } .bg-cream .arrow { color: var(--ink); }
+    .footer { position: absolute; bottom: 18px; left: 30px; right: 30px; display: flex; align-items: center; gap: 10px; }
+    .footer span { font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; flex-shrink: 0; }
+    .bg-olive .footer span { color: rgba(237,234,227,0.4); } .bg-cream .footer span { color: rgba(31,36,24,0.38); }
+    .progress { flex: 1; height: 2px; background: rgba(128,128,128,0.22); border-radius: 2px; position: relative; }
+    .progress::after { content: ''; position: absolute; left: 0; top: 0; width: var(--p); height: 100%; background: var(--gold); border-radius: 2px; }
+  </style>
+</head>
+<body>
+<div class="ig-frame">
+  <div class="carousel">
+    <div class="track" id="track">
+
+      <section class="slide bg-olive">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">01 / 07</div>
+        <div class="body">
+          <div class="cover-eyebrow">30 天變現引流 D15</div>
+          <div class="cover-h">我曾經一邊崩潰<br>一邊餵奶</div>
+          <div class="cover-sub">後來我這樣調整了自己。<br>寫給正在硬撐的你。</div>
+          <div class="cover-foot">真實故事 · 媽媽心聲 · 底氣</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:14%;"></div><span>SAVE</span></div>
+      </section>
+
+      <section class="slide bg-cream">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">02 / 07</div>
+        <div class="body">
+          <div class="eyebrow">崩潰的日子</div>
+          <h2 class="h1">那段時間，我覺得自己什麼都做不好</h2>
+          <div class="p">早上送完小孩去托嬰中心，<br>我坐在車上哭了五分鐘<br>才能上班。</div>
+          <div class="p" style="margin-top:10px;">不是發生了什麼大事，<br>只是覺得<span class="hl">「我撐不住了」</span>。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:28%;"></div><span>SAVE</span></div>
+      </section>
+
+      <section class="slide bg-olive">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">03 / 07</div>
+        <div class="body">
+          <div class="eyebrow">什麼都想做好</div>
+          <h2 class="h1" style="color:var(--cream);">每一件事都在跟我要時間</h2>
+          <div class="p" style="color:rgba(237,234,227,0.85);">工作要表現好、<br>小孩要照顧好、<br>副業不能斷更、<br>家事不能放著。</div>
+          <div class="p" style="margin-top:12px;color:rgba(237,234,227,0.85);">但我的時間，<br><span style="font-weight:700;color:var(--cream);">早就透支了</span>。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:43%;"></div><span>SAVE</span></div>
+      </section>
+
+      <section class="slide bg-cream">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">04 / 07</div>
+        <div class="body">
+          <div class="eyebrow">轉折點</div>
+          <h2 class="h1">「你最近連笑都很累。」</h2>
+          <div class="p">老公跟我說了這句話。</div>
+          <div class="p" style="margin-top:10px;">那一刻我才意識到——<br>我一直在「撐」，<br>但從來沒問過自己<span class="hl">「怎麼了」</span>。</div>
+          <div class="quote-sm">有時候，停下來比往前衝更需要勇氣。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:57%;"></div><span>SAVE</span></div>
+      </section>
+
+      <section class="slide bg-olive">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">05 / 07</div>
+        <div class="body">
+          <div class="eyebrow">我的調整</div>
+          <h2 class="h1" style="color:var(--cream);">每天只做一件跟副業有關的小事</h2>
+          <div class="p" style="color:rgba(237,234,227,0.85);">寫一段文案、<br>回一則留言、<br>看一篇文章。</div>
+          <div class="p" style="margin-top:12px;color:rgba(237,234,227,0.85);">不追求完美，<br>只追求<span style="font-weight:700;color:var(--cream);">「今天有往前一步」</span>。</div>
+          <div class="quote-sm">一步也是進步。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:71%;"></div><span>SAVE</span></div>
+      </section>
+
+      <section class="slide bg-cream">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">06 / 07</div>
+        <div class="body">
+          <div class="eyebrow">現在的我</div>
+          <h2 class="h1">那個「我做不到」的聲音，變小了</h2>
+          <div class="p">慢慢地，我學會了：</div>
+          <div class="p" style="margin-top:8px;"><span class="hl">進步不需要很大，<br>但不能停下來。</span></div>
+          <div class="p" style="margin-top:12px;">現在的我，<br>比那時候多了很多底氣。</div>
+          <div class="quote-sm">你不需要完美，你需要的是一個起點。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:85%;"></div><span>SAVE</span></div>
+      </section>
+
+      <section class="slide bg-olive">
+        <div class="topbar"><div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div><div class="handle">@54jingyi</div></div>
+        <div class="pagenum">07 / 07</div>
+        <div class="body">
+          <div class="cta-wrap">
+            <div class="cta-eyebrow">留言關鍵字</div>
+            <div class="cta-line">如果你現在也在硬撐</div>
+            <div class="cta-line">你不孤單</div>
+            <div class="cta-keyword">底 氣</div>
+            <div class="cta-desc">留言「底氣」<br>讓我陪你走一段</div>
+          </div>
+        </div>
+        <div class="footer"><span>SHARE</span><div class="progress" style="--p:100%;"></div><span>SAVE</span></div>
+      </section>
+
+    </div>
+  </div>
+</div>
+<script>
+  let cur=0;const total=7;const track=document.getElementById('track');
+  function goTo(n){cur=Math.max(0,Math.min(total-1,n));track.style.transform=`translateX(-${cur*400}px)`;}
+  document.querySelectorAll('.arrow').forEach(a=>a.addEventListener('click',()=>goTo(cur+1)));
+  document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')goTo(cur+1);if(e.key==='ArrowLeft')goTo(cur-1);});
+  let tx=0;track.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
+  track.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>40)goTo(dx<0?cur+1:cur-1);},{passive:true});
+</script>
+</body>
+</html>
