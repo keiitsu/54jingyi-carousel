@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>#143 益生菌怎麼挑？市售10億 vs 1000億，差在哪</title>
+  <title>#139 防曬乳到底要用哪種？化學 vs 物理全比較</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -40,6 +40,7 @@
     .bg-olive { background-color: var(--olive); color: var(--cream); }
     .bg-cream { background-color: var(--cream); color: var(--ink); }
 
+    /* Topbar */
     .topbar { display: flex; align-items: center; gap: 7px; position: absolute; top: 18px; left: 20px; }
     .avatar { width: 26px; height: 26px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
     .avatar img { width: 100%; height: 100%; object-fit: cover; }
@@ -51,71 +52,86 @@
     .bg-olive .pagenum { color: rgba(237,234,227,0.7); }
     .bg-cream .pagenum { color: rgba(31,36,24,0.55); }
 
+    /* Body */
     .body {
       position: absolute;
       top: 58px; left: 30px; right: 30px; bottom: 60px;
-      display: flex; flex-direction: column; justify-content: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
-    .eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 10px; }
+    .eyebrow {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
     .bg-olive .eyebrow { color: var(--gold); }
     .bg-cream .eyebrow { color: var(--olive); }
 
     .h1 { font-family: var(--serif); font-size: 19px; font-weight: 700; line-height: 1.5; margin-bottom: 12px; }
+
     .p { font-family: var(--sans); font-size: 14px; font-weight: 300; line-height: 1.9; }
     .hl { font-weight: 700; }
 
     .quote-sm {
-      font-family: var(--serif); font-size: 14px; font-weight: 500; line-height: 1.75;
-      margin-top: 14px; padding-left: 14px;
+      font-family: var(--serif);
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.7;
+      margin-top: 14px;
+      padding-left: 14px;
+      border-left: 2px solid var(--gold);
     }
-    .bg-olive .quote-sm { border-left: 2px solid var(--gold); color: rgba(237,234,227,0.9); }
-    .bg-cream .quote-sm { border-left: 2px solid var(--olive); }
+    .bg-cream .quote-sm { border-left-color: var(--olive); }
 
     /* Cover */
     .cover-eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
-    .cover-h { font-family: var(--serif); font-size: 28px; font-weight: 700; line-height: 1.45; color: var(--cream); margin-bottom: 16px; }
+    .cover-h { font-family: var(--serif); font-size: 30px; font-weight: 700; line-height: 1.4; color: var(--cream); margin-bottom: 16px; }
     .cover-sub { font-family: var(--sans); font-size: 14px; font-weight: 300; line-height: 1.85; color: rgba(237,234,227,0.8); margin-bottom: 18px; }
     .cover-foot { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: rgba(237,234,227,0.45); }
 
-    /* Compare columns */
-    .compare-wrap { display: flex; gap: 12px; margin-top: 12px; }
-    .compare-col { flex: 1; border-radius: 8px; padding: 13px 12px; }
-    .bg-olive .compare-col { background: rgba(201,169,97,0.12); }
-    .bg-cream .compare-col { background: rgba(61,79,42,0.07); }
-    .col-label {
-      font-family: var(--serif); font-size: 15px; font-weight: 700;
-      margin-bottom: 8px; padding-bottom: 8px;
-    }
-    .bg-olive .col-label { border-bottom: 1px solid rgba(201,169,97,0.35); color: var(--cream); }
-    .bg-cream .col-label { border-bottom: 1px solid rgba(61,79,42,0.2); color: var(--ink); }
-    .col-item { font-family: var(--sans); font-size: 12.5px; font-weight: 300; line-height: 1.7; margin-bottom: 5px; }
-
     /* Tip list */
-    .tip-list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+    .tip-list { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
     .tip-row { display: flex; gap: 10px; align-items: flex-start; }
     .tip-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); margin-top: 7px; flex-shrink: 0; }
     .bg-cream .tip-dot { background: var(--olive); }
-    .tip-text { font-family: var(--sans); font-size: 13px; font-weight: 300; line-height: 1.7; }
+    .tip-text { font-family: var(--sans); font-size: 13px; font-weight: 300; line-height: 1.75; }
 
-    /* Fact card */
-    .fact-card { border-radius: 8px; padding: 14px; margin-top: 10px; }
-    .bg-olive .fact-card { background: rgba(201,169,97,0.12); }
-    .bg-cream .fact-card { background: rgba(61,79,42,0.07); }
-    .fact-title { font-family: var(--serif); font-size: 14px; font-weight: 700; margin-bottom: 10px; padding-bottom: 8px; }
-    .bg-olive .fact-title { border-bottom: 1px solid rgba(201,169,97,0.35); color: var(--cream); }
-    .bg-cream .fact-title { border-bottom: 1px solid rgba(61,79,42,0.2); }
+    /* Card box */
+    .card-box {
+      background: rgba(201,169,97,0.12);
+      border-radius: 8px;
+      padding: 14px;
+      margin-top: 12px;
+    }
+    .bg-cream .card-box { background: rgba(61,79,42,0.07); }
+    .card-title {
+      font-family: var(--serif);
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(201,169,97,0.4);
+    }
+    .bg-cream .card-title { border-bottom-color: rgba(61,79,42,0.25); }
 
-    /* Key label rows (S5) */
-    .key-list { display: flex; flex-direction: column; gap: 9px; margin-top: 10px; }
-    .key-row { display: flex; align-items: flex-start; gap: 12px; border-radius: 6px; padding: 10px 12px; }
-    .bg-olive .key-row { background: rgba(201,169,97,0.1); }
-    .bg-cream .key-row { background: rgba(61,79,42,0.07); }
-    .key-label { font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; flex-shrink: 0; width: 52px; line-height: 1.4; padding-top: 2px; }
-    .bg-olive .key-label { color: var(--gold); }
-    .bg-cream .key-label { color: var(--olive); }
-    .key-text { font-family: var(--sans); font-size: 12.5px; font-weight: 300; line-height: 1.65; }
-    .key-text strong { font-weight: 700; }
+    /* Occasion list */
+    .occasion-list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+    .occasion-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(201,169,97,0.1);
+      border-radius: 6px;
+      padding: 9px 12px;
+    }
+    .occasion-scene { font-family: var(--sans); font-size: 12px; font-weight: 700; width: 72px; flex-shrink: 0; color: var(--gold); }
+    .occasion-pick { font-family: var(--sans); font-size: 12.5px; font-weight: 300; line-height: 1.5; color: var(--cream); }
+    .occasion-pick strong { font-weight: 700; color: var(--gold); }
 
     /* BA wrap */
     .ba-wrap { display: flex; gap: 10px; margin-top: 10px; }
@@ -131,14 +147,40 @@
     .cta-wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; gap: 11px; }
     .cta-eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
     .cta-line { font-family: var(--serif); font-size: 17px; font-weight: 600; color: var(--cream); line-height: 1.6; }
-    .cta-keyword { font-family: var(--serif); font-size: 32px; font-weight: 900; color: var(--cream); background: rgba(201,169,97,0.2); border: 1.5px solid var(--gold); border-radius: 6px; padding: 6px 28px; letter-spacing: 0.2em; text-shadow: none; box-shadow: none; }
+    .cta-keyword {
+      font-family: var(--serif);
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--cream);
+      background: rgba(201,169,97,0.2);
+      border: 1.5px solid var(--gold);
+      border-radius: 6px;
+      padding: 6px 28px;
+      letter-spacing: 0.2em;
+      text-shadow: none;
+      box-shadow: none;
+    }
     .cta-desc { font-family: var(--sans); font-size: 13px; font-weight: 300; line-height: 1.9; color: rgba(237,234,227,0.8); }
 
-    .arrow { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 22px; opacity: 0.45; transition: opacity 0.2s; user-select: none; }
+    /* Arrow */
+    .arrow {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 28px; height: 28px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      font-size: 22px;
+      opacity: 0.45;
+      transition: opacity 0.2s;
+      user-select: none;
+    }
     .arrow:hover { opacity: 1; }
     .bg-olive .arrow { color: var(--cream); }
     .bg-cream .arrow { color: var(--ink); }
 
+    /* Footer */
     .footer { position: absolute; bottom: 18px; left: 30px; right: 30px; display: flex; align-items: center; gap: 10px; }
     .footer span { font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; flex-shrink: 0; }
     .bg-olive .footer span { color: rgba(237,234,227,0.4); }
@@ -161,9 +203,9 @@
         <div class="pagenum">01 / 07</div>
         <div class="body">
           <div class="cover-eyebrow">選品保養</div>
-          <div class="cover-h">益生菌怎麼挑？<br>10億 vs 1000億，差在哪</div>
-          <div class="cover-sub">數字越大越好？很多人為了高菌數多花好幾倍的錢，卻根本搞錯了方向。</div>
-          <div class="cover-foot">菌數 · 菌株 · 包埋技術 · 活菌到腸</div>
+          <div class="cover-h">防曬乳<br>到底要用哪種？</div>
+          <div class="cover-sub">化學 vs 物理，很多人選了十年還是選錯。一篇講清楚適合你的那一種。</div>
+          <div class="cover-foot">化學防曬 · 物理防曬 · 混合型</div>
         </div>
         <div class="arrow">›</div>
         <div class="footer">
@@ -173,7 +215,7 @@
         </div>
       </section>
 
-      <!-- S2 核心差異說明 bg-cream -->
+      <!-- S2 核心差異 bg-cream -->
       <section class="slide bg-cream">
         <div class="topbar">
           <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
@@ -181,10 +223,10 @@
         </div>
         <div class="pagenum">02 / 07</div>
         <div class="body">
-          <div class="eyebrow">最容易被誤解的事</div>
-          <h2 class="h1">菌數只是其中一個指標，不是全部</h2>
-          <p class="p">益生菌的效果取決於三件事：<span class="hl">菌株種類、活菌能否到達腸道、菌數是否足夠</span>。三者缺一不可。光看菌數，就像只看食物的卡路里，忽略了其他所有營養。</p>
-          <div class="quote-sm">1000億的菌，若在胃酸中全滅，到達腸道的是零。</div>
+          <div class="eyebrow">最根本的差異</div>
+          <h2 class="h1">兩種防曬，防的方式完全不同</h2>
+          <p class="p"><span class="hl">化學防曬</span>吸收紫外線後轉化為熱能散出。質地輕薄、不泛白，但需要塗抹後等 15–20 分鐘才生效。</p>
+          <div class="quote-sm">物理防曬在皮膚表面形成反射屏障，塗上即生效，成分穩定，但質地偏厚、容易泛白。</div>
         </div>
         <div class="arrow">›</div>
         <div class="footer">
@@ -194,7 +236,7 @@
         </div>
       </section>
 
-      <!-- S3 低菌數產品 bg-olive -->
+      <!-- S3 化學防曬 bg-olive -->
       <section class="slide bg-olive">
         <div class="topbar">
           <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
@@ -202,15 +244,15 @@
         </div>
         <div class="pagenum">03 / 07</div>
         <div class="body">
-          <div class="eyebrow">10億–100億</div>
-          <h2 class="h1" style="color:var(--cream);">低菌數，不等於效果差</h2>
-          <div class="fact-card">
-            <div class="fact-title">這類產品適合這樣選</div>
+          <div class="eyebrow">化學防曬</div>
+          <h2 class="h1" style="color:var(--cream);">適合你，如果你是這樣</h2>
+          <div class="card-box">
+            <div class="card-title" style="color:var(--cream);">這些人選化學防曬</div>
             <div class="tip-list">
-              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">有<span style="font-weight:700;">包埋技術</span>（腸溶膠囊、雙層包覆），活菌到腸率更高</div></div>
-              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">菌株明確標示（如 LGG、BB-12、DE111），有臨床研究支持</div></div>
-              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">適合日常維持腸道健康、免疫力保養</div></div>
-              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">價格合理，長期補充更容易持續</div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">日常通勤、室內辦公為主</div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">追求輕薄感、不破壞妝容</div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">膚色偏深，擔心泛白問題</div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">非極度敏感肌、無酒糟困擾</div></div>
             </div>
           </div>
         </div>
@@ -222,7 +264,7 @@
         </div>
       </section>
 
-      <!-- S4 高菌數產品 bg-cream -->
+      <!-- S4 物理防曬 bg-cream -->
       <section class="slide bg-cream">
         <div class="topbar">
           <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
@@ -230,15 +272,15 @@
         </div>
         <div class="pagenum">04 / 07</div>
         <div class="body">
-          <div class="eyebrow">500億–1000億以上</div>
-          <h2 class="h1">高菌數，什麼時候才需要？</h2>
-          <div class="fact-card">
-            <div class="fact-title">這些情況才需要高劑量</div>
+          <div class="eyebrow">物理防曬</div>
+          <h2 class="h1">這些族群一定要選物理</h2>
+          <div class="card-box">
+            <div class="card-title">溫和優先，選物理防曬</div>
             <div class="tip-list">
-              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">抗生素療程後，腸道菌群大量損耗需快速補充</div></div>
-              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">腸躁症、腹瀉頻繁等腸道問題明顯的人</div></div>
-              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">長期外食、腸道環境特別差的人</div></div>
-              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">注意：沒有包埋技術，高菌數一樣死在胃裡</div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">敏感肌、玫瑰痤瘡、異位性皮膚炎</div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">孕婦、哺乳中的媽媽</div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">嬰幼兒、兒童（6個月以上）</div></div>
+              <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">需立即出門、不想等待生效</div></div>
             </div>
           </div>
         </div>
@@ -250,7 +292,7 @@
         </div>
       </section>
 
-      <!-- S5 挑選關鍵四點 bg-olive -->
+      <!-- S5 依場合選 bg-olive -->
       <section class="slide bg-olive">
         <div class="topbar">
           <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
@@ -258,24 +300,24 @@
         </div>
         <div class="pagenum">05 / 07</div>
         <div class="body">
-          <div class="eyebrow">挑選關鍵</div>
-          <h2 class="h1" style="color:var(--cream);">看這四點，比看菌數更重要</h2>
-          <div class="key-list">
-            <div class="key-row">
-              <div class="key-label">菌株</div>
-              <div class="key-text" style="color:var(--cream);">有<strong style="color:var(--gold);">具名菌株</strong>，如 LGG、DE111，不能只寫「乳酸菌」</div>
+          <div class="eyebrow">依場合選</div>
+          <h2 class="h1" style="color:var(--cream);">這樣搭就對了</h2>
+          <div class="occasion-list">
+            <div class="occasion-row">
+              <div class="occasion-scene">日常通勤</div>
+              <div class="occasion-pick">化學防曬，輕薄好上妝</div>
             </div>
-            <div class="key-row">
-              <div class="key-label">包埋</div>
-              <div class="key-text" style="color:var(--cream);">腸溶膠囊或雙層包覆，確保<strong style="color:var(--gold);">活菌通過胃酸</strong></div>
+            <div class="occasion-row">
+              <div class="occasion-scene">戶外長時間</div>
+              <div class="occasion-pick">混合型或<strong>物理為主</strong>，防曬力更穩</div>
             </div>
-            <div class="key-row">
-              <div class="key-label">保存</div>
-              <div class="key-text" style="color:var(--cream);">冷藏或常溫？確認<strong style="color:var(--gold);">保存條件</strong>符合你的生活習慣</div>
+            <div class="occasion-row">
+              <div class="occasion-scene">敏感發炎期</div>
+              <div class="occasion-pick">物理防曬，刺激性低、不加重</div>
             </div>
-            <div class="key-row">
-              <div class="key-label">益生元</div>
-              <div class="key-text" style="color:var(--cream);">含<strong style="color:var(--gold);">菊糖、果寡糖</strong>等益生元，讓益生菌在腸道活得更久</div>
+            <div class="occasion-row">
+              <div class="occasion-scene">親子外出</div>
+              <div class="occasion-pick">媽媽孩子都用<strong>純物理</strong>最安心</div>
             </div>
           </div>
         </div>
@@ -287,7 +329,7 @@
         </div>
       </section>
 
-      <!-- S6 Before / After bg-cream -->
+      <!-- S6 選對 vs 選錯 bg-cream -->
       <section class="slide bg-cream">
         <div class="topbar">
           <div class="avatar"><img src="avatar_jy.jpg" alt="54jingyi"></div>
@@ -295,22 +337,22 @@
         </div>
         <div class="pagenum">06 / 07</div>
         <div class="body">
-          <div class="eyebrow">換了選法之後</div>
-          <h2 class="h1">花更少的錢，效果反而更明顯</h2>
+          <div class="eyebrow">選對 vs 選錯</div>
+          <h2 class="h1">差別真的很大</h2>
           <div class="ba-wrap">
             <div class="ba-col before">
-              <div class="ba-head" style="color:rgba(31,36,24,0.5);">以前的選法</div>
-              <div class="ba-item">只看菌數，越高越好</div>
-              <div class="ba-item">花大錢買 1000 億</div>
-              <div class="ba-item">吃了沒什麼感覺</div>
-              <div class="ba-item">懷疑益生菌根本沒用</div>
+              <div class="ba-head" style="color:rgba(31,36,24,0.5);">選錯的狀況</div>
+              <div class="ba-item">臉泛白、妝容怪異</div>
+              <div class="ba-item">越用越刺痛、長痘</div>
+              <div class="ba-item">出門才塗，根本沒效</div>
+              <div class="ba-item">一到夏天就曬傷</div>
             </div>
             <div class="ba-col after">
-              <div class="ba-head" style="color:var(--olive);">看懂之後的選法</div>
-              <div class="ba-item">先確認菌株與包埋技術</div>
-              <div class="ba-item">100 億但有腸溶設計</div>
-              <div class="ba-item">排便順暢、脹氣減少</div>
-              <div class="ba-item">持續補充效果更穩定</div>
+              <div class="ba-head" style="color:var(--olive);">選對的結果</div>
+              <div class="ba-item">膚感舒服、妝也服貼</div>
+              <div class="ba-item">敏感不再反覆發作</div>
+              <div class="ba-item">防曬力穩定不怕曬</div>
+              <div class="ba-item">長期用皮膚越來越好</div>
             </div>
           </div>
         </div>
@@ -332,10 +374,10 @@
         <div class="body">
           <div class="cta-wrap">
             <div class="cta-eyebrow">想了解更多</div>
-            <div class="cta-line">想要一份經過篩選的</div>
-            <div class="cta-line">益生菌選品推薦清單</div>
+            <div class="cta-line">想知道適合你膚質的防曬推薦</div>
+            <div class="cta-line">留言輸入關鍵字</div>
             <div class="cta-keyword">底 氣</div>
-            <div class="cta-desc">私訊你按菌株、菌數、保存方式<br>整理的實測推薦，完全免費</div>
+            <div class="cta-desc">私訊你一份適合你膚質的<br>防曬選品清單，完全免費</div>
           </div>
         </div>
         <div class="footer">
