@@ -2,7 +2,7 @@
 
 GitHub Pages 首頁：https://keiitsu.github.io/54jingyi-carousel/
 
-分享 HTML 共 110 個，更新日期：2026-06-22。
+分享 HTML 共 111 個，更新日期：2026-06-22。
 
 - [ig_carousel_61.html](https://keiitsu.github.io/54jingyi-carousel/ig_carousel_61.html)
 - [ig_carousel_61_standalone.html](https://keiitsu.github.io/54jingyi-carousel/ig_carousel_61_standalone.html)
@@ -114,3 +114,4 @@ GitHub Pages 首頁：https://keiitsu.github.io/54jingyi-carousel/
 - [ig_carousel_161.html](https://keiitsu.github.io/54jingyi-carousel/ig_carousel_161.html)
 - [my_story_five_years_ago_carousel.html](https://keiitsu.github.io/54jingyi-carousel/my_story_five_years_ago_carousel.html)
 - [monthly_35k_side_hustle_carousel.html](https://keiitsu.github.io/54jingyi-carousel/monthly_35k_side_hustle_carousel.html)
+- [my_system_enrollment_carousel.html](https://keiitsu.github.io/54jingyi-carousel/my_system_enrollment_carousel.html)
