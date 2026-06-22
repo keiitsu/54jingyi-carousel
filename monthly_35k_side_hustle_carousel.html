@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>54jingyi｜月收35K想靠副業增加收入？先搞懂這3件事 輪播貼文</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#EDEAE3;
+    --olive:#3D4F2A;
+    --olive-deep:#2E3D1F;
+    --ink:#1F2418;
+    --gold:#C9A961;
+    --serif:'Noto Serif TC', serif;
+    --sans:'Noto Sans TC', sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;}
+  body{
+    font-family:var(--sans);
+    background:#D9D5CC;
+    display:flex;align-items:center;justify-content:center;
+    min-height:100vh;padding:32px 16px;color:var(--ink);
+  }
+
+  .ig-frame{
+    width:440px;background:#fff;border-radius:18px;
+    box-shadow:0 18px 50px rgba(0,0,0,.18);
+    overflow:hidden;border:1px solid #e6e2d8;
+  }
+  .ig-header{
+    display:flex;align-items:center;gap:10px;
+    padding:12px 14px;border-bottom:1px solid #efece4;
+  }
+  .ig-avatar-small{
+    width:34px;height:34px;border-radius:50%;
+    background:#cdd0c2 url('./assets/case-3.jpg.png') center/cover;
+    border:1px solid #e6e2d8;
+  }
+  .ig-meta{display:flex;flex-direction:column;line-height:1.2;}
+  .ig-meta .name{font-weight:600;font-size:13px;}
+  .ig-meta .sub{font-size:11px;color:#888;}
+  .ig-dots{margin-left:auto;color:#666;font-size:18px;letter-spacing:2px;}
+
+  .carousel{
+    position:relative;width:400px;height:500px;
+    margin:10px auto;overflow:hidden;border-radius:8px;
+    user-select:none;
+  }
+  .track{
+    display:flex;width:100%;height:100%;
+    transition:transform .45s cubic-bezier(.22,.7,.25,1);
+    will-change:transform;
+  }
+  .slide{
+    flex:0 0 100%;width:400px;height:500px;
+    position:relative;padding:24px 30px 60px;
+    display:flex;flex-direction:column;
+    overflow:hidden;
+  }
+  .slide.bg-cream{background:var(--cream);color:var(--ink);}
+  .slide.bg-olive{background:var(--olive);color:var(--cream);}
+
+  /* === 照片背景頁 === */
+  .slide.bg-photo{color:var(--cream);}
+  .slide.bg-photo.photo-cover{
+    background:linear-gradient(180deg,rgba(46,61,31,.12) 0%,rgba(46,61,31,.35) 42%,rgba(46,61,31,.78) 70%,rgba(46,61,31,.94) 100%),
+               url('./assets/income-cover.jpg.jpg') center 20% / cover no-repeat;
+  }
+  .slide.bg-photo.photo-now{
+    background:linear-gradient(180deg,rgba(46,61,31,.18) 0%,rgba(46,61,31,.40) 40%,rgba(46,61,31,.80) 72%,rgba(46,61,31,.95) 100%),
+               url('./assets/income-now.jpg.jpg') 30% 28% / cover no-repeat;
+  }
+
+  .topbar{
+    display:flex;align-items:center;gap:8px;
+    margin-bottom:6px;position:relative;z-index:2;
+  }
+  .topbar .avatar{
+    width:26px;height:26px;border-radius:50%;
+    background:#cdd0c2 url('./assets/case-3.jpg.png') center/cover;
+    border:1.5px solid currentColor;
+    flex-shrink:0;
+  }
+  .topbar .handle{
+    font-family:var(--sans);font-weight:500;
+    font-size:13px;letter-spacing:.5px;
+    opacity:.95;
+  }
+
+  .pagenum{
+    position:absolute;top:30px;right:30px;z-index:2;
+    font-family:var(--serif);font-size:13px;
+    letter-spacing:1px;opacity:.55;
+  }
+
+  .body{
+    flex:1;display:flex;flex-direction:column;
+    justify-content:flex-start;margin-top:18px;
+    position:relative;z-index:2;
+  }
+  .h1{
+    font-family:var(--serif);font-weight:700;
+    font-size:21px;line-height:1.5;letter-spacing:.3px;
+    margin-bottom:18px;
+  }
+  .h1.h1-2line{
+    font-size:19px;line-height:1.45;margin-bottom:14px;
+  }
+
+  .hl{
+    font-family:var(--serif);font-weight:700;
+    line-height:1.4;
+  }
+
+  .p{
+    font-family:var(--serif);
+    font-size:14px;line-height:1.85;letter-spacing:.3px;
+    margin-bottom:13px;opacity:.92;
+  }
+  .p.p-tight{font-size:13px;line-height:1.7;margin-bottom:10px;}
+
+  .quote{
+    margin-top:auto;margin-bottom:6px;
+    padding-left:12px;
+    border-left:2px solid currentColor;
+    font-family:var(--serif);font-weight:700;
+    font-size:15px;line-height:1.7;
+    letter-spacing:.5px;
+  }
+  .quote.quote-sm{
+    font-size:13px;line-height:1.6;
+    letter-spacing:.3px;margin-top:10px;
+  }
+
+  /* === 封面 / 照片文字底部對齊 === */
+  .cover-body,.photo-body{justify-content:flex-end;margin-top:0!important;padding-bottom:4px;}
+  .photo-body .h1{text-shadow:0 2px 12px rgba(0,0,0,.5);}
+  .photo-body .p{text-shadow:0 1px 8px rgba(0,0,0,.45);}
+  .photo-body .quote{text-shadow:0 1px 8px rgba(0,0,0,.45);}
+  .cover-eyebrow{
+    font-family:var(--sans);font-size:12px;
+    letter-spacing:3px;opacity:.7;
+    margin-bottom:12px;
+  }
+  .cover-h{
+    font-family:var(--serif);font-weight:700;
+    font-size:32px;line-height:1.45;letter-spacing:.5px;
+    margin-bottom:14px;
+    text-shadow:0 2px 12px rgba(0,0,0,.45);
+  }
+  .cover-sub{
+    font-family:var(--serif);font-weight:500;
+    font-size:15px;line-height:1.8;
+    color:var(--gold);
+    margin-bottom:14px;
+    text-shadow:0 1px 8px rgba(0,0,0,.4);
+  }
+  .cover-foot{
+    font-family:var(--serif);
+    font-size:12.5px;letter-spacing:2px;
+    opacity:.8;
+    text-shadow:0 1px 8px rgba(0,0,0,.4);
+  }
+
+  /* === 編號重點清單 === */
+  .step-eyebrow{
+    font-family:var(--sans);font-size:11.5px;letter-spacing:2px;
+    opacity:.6;margin-bottom:10px;
+  }
+
+  /* === CTA === */
+  .cta-stack{
+    flex:1;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;text-align:center;
+    margin-top:30px;position:relative;z-index:2;
+  }
+  .cta-top{
+    font-family:var(--serif);font-weight:500;
+    font-size:15px;letter-spacing:.5px;
+    line-height:1.6;opacity:.7;margin-bottom:22px;
+  }
+  .cta-mid{
+    font-family:var(--serif);font-weight:700;
+    font-size:22px;letter-spacing:1px;
+    margin-bottom:10px;
+  }
+  .cta-keyword{margin-bottom:18px;}
+  .cta-keyword .hl{
+    font-size:30px;letter-spacing:8px;color:var(--gold);
+  }
+  .cta-action{
+    font-family:var(--serif);font-weight:700;
+    font-size:18px;letter-spacing:.5px;
+    line-height:1.6;margin-bottom:14px;
+  }
+  .cta-note{
+    font-family:var(--serif);font-size:13px;
+    opacity:.7;margin-bottom:auto;
+  }
+  .cta-tags{
+    margin-top:24px;
+    font-family:var(--sans);font-size:11px;letter-spacing:.5px;
+    opacity:.5;
+  }
+
+  .arrow{
+    position:absolute;right:14px;top:50%;
+    transform:translateY(-50%);
+    width:32px;height:32px;border-radius:50%;
+    background:rgba(255,255,255,.6);color:var(--olive);
+    display:flex;align-items:center;justify-content:center;
+    font-size:18px;backdrop-filter:blur(4px);
+    animation:nudge 1.6s ease-in-out infinite;z-index:3;
+  }
+  .bg-olive .arrow,.bg-photo .arrow{background:rgba(237,234,227,.2);color:var(--cream);}
+  @keyframes nudge{
+    0%,100%{transform:translateY(-50%) translateX(0);}
+    50%{transform:translateY(-50%) translateX(5px);}
+  }
+
+  .footer{
+    position:absolute;left:30px;right:30px;bottom:18px;z-index:2;
+    display:flex;align-items:center;justify-content:space-between;
+    font-family:var(--sans);font-size:11px;letter-spacing:3px;opacity:.7;
+  }
+  .progress{
+    flex:1;margin:0 14px;height:2px;background:currentColor;
+    opacity:.25;border-radius:2px;position:relative;overflow:hidden;
+  }
+  .progress::after{
+    content:'';position:absolute;left:0;top:0;height:100%;
+    background:currentColor;opacity:1;
+    width:var(--p,14%);transition:width .45s ease;
+  }
+
+  .controls{display:flex;justify-content:center;gap:10px;padding:10px 14px 14px;}
+  .controls button{
+    border:1px solid #d6d2c6;background:#fff;
+    padding:6px 14px;border-radius:999px;
+    font-family:var(--sans);font-size:12px;
+    cursor:pointer;color:#333;transition:all .2s;
+  }
+  .controls button:hover{background:var(--olive);color:#fff;border-color:var(--olive);}
+  .dots{display:flex;align-items:center;gap:6px;margin:0 8px;}
+  .dots span{width:6px;height:6px;border-radius:50%;background:#cfcabc;transition:all .2s;cursor:pointer;}
+  .dots span.active{background:var(--olive);width:18px;border-radius:3px;}
+
+  .ig-actions{display:flex;gap:14px;padding:10px 14px 6px;font-size:18px;color:#333;}
+  .ig-actions .right{margin-left:auto;}
+  .ig-caption{padding:0 14px 14px;font-size:12px;color:#555;line-height:1.6;}
+  .ig-caption b{color:#222;}
+
+  @media(max-width:480px){
+    .ig-frame{width:100%;max-width:400px;}
+    .carousel{width:100%;max-width:400px;}
+    .slide{width:100%;}
+  }
+</style>
+</head>
+<body>
+
+<div class="ig-frame">
+  <div class="ig-header">
+    <div class="ig-avatar-small"></div>
+    <div class="ig-meta">
+      <span class="name">54jingyi</span>
+      <span class="sub">底氣實驗室 · 原創內容</span>
+    </div>
+    <div class="ig-dots">···</div>
+  </div>
+
+  <div class="carousel" id="carousel">
+    <div class="track" id="track">
+
+      <!-- 1. 封面 -->
+      <section class="slide bg-photo photo-cover">
+        <div class="topbar">
+          <div class="avatar"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="body cover-body">
+          <div class="cover-eyebrow">副業思維</div>
+          <h1 class="cover-h">月收 35K，<br>想靠副業增加收入？</h1>
+          <div class="cover-sub">先搞懂這 3 件事，<br>少走 3 年冤枉路。</div>
+          <div class="cover-foot">全職接案 5 年的我，整理給妳</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:14%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- 2. 痛點 -->
+      <section class="slide bg-cream">
+        <div class="topbar">
+          <div class="avatar"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">02 / 07</div>
+        <div class="body">
+          <h2 class="h1">為什麼努力了還是零收入</h2>
+          <p class="p">很多人做副業，急著「開始賺錢」，做了 3 個月還是零。</p>
+          <p class="p">問題不在不夠努力，在<span class="hl">順序錯了</span>。</p>
+          <div class="quote quote-sm">不是不努力，<br>是順序錯了。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:28%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- 3. 第一件事 -->
+      <section class="slide bg-olive">
+        <div class="topbar">
+          <div class="avatar"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">03 / 07</div>
+        <div class="body">
+          <div class="step-eyebrow">① 第一件事</div>
+          <h2 class="h1">先找「對的定位」</h2>
+          <p class="p">不是什麼熱門做什麼，是妳能持續、且有人需要的事。</p>
+          <p class="p"><span class="hl">定位錯，後面全白費。</span></p>
+          <div class="quote quote-sm">定位對了，<br>事半功倍。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:42%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- 4. 第二件事 -->
+      <section class="slide bg-cream">
+        <div class="topbar">
+          <div class="avatar"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">04 / 07</div>
+        <div class="body">
+          <div class="step-eyebrow">② 第二件事</div>
+          <h2 class="h1">用「對的工具」省時間</h2>
+          <p class="p">妳的時間有限，要上班、要顧家。</p>
+          <p class="p">用 AI 工具加速內容，用系統自動化流程，<span class="hl">不是更努力，是更聰明</span>。</p>
+          <div class="quote quote-sm">省下的時間，<br>就是妳的優勢。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:57%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- 5. 第三件事 -->
+      <section class="slide bg-olive">
+        <div class="topbar">
+          <div class="avatar"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">05 / 07</div>
+        <div class="body">
+          <div class="step-eyebrow">③ 第三件事</div>
+          <h2 class="h1">建「能接住客戶」的系統</h2>
+          <p class="p">流量來了，妳得有地方承接、轉換。</p>
+          <p class="p">沒有<span class="hl">系統</span>，流量來了也是白白流走。</p>
+          <div class="quote quote-sm">流量是過客，<br>系統才留得住。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:71%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- 6. 總結 -->
+      <section class="slide bg-photo photo-now">
+        <div class="topbar">
+          <div class="avatar"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="pagenum">06 / 07</div>
+        <div class="body photo-body">
+          <h2 class="h1">順序對了，副業才長得大</h2>
+          <p class="p">定位 → 工具 → 系統，這個順序對了，副業才會穩穩長大。</p>
+          <div class="quote quote-sm">對的順序，<br>勝過盲目努力。</div>
+        </div>
+        <div class="arrow">›</div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:85%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+      <!-- 7. CTA -->
+      <section class="slide bg-olive">
+        <div class="topbar">
+          <div class="avatar"></div>
+          <div class="handle">@54jingyi</div>
+        </div>
+        <div class="cta-stack">
+          <div class="cta-top">想要這 3 件事的<br>完整做法？</div>
+          <div class="cta-mid">留言或私訊</div>
+          <div class="cta-keyword"><span class="hl">資源</span></div>
+          <div class="cta-action">我把詳細步驟<br>分享給妳</div>
+          <div class="cta-note">收藏起來，之後一定用得到</div>
+          <div class="cta-tags">
+            #副業　#增加收入　#AI工具　#個人品牌　#底氣實驗室
+          </div>
+        </div>
+        <div class="footer">
+          <span>SHARE</span>
+          <div class="progress" style="--p:100%;"></div>
+          <span>SAVE</span>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <div class="ig-actions">
+    <span>♡</span><span>💬</span><span>📤</span>
+    <span class="right">🔖</span>
+  </div>
+  <div class="ig-caption">
+    <b>54jingyi</b>　月收 35K 想靠副業增加收入？先搞懂這 3 件事：定位、工具、系統。<br>
+    順序對了，副業才會穩穩長大。全職接案 5 年的我整理給妳。<br>
+    留言或私訊「資源」，拿完整步驟 →
+  </div>
+
+  <div class="controls">
+    <button id="prev">← 上一張</button>
+    <div class="dots" id="dots"></div>
+    <button id="next">下一張 →</button>
+  </div>
+</div>
+
+<script>
+  const track = document.getElementById('track');
+  const slides = track.querySelectorAll('.slide');
+  const total = slides.length;
+  const dotsWrap = document.getElementById('dots');
+  let idx = 0;
+
+  for(let i=0;i<total;i++){
+    const d=document.createElement('span');
+    if(i===0)d.classList.add('active');
+    d.addEventListener('click',()=>go(i));
+    dotsWrap.appendChild(d);
+  }
+  const dots = dotsWrap.querySelectorAll('span');
+
+  function go(i){
+    idx = Math.max(0, Math.min(total-1, i));
+    track.style.transform = `translateX(-${idx*100}%)`;
+    dots.forEach((d,j)=>d.classList.toggle('active',j===idx));
+  }
+
+  document.getElementById('prev').addEventListener('click',()=>go(idx-1));
+  document.getElementById('next').addEventListener('click',()=>go(idx+1));
+
+  document.addEventListener('keydown',(e)=>{
+    if(e.key==='ArrowLeft')go(idx-1);
+    if(e.key==='ArrowRight')go(idx+1);
+  });
+
+  let startX=0, dx=0, dragging=false;
+  const carousel=document.getElementById('carousel');
+  const onStart=(x)=>{startX=x;dragging=true;dx=0;};
+  const onMove=(x)=>{if(dragging)dx=x-startX;};
+  const onEnd=()=>{
+    if(!dragging)return;
+    if(Math.abs(dx)>50){ dx<0?go(idx+1):go(idx-1); }
+    dragging=false;dx=0;
+  };
+  carousel.addEventListener('mousedown',e=>onStart(e.clientX));
+  carousel.addEventListener('mousemove',e=>onMove(e.clientX));
+  carousel.addEventListener('mouseup',onEnd);
+  carousel.addEventListener('mouseleave',onEnd);
+  carousel.addEventListener('touchstart',e=>onStart(e.touches[0].clientX),{passive:true});
+  carousel.addEventListener('touchmove',e=>onMove(e.touches[0].clientX),{passive:true});
+  carousel.addEventListener('touchend',onEnd);
+</script>
+</body>
+</html>
